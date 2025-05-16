@@ -2,7 +2,6 @@
 import React from "react";
 import { motion } from "framer-motion";
 import man from "../assets/man.svg";
-import woman from "../assets/woman.svg";
 
 const teamMembers = [
   {
@@ -18,21 +17,7 @@ const teamMembers = [
       linkedin: "https://linkedin.com/in/yousofshaker",
       twitter: "https://twitter.com/yousofshaker",
     },
-  },
-  {
-    id: 2,
-    name: "Fatemeh",
-    role: "Head of Design & Engineering",
-    description:
-      "Fatemeh crafts seamless digital experiences where form meets function — ensuring every detail feels intentional and effortless.",
-    imgSrc: woman,
-    alt: "Fatemeh",
-    rotate: -3,
-    socials: {
-      linkedin: "https://linkedin.com/in/fatemeh",
-      twitter: "https://twitter.com/fatemeh",
-    },
-  },
+  }
 ];
 
 function SocialIcon({ type, url }) {
@@ -80,7 +65,7 @@ function Team() {
         >
           We’re a team of designers, engineers, and thinkers who believe great technology starts with empathy.
         </motion.p>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-12 justify-center">
+        <div className="grid grid-cols-1 md:grid-cols-1 gap-12 justify-center">
           {teamMembers.map(({ id, name, role, description, imgSrc, alt, rotate, socials }, index) => (
             <motion.div
               key={id}

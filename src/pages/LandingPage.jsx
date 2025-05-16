@@ -1,6 +1,6 @@
 import React from "react";
 import { motion } from "framer-motion";
-import bgImage from "../assets/bg-image.jpg";
+import bgImage from "../assets/bg-image.webp";
 
 const fadeInUp = {
   hidden: { opacity: 0, y: 30 },

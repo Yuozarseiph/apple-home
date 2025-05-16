@@ -16,12 +16,12 @@ body {
   transform: translate(-50%, -50%);
 }
 .bg-image-iPhone{
-  background-image: url('/src/assets/bg-image2.jpg');
+  background-image: url('/src/assets/bg-image2.webp');
   background-size: cover;
   background-position: center;
 }
 .shop-bg{
-  background-image: url('/src/assets/shop-bg.jpg');
+  background-image: url('/src/assets/shop-bg.webp');
   background-size: cover;
   background-position: center;
 }
