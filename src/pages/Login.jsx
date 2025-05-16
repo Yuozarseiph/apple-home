@@ -30,6 +30,7 @@ const Login = () => {
       const response = await axios.post("/api/login", { email, password });
       localStorage.setItem("token", response.data.token); // Save token
       navigate("/dashboard"); // Navigate to dashboard page
+      window.location.reload(); // Reload page to refresh app state
     } catch (err) {
       if (err.response) {
         setError(err.response.data.message || "Invalid credentials");

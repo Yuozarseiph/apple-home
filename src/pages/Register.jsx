@@ -45,10 +45,8 @@ const Register = () => {
 
       // Save token to localStorage
       localStorage.setItem("token", response.data.token);
-
       // Redirect to dashboard
       navigate("/dashboard");
-      
       // Reload page to refresh app state (optional)
       window.location.reload();
     } catch (err) {
