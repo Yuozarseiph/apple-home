@@ -50,13 +50,13 @@ const Header = () => {
   const toggleMenu = () => setIsMenuOpen((prev) => !prev);
 
   return (
-    <header className="select-none header fixed z-50 backdrop-blur-md bg-black/10 shadow-lg text-white rounded-full w-fit mx-auto mt-8">
-      <nav className="flex items-center justify-between md:justify-center px-6 py-4 rounded-full relative w-full">
+    <header className="select-none header fixed z-50 backdrop-blur-md bg-black/10 shadow-lg text-white rounded-full w-full mx-auto mt-8">
+      <nav className="flex items-center justify-between lg:justify-center px-6 py-4 rounded-full relative w-full">
         {/* Brand name visible only on mobile */}
-        <h1 className="text-xl font-bold tracking-wider md:hidden">Apple Home</h1>
+        <h1 className="text-xl font-bold tracking-wider lg:hidden">Apple Home</h1>
 
         {/* Desktop navigation menu - horizontal centered list */}
-        <ul className="hidden md:flex flex-wrap justify-center gap-x-6 gap-y-2 w-full text-center items-center">
+        <ul className="hidden lg:flex flex-wrap justify-center gap-x-6 gap-y-2 w-full text-center items-center">
           {navLinks.map((link) => (
             <motion.li key={link.path} className="inline-block">
               <NavLink
@@ -76,7 +76,7 @@ const Header = () => {
         </ul>
 
         {/* Mobile hamburger menu button */}
-        <div className="md:hidden flex items-center">
+        <div className="lg:hidden flex items-center">
           <button
             onClick={toggleMenu}
             className="text-2xl text-white focus:outline-none"
@@ -96,9 +96,9 @@ const Header = () => {
             initial="closed"
             animate="open"
             exit="closed"
-            className="md:hidden fixed top-full left-0 right-0 mx-4 mt-2 bg-black/10 backdrop-blur-md border border-white/20 shadow-xl rounded-2xl overflow-hidden text-white z-40 pt-4 pb-6 px-6"
+            className="lg:hidden fixed top-full bg-black/75 backdrop-blur left-0 right-0 mx-4 mt-2 border border-white/20 shadow-xl rounded-2xl overflow-hidden text-white z-40 pt-4 pb-6 px-6"
           >
-            <ul className="space-y-4 text-center">
+            <ul className="space-y-4 text-center ">
               {navLinks.map((link, index) => (
                 <motion.li
                   key={link.path}
