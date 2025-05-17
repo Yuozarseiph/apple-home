@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
@@ -69,7 +69,7 @@ function Cart() {
   // Show loading text while data is being fetched
   if (loading)
     return (
-      <div className="text-white text-center py-10">Loading your cart...</div>
+      <div className="text-white bg-image-iPhone text-center py-10">Loading your cart...</div>
     );
 
   return (

@@ -1,6 +1,5 @@
 // src/pages/BlogPost.js
 
-import React from "react";
 import { motion } from "framer-motion";
 import { useParams } from "react-router-dom";
 import { blogPosts } from "../data/blogPosts";

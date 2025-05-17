@@ -88,7 +88,7 @@ const Dashboard = () => {
   // Show loading text while user data is being fetched
   if (!userData) {
     return (
-      <div className="flex items-center justify-center h-screen text-lg text-gray-600">
+      <div className="flex bg-image-iPhone items-center justify-center h-screen text-lg text-gray-600">
         Loading...
       </div>
     );
