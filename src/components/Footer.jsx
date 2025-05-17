@@ -38,7 +38,7 @@ const Footer = () => {
         
         {/* Branding and social icons */}
         <motion.div variants={itemVariant} className="flex-1 min-w-[250px]">
-          <h3 className="text-2xl font-bold mb-4">Smart Rendezvous</h3>
+          <h3 className="text-2xl font-bold mb-4">Apple Home</h3>
           <p className="mb-5 text-sm leading-relaxed text-gray-300">
             Our mission is to bring couples closer together through meaningful and empowering gymnastics lessons.
           </p>
@@ -136,7 +136,7 @@ const Footer = () => {
         variants={itemVariant}
         className="mt-10 text-center text-sm text-[#7EC8E3]"
       >
-        &copy; {new Date().getFullYear()} Smart Rendezvous. All rights reserved.
+        &copy; {new Date().getFullYear()} Apple Home. All rights reserved.
       </motion.div>
 
       {/* Developer Credit */}
@@ -149,7 +149,7 @@ const Footer = () => {
           href="https://yuozarseiph.top"
           className="hover:text-[#7EC8E3] transition-colors"
         >
-          Yusuf Shaker Ardakani
+          Yousef Shaker Ardakani
         </a>
         . All rights reserved.
       </motion.div>
