@@ -26,6 +26,7 @@ body {
   background-position: center;
 }
 .glow-button:hover {
+  border: 1px solid rgb(2, 183, 255);
   color: rgb(0, 0, 0);
   box-shadow: 0 0px 20px rgb(0, 217, 255);
 }
@@ -79,4 +80,29 @@ body {
 .bd-blur{
   -webkit-backdrop-filter: blur(10px);
   backdrop-filter: blur(10px);
+}
+
+
+/*For Our Values*/
+.position-relative{
+  border: 1px solid rgba(2, 183, 255, 0.267);
+  position: relative;
+  z-index: 10;
+}
+.position-relative::after , .position-relative::before { 
+  content: "";
+  position: absolute;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(2, 183, 255, 0.664) 0%, rgba(255, 255, 255, 0) 50%);
+  width: 25px;
+  height: 25px;
+  z-index: -1;
+}
+.position-relative::after{
+  left: 0;
+  top: 0;
+}
+.position-relative::before{
+  right: 0;
+  top: 0;
 }

@@ -59,7 +59,8 @@ export default function LandingPage() {
           transition={{ delay: 0.3 }}
           className="text-xl mb-6 max-w-2xl"
         >
-          A new way to build strength, together. Designed with care, built for connection.
+          A new way to build strength, together. Designed with care, built for
+          connection.
         </motion.p>
         <motion.button
           onClick={scrollToValues}
@@ -86,18 +87,18 @@ export default function LandingPage() {
         </motion.h2>
         <div className="grid md:grid-cols-3 gap-10 max-w-6xl mx-auto">
           {valuesData.map(({ title, desc }, i) => (
-            <motion.div
-              key={i}
-              variants={fadeInUp}
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              className="backdrop-blur-md bg-black/10 shadow-lg p-6 rounded-xl transition hover:scale-105"
-            >
-              <h3 className="text-2xl font-semibold text-[#7EC8E3] mb-2">
-                {title}
-              </h3>
-              <p className="text-white">{desc}</p>
-            </motion.div>
+              <motion.div
+                key={i}
+                variants={fadeInUp}
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                className="position-relative backdrop-blur-md bg-black/10 shadow-lg p-6 rounded-xl transition hover:scale-105"
+              >
+                <h3 className="text-2xl font-semibold text-[#7EC8E3] mb-2">
+                  {title}
+                </h3>
+                <p className="text-white">{desc}</p>
+              </motion.div>
           ))}
         </div>
       </motion.section>
@@ -118,7 +119,8 @@ export default function LandingPage() {
           transition={{ delay: 0.3 }}
           className="mb-6"
         >
-          Be the first to know about new features, updates, and how others are using Apple Home.
+          Be the first to know about new features, updates, and how others are
+          using Apple Home.
         </motion.p>
         <motion.a
           href="https://instagram.com"
