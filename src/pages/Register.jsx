@@ -61,7 +61,7 @@ const Register = () => {
 
   return (
     <motion.div
-      className="flex items-center justify-center min-h-screen bg-image-iPhone bg-cover bg-center px-4"
+      className="flex items-center justify-center min-h-screen bg-image-iPhone bg-cover bg-center px-4 w-full"
       initial="hidden"
       animate="visible"
       variants={{
@@ -72,7 +72,7 @@ const Register = () => {
     >
       <motion.div
         variants={fadeInUp(0)}
-        className="backdrop-blur-md bg-black/20 shadow-lg p-8 rounded-lg w-full max-w-sm"
+        className="position-relative backdrop-blur-md bg-black/30 shadow-lg p-10 rounded-2xl w-full max-w-md"
       >
         <motion.h2
           variants={fadeInUp(0.3)}

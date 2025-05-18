@@ -89,7 +89,7 @@ function Cart() {
               {cartItems.map((item) => (
                 <li
                   key={item.product._id}
-                  className="flex flex-col md:flex-row items-center gap-4 p-4 backdrop-blur-md bg-black/10 rounded-lg shadow-lg"
+                  className="position-relative mt-2 flex flex-col md:flex-row items-center gap-4 p-4 backdrop-blur-md bg-black/10 rounded-lg shadow-lg"
                 >
                   {/* Product image with fallback */}
                   <img
@@ -127,7 +127,7 @@ function Cart() {
                 onClick={() => {
                   navigate("/checkout");
                 }}
-                className="bg-[#7EC8E3] text-black px-6 py-2 rounded hover:bg-blue-400 transition"
+                className="bg-[#7EC8E3] text-black px-6 py-2 rounded-full hover:bg-blue-400 transition"
               >
                 Proceed to Checkout
               </button>

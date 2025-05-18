@@ -35,7 +35,7 @@ function Terms() {
           Terms of Use
         </motion.h1>
 
-        <div className="backdrop-blur-md bg-black/10 shadow-lg p-8 rounded-xl shadow-lg text-left">
+        <div className="position-relative backdrop-blur-md bg-black/10 shadow-lg p-8 rounded-xl shadow-lg text-left">
           <motion.p
             variants={itemVariants}
             custom={0.5}

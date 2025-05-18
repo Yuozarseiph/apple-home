@@ -53,7 +53,7 @@ const Login = () => {
     >
       <motion.div
         variants={fadeInUp(0)}
-        className="backdrop-blur-md bg-black/30 shadow-lg p-10 rounded-2xl w-full max-w-md"
+        className="position-relative backdrop-blur-md bg-black/30 shadow-lg p-10 rounded-2xl w-full max-w-md"
       >
         <motion.h2
           variants={fadeInUp(0.3)}

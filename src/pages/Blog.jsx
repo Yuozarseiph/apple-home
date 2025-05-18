@@ -20,7 +20,7 @@ function Blog() {
         <div className="grid md:grid-cols-3 gap-12">
           {/* First Card */}
           <motion.div
-            className="backdrop-blur-md bg-black/10 shadow-lg p-6 rounded-xl shadow-lg"
+            className="position-relative backdrop-blur-md bg-black/10 shadow-lg p-6 rounded-xl shadow-lg"
             initial={{ opacity: 0, y: 50 }} // Start faded and shifted down
             animate={{ opacity: 1, y: 0 }} // Animate to visible and in place
             transition={{ duration: 1, delay: 0.2 }} // Slight delay for staggered effect
@@ -43,7 +43,7 @@ function Blog() {
 
           {/* Second Card */}
           <motion.div
-            className="backdrop-blur-md bg-black/10 shadow-lg p-6 rounded-xl shadow-lg"
+            className="position-relative backdrop-blur-md bg-black/10 shadow-lg p-6 rounded-xl shadow-lg"
             initial={{ opacity: 0, y: 50 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1, delay: 0.4 }}
@@ -65,7 +65,7 @@ function Blog() {
 
           {/* Third Card */}
           <motion.div
-            className="backdrop-blur-md bg-black/10 shadow-lg p-6 rounded-xl shadow-lg"
+            className="position-relative backdrop-blur-md bg-black/10 shadow-lg p-6 rounded-xl shadow-lg"
             initial={{ opacity: 0, y: 50 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1, delay: 0.6 }}

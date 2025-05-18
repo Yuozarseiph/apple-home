@@ -84,7 +84,7 @@ export default function Faq() {
             <motion.div
               key={i}
               variants={fadeInUp}
-              className="backdrop-blur-md bg-black/10 shadow-lg p-6 rounded-xl cursor-pointer select-none"
+              className="position-relative backdrop-blur-md bg-black/10 shadow-lg p-6 rounded-xl cursor-pointer select-none"
             >
               <h2
                 role="button"

@@ -176,36 +176,38 @@ function Checkout() {
               animate={{ opacity: 1 }}
               transition={{ duration: 0.5 }}
             >
-              {/* Name input */}
-              <div className="mb-4">
-                <label className="block text-xl mb-2">Name</label>
-                <motion.input
-                  type="text"
-                  name="name"
-                  value={formData.name}
-                  onChange={handleChange}
-                  className="w-full p-3 bg-gray-800 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-[#7EC8E3]"
-                  required
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  transition={{ duration: 0.5 }}
-                />
-              </div>
+              <div className="mb-4 flex flex-col md:flex-row">
+                {/* Name input */}
+                <div className="mb-4 w-full md:w-1/2 md:mb-0 md:mr-2">
+                  <label className="block text-xl mb-2">Name</label>
+                  <motion.input
+                    type="text"
+                    name="name"
+                    value={formData.name}
+                    onChange={handleChange}
+                    className="w-full p-3 mb-4 rounded-full focus:outline-none focus:ring-2 focus:ring-[#7EC8E3] bg-[#003E73] text-white placeholder:text-[#A6C8E3]"
+                    required
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ duration: 0.5 }}
+                  />
+                </div>
 
-              {/* Email input */}
-              <div className="mb-4">
-                <label className="block text-xl mb-2">Email</label>
-                <motion.input
-                  type="email"
-                  name="email"
-                  value={formData.email}
-                  onChange={handleChange}
-                  className="w-full p-3 bg-gray-800 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-[#7EC8E3]"
-                  required
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  transition={{ duration: 0.5 }}
-                />
+                {/* Email input */}
+                <div className="w-full md:w-1/2 md:ml-2">
+                  <label className="block text-xl mb-2">Email</label>
+                  <motion.input
+                    type="email"
+                    name="email"
+                    value={formData.email}
+                    onChange={handleChange}
+                    className="w-full p-3 mb-4 rounded-full focus:outline-none focus:ring-2 focus:ring-[#7EC8E3] bg-[#003E73] text-white placeholder:text-[#A6C8E3]"
+                    required
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ duration: 0.5 }}
+                  />
+                </div>
               </div>
 
               {/* Address input */}
@@ -216,7 +218,7 @@ function Checkout() {
                   name="address"
                   value={formData.address}
                   onChange={handleChange}
-                  className="w-full p-3 bg-gray-800 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-[#7EC8E3]"
+                  className="w-full p-3 mb-4 rounded-full focus:outline-none focus:ring-2 focus:ring-[#7EC8E3] bg-[#003E73] text-white placeholder:text-[#A6C8E3]"
                   required
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
@@ -227,7 +229,7 @@ function Checkout() {
               {/* Card Number input split into 4 fields */}
               <div className="mb-4">
                 <label className="block text-xl mb-2">Card Number</label>
-                <div className="flex gap-2">
+                <div className="flex flex-col gap-2 md:flex-row">
                   {cardNumber.map((num, index) => (
                     <motion.input
                       key={index}
@@ -237,7 +239,7 @@ function Checkout() {
                         handleCardNumberChange(index, e.target.value)
                       }
                       ref={(el) => (cardRefs.current[index] = el)}
-                      className="w-1/4 p-3 bg-gray-800 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-[#7EC8E3] text-center"
+                      className="w-full md:w-1/4 p-3 mb-4 rounded-full focus:outline-none focus:ring-2 focus:ring-[#7EC8E3] bg-[#003E73] text-white placeholder:text-[#A6C8E3]"
                       maxLength="4"
                       required
                       initial={{ opacity: 0 }}
@@ -249,7 +251,7 @@ function Checkout() {
               </div>
 
               {/* Expiry date inputs */}
-              <div className="flex gap-4 mb-4">
+              <div className="flex flex-col md:flex-row gap-4 mb-4">
                 <div className="flex-1">
                   <label className="block text-xl mb-2">Expiry Month</label>
                   <motion.input
@@ -259,7 +261,7 @@ function Checkout() {
                       handleExpiryDateChange("month", e.target.value)
                     }
                     ref={(el) => (expiryRefs.current.month = el)}
-                    className="w-full p-3 bg-gray-800 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-[#7EC8E3] text-center"
+                    className="w-full p-3 mb-4 rounded-full focus:outline-none focus:ring-2 focus:ring-[#7EC8E3] bg-[#003E73] text-white placeholder:text-[#A6C8E3]"
                     maxLength="2"
                     placeholder="MM"
                     required
@@ -277,7 +279,7 @@ function Checkout() {
                       handleExpiryDateChange("year", e.target.value)
                     }
                     ref={(el) => (expiryRefs.current.year = el)}
-                    className="w-full p-3 bg-gray-800 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-[#7EC8E3] text-center"
+                    className="w-full p-3 mb-4 rounded-full focus:outline-none focus:ring-2 focus:ring-[#7EC8E3] bg-[#003E73] text-white placeholder:text-[#A6C8E3]"
                     maxLength="2"
                     placeholder="YY"
                     required
@@ -286,29 +288,28 @@ function Checkout() {
                     transition={{ duration: 0.5 }}
                   />
                 </div>
-              </div>
-
-              {/* CVV input */}
-              <div className="mb-4">
-                <label className="block text-xl mb-2">CVV</label>
-                <motion.input
-                  type="text"
-                  name="cvv"
-                  value={formData.cvv}
-                  onChange={handleChange}
-                  ref={cvvRef}
-                  className="w-full p-3 bg-gray-800 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-[#7EC8E3]"
-                  required
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  transition={{ duration: 0.5 }}
-                />
+                {/* CVV input */}
+                <div className="flex-1">
+                  <label className="block text-xl mb-2">CVV</label>
+                  <motion.input
+                    type="text"
+                    name="cvv"
+                    value={formData.cvv}
+                    onChange={handleChange}
+                    ref={cvvRef}
+                    className="w-full p-3 mb-4 rounded-full focus:outline-none focus:ring-2 focus:ring-[#7EC8E3] bg-[#003E73] text-white placeholder:text-[#A6C8E3]"
+                    required
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ duration: 0.5 }}
+                  />
+                </div>
               </div>
 
               {/* Submit button with hover and tap animations */}
               <motion.button
                 type="submit"
-                className="w-full py-3 bg-[#7EC8E3] text-black rounded-lg hover:bg-blue-400 transition"
+                className="w-full md:w-auto px-8 py-3 bg-[#7EC8E3] text-black rounded-full hover:bg-blue-400 transition"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
                 initial={{ opacity: 0 }}

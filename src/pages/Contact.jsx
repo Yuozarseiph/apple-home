@@ -17,7 +17,7 @@ export default function Contact() {
 
       {/* Contact form container */}
       <motion.form
-        className="backdrop-blur-md bg-black/10 shadow-lg p-6 rounded-xl shadow-lg w-full max-w-md"
+        className="position-relative backdrop-blur-md bg-black/10 shadow-lg p-6 rounded-xl shadow-lg w-full max-w-md"
         initial={{ opacity: 0, y: 50 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 1 }}
@@ -89,7 +89,7 @@ export default function Contact() {
         <motion.textarea
           id="message"
           rows="4"
-          className="resize-none w-full p-3 mb-4 rounded-[24px] focus:outline-none focus:ring-2 focus:ring-[#7EC8E3] bg-[#003E73] text-white placeholder:text-[#A6C8E3]"
+          className="resize-none w-full p-3 mb-4 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#7EC8E3] bg-[#003E73] text-white placeholder:text-[#A6C8E3]"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 1, delay: 1.2 }}
@@ -99,7 +99,7 @@ export default function Contact() {
         {/* Submit button */}
         <motion.button
           type="submit"
-          className="w-full bg-[#7EC8E3] text-black px-5 py-2 rounded-md hover:bg-[#6ab5c7] transition-colors"
+          className="w-full bg-[#7EC8E3] text-black px-5 py-2 rounded-xl hover:bg-[#6ab5c7] transition-colors"
           variants={hoverTapVariant}
           whileHover="hover"
           whileTap="tap"

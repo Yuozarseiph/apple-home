@@ -69,11 +69,9 @@ function Team() {
           {teamMembers.map(({ id, name, role, description, imgSrc, alt, rotate, socials }, index) => (
             <motion.div
               key={id}
-              className="backdrop-blur-md bg-black/10 shadow-lg p-6 rounded-xl flex flex-col items-center"
-              initial={{ opacity: 0, y: 50 }}
-              animate={{ opacity: 1, y: 0 }}
+              className="position-relative backdrop-blur-md bg-black/10 shadow-lg p-6 rounded-xl flex flex-col items-center"
               transition={{ duration: 0.8, type: "spring", stiffness: 50, delay: index * 0.2 }}
-              whileHover={{ scale: 1.05, rotate, boxShadow: "0px 8px 12px rgba(0, 0, 0, 0.3)", transition: { duration: 0.3 } }}
+              whileHover={{ scale: 1.05, boxShadow: "0px 8px 12px rgba(0, 0, 0, 0.3)", transition: { duration: 0.3 } }}
               whileTap={{ scale: 0.95 }}
             >
               <img src={imgSrc} alt={alt} className="rounded-full mb-4 w-32 h-32 object-cover" />

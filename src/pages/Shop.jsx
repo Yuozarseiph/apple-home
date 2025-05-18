@@ -72,7 +72,7 @@ function Shop() {
                 key={product._id}
                 variants={itemVariants}
                 custom={index}
-                className="backdrop-blur-md bg-black/40 shadow-lg p-6 rounded-xl shadow-lg text-white flex flex-col"
+                className="position-relative backdrop-blur-md bg-black/40 shadow-lg p-6 rounded-xl shadow-lg text-white flex flex-col"
               >
                 <motion.img
                   src={product.image}

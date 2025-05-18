@@ -4,7 +4,7 @@ export default function About() {
   return (
     <div className="bg-image-iPhone text-white min-h-screen pt-24 pb-16 px-6">
       {/* Main section with title and intro paragraph */}
-      <section className="backdrop-blur-md bg-black/10 shadow-lg max-w-5xl mx-auto text-center">
+      <section className="position-relative backdrop-blur-md bg-black/10 shadow-lg max-w-5xl mx-auto text-center rounded-xl p-5">
         <motion.h1
           className="text-4xl font-bold mb-6 text-[#7EC8E3]"
           initial={{ opacity: 0 }} // Start with transparent
@@ -26,7 +26,7 @@ export default function About() {
       </section>
 
       {/* Section describing the company's purpose */}
-      <section className="backdrop-blur-md bg-black/10 shadow-lg p-8 rounded-xl shadow-lg max-w-4xl mx-auto">
+      <section className="position-relative backdrop-blur-md bg-black/10 shadow-lg p-8 rounded-xl shadow-lg max-w-4xl mx-auto mt-4">
         <motion.h2
           className="text-2xl font-semibold mb-4 text-[#7EC8E3]"
           initial={{ opacity: 0 }} // Start transparent
@@ -50,7 +50,7 @@ export default function About() {
       <section className="mt-12 grid md:grid-cols-2 gap-8 max-w-6xl mx-auto">
         {/* "Who We Are" card with fade and upward slide animation */}
         <motion.div
-          className="backdrop-blur-md bg-black/10 shadow-lg p-6 rounded-xl shadow-lg"
+          className="position-relative backdrop-blur-md bg-black/10 shadow-lg p-6 rounded-xl shadow-lg"
           initial={{ opacity: 0, y: 50 }} // Start transparent and shifted down
           animate={{ opacity: 1, y: 0 }} // Fade in and move up to place
           transition={{ duration: 1, delay: 0.8 }} // Delay for staggered effect
@@ -67,7 +67,7 @@ export default function About() {
 
         {/* "What Drives Us" card with similar animation, slightly delayed */}
         <motion.div
-          className="backdrop-blur-md bg-black/10 shadow-lg p-6 rounded-xl shadow-lg"
+          className="position-relative backdrop-blur-md bg-black/10 shadow-lg p-6 rounded-xl shadow-lg"
           initial={{ opacity: 0, y: 50 }} // Start transparent and shifted down
           animate={{ opacity: 1, y: 0 }} // Fade in and move up
           transition={{ duration: 1, delay: 1 }} // Slightly later delay for stagger

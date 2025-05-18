@@ -1,5 +1,5 @@
 import React from "react";
-import nfimg from "../assets/not-found.svg"; // Adjust the path as necessary
+import nfimg from "../assets/not-found.svg";
 import { Link } from "react-router-dom";
 export default function PageNotFound() {
   return (
