@@ -19,6 +19,7 @@ import Dashboard from "./pages/Dashboard";
 import BlogPost from "./pages/BlogPost";
 import Cart from "./pages/Cart";
 import Checkout from "./pages/Checkout";
+import PageNotFound from "./pages/PageNotFound";
 
 function App() {
   return (
@@ -70,6 +71,8 @@ function App() {
         <Route path="/blog" element={<Blog />} />
         <Route path="/blog/:slug" element={<BlogPost />} />
         <Route path="/team" element={<Team />} />
+        {/* 404 Page Not Found route */}
+        <Route path="*" element={<PageNotFound />} />
       </Routes>
       <Footer />
     </Router>
