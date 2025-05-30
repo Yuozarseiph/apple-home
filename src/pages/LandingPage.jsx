@@ -51,7 +51,7 @@ export default function LandingPage() {
           backgroundPosition: "center",
         }}
       >
-        <motion.h1 variants={fadeInUp} className="text-5xl font-bold mb-4">
+        <motion.h1 variants={fadeInUp} className="text-2xl sm:xl d:text-3xl lg:text-5xl xl:text-7xl font-bold mb-4">
           Welcome to Apple Home.
         </motion.h1>
         <motion.p
