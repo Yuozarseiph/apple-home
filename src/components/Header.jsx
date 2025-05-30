@@ -96,7 +96,7 @@ const Header = () => {
             initial="closed"
             animate="open"
             exit="closed"
-            className="lg:hidden fixed top-full bg-black/75 backdrop-blur left-0 right-0 mx-4 mt-2 border border-white/20 shadow-xl rounded-2xl overflow-hidden text-white z-40 pt-4 pb-6 px-6"
+            className="lg:hidden fixed top-full bg-[#00000073] backdrop:blur-2xl left-0 right-0 mx-4 mt-2 border border-white/20 shadow-xl rounded-2xl overflow-hidden text-white z-40 pt-4 pb-6 px-6"
           >
             <ul className="space-y-4 text-center ">
               {navLinks.map((link, index) => (

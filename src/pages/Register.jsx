@@ -96,7 +96,7 @@ const Register = () => {
               value={fullName}
               onChange={(e) => setFullName(e.target.value)}
               required
-              className="w-full p-3 border border-[#7EC8E3] rounded-full bg-[#2E3A59] text-white placeholder-gray-300 focus:outline-none focus:ring-2 focus:ring-[#7EC8E3] transition duration-200"
+              className="w-full p-4 mb-4 rounded-full focus:outline-none shadow-lg shadow-[#ffffff23]  bg-[#4d4d4d2c] backdrop:blur-2xl text-white placeholder:text-[#A6C8E3]"
             />
           </motion.div>
 
@@ -107,7 +107,7 @@ const Register = () => {
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               required
-              className="w-full p-3 border border-[#7EC8E3] rounded-full bg-[#2E3A59] text-white placeholder-gray-300 focus:outline-none focus:ring-2 focus:ring-[#7EC8E3] transition duration-200"
+              className="w-full p-4 mb-4 rounded-full focus:outline-none shadow-lg shadow-[#ffffff23]  bg-[#4d4d4d2c] backdrop:blur-2xl text-white placeholder:text-[#A6C8E3]"
             />
           </motion.div>
 
@@ -118,7 +118,7 @@ const Register = () => {
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               required
-              className="w-full p-3 border border-[#7EC8E3] rounded-full bg-[#2E3A59] text-white placeholder-gray-300 focus:outline-none focus:ring-2 focus:ring-[#7EC8E3] transition duration-200"
+              className="w-full p-4 mb-4 rounded-full focus:outline-none shadow-lg shadow-[#ffffff23]  bg-[#4d4d4d2c] backdrop:blur-2xl text-white placeholder:text-[#A6C8E3]"
             />
           </motion.div>
 
@@ -129,7 +129,7 @@ const Register = () => {
               value={confirmPassword}
               onChange={(e) => setConfirmPassword(e.target.value)}
               required
-              className="w-full p-3 border border-[#7EC8E3] rounded-full bg-[#2E3A59] text-white placeholder-gray-300 focus:outline-none focus:ring-2 focus:ring-[#7EC8E3] transition duration-200"
+              className="w-full p-4 mb-4 rounded-full focus:outline-none shadow-lg shadow-[#ffffff23]  bg-[#4d4d4d2c] backdrop:blur-2xl text-white placeholder:text-[#A6C8E3]"
             />
           </motion.div>
 
@@ -148,7 +148,7 @@ const Register = () => {
             whileTap={{ scale: 0.98 }}
             variants={fadeInUp(0.9)}
             type="submit"
-            className="w-full p-3 bg-[#7EC8E3] text-black font-semibold rounded-full hover:bg-white transition duration-200 shadow-md"
+            className="w-full bg-[#ffffff2f] text-black px-5 py-4 rounded-full backdrop:blur-2xl hover:bg-[#ffffff9f] transition-colors"
           >
             Continue
           </motion.button>

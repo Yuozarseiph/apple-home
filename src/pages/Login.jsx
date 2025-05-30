@@ -77,7 +77,7 @@ const Login = () => {
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               required
-              className="w-full p-4 border border-[#7EC8E3] rounded-full focus:outline-none focus:ring-4 focus:ring-[#7EC8E3] text-white bg-[#2E3A59] placeholder-gray-400 transition duration-300"
+              className="w-full p-4 mb-4 rounded-full focus:outline-none shadow-lg shadow-[#ffffff23]  bg-[#4d4d4d2c] backdrop:blur-2xl text-white placeholder:text-[#A6C8E3]"
             />
           </motion.div>
 
@@ -88,7 +88,7 @@ const Login = () => {
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               required
-              className="w-full p-4 border border-[#7EC8E3] rounded-full focus:outline-none focus:ring-4 focus:ring-[#7EC8E3] text-white bg-[#2E3A59] placeholder-gray-400 transition duration-300"
+              className="w-full p-4 mb-4 rounded-full focus:outline-none shadow-lg shadow-[#ffffff23]  bg-[#4d4d4d2c] backdrop:blur-2xl text-white placeholder:text-[#A6C8E3]"
             />
           </motion.div>
 
@@ -107,7 +107,7 @@ const Login = () => {
             whileTap={{ scale: 0.95 }}
             variants={fadeInUp(0.7)}
             type="submit"
-            className="w-full p-4 bg-[#7EC8E3] text-black font-bold rounded-full hover:bg-[#66b0d9] transition duration-300 shadow-lg"
+            className="w-full bg-[#ffffff2f] text-black px-5 py-4 rounded-full backdrop:blur-2xl hover:bg-[#ffffff9f] transition-colors"
           >
             Continue with Apple ID
           </motion.button>

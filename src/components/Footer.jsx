@@ -117,10 +117,10 @@ const Footer = () => {
             <input
               type="email"
               placeholder="Enter your email"
-              className="w-full px-4 py-1 rounded-full border-none text-black input-shadow"
+              className="w-full px-4 py-1 rounded-full border-none shadow-lg shadow-[#ffffff38] bg-[#7474741e] backdrop:blur-2xl text-white input-shadow"
             />
             <motion.button
-              className="bg-[#7EC8E3] text-black px-5 py-2 rounded-full hover:bg-[#6ab5c7] transition-colors"
+              className="bg-[#ffffff81] text-black px-5 py-2 rounded-full hover:bg-[#6ab5c7] transition-colors"
               variants={hoverTapVariant}
               whileHover="hover"
               whileTap="tap"
