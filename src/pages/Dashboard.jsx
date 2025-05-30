@@ -26,6 +26,10 @@ const staggerChildren = {
   },
 };
 
+// className for User Greeting and Info Cards
+const UGAIC = 'position-relative mt-2 backdrop-blur-md bg-black/40 p-6 rounded-2xl shadow-md flex items-center gap-4';
+
+
 const Dashboard = () => {
   // State to hold user data fetched from API
   const [userData, setUserData] = useState(null);
@@ -148,7 +152,7 @@ const Dashboard = () => {
         {/* User Greeting and Info Cards */}
         <motion.div
           variants={fadeInUp(0.2)}
-          className="position-relative mt-2 backdrop-blur-md bg-black/40 shadow-lg p-6 rounded-2xl shadow-md"
+          className="position-relative mt-2 backdrop-blur-md bg-black/40 p-6 rounded-2xl shadow-md"
         >
           <h2 className="text-xl font-semibold text-white mb-2">
             Welcome, {userData.name}
@@ -161,7 +165,7 @@ const Dashboard = () => {
         {/* User Name Card */}
         <motion.div
           variants={fadeInUp(0.3)}
-          className="position-relative mt-2 backdrop-blur-md bg-black/40 shadow-lg p-6 rounded-2xl shadow-md flex items-center gap-4"
+          className={UGAIC}
         >
           <div>
             <p className="text-sm text-gray-300">Your Name</p>
@@ -172,7 +176,7 @@ const Dashboard = () => {
         {/* User Email / Apple ID Card */}
         <motion.div
           variants={fadeInUp(0.4)}
-          className="position-relative mt-2 backdrop-blur-md bg-black/40 shadow-lg p-6 rounded-2xl shadow-md flex items-center gap-4"
+          className={UGAIC}
         >
           <div>
             <p className="text-sm text-gray-300">Apple ID</p>
@@ -183,7 +187,7 @@ const Dashboard = () => {
         {/* Active Devices Card */}
         <motion.div
           variants={fadeInUp(0.5)}
-          className="position-relative mt-2 backdrop-blur-md bg-black/40 shadow-lg p-6 rounded-2xl shadow-md flex items-center gap-4"
+          className={UGAIC}
         >
           <div>
             <p className="text-sm text-gray-300">Active Devices</p>
@@ -194,7 +198,7 @@ const Dashboard = () => {
         {/* Recent Activity Section */}
         <motion.div
           variants={fadeInUp(0.6)}
-          className="position-relative mt-2 backdrop-blur-md bg-black/40 shadow-lg p-6 rounded-2xl shadow-md"
+          className="position-relative mt-2 backdrop-blur-md bg-black/40 p-6 rounded-2xl shadow-md"
         >
           <h2 className="text-xl font-bold text-[#7ec8e3] mb-4">
             Recent Activity
@@ -209,7 +213,7 @@ const Dashboard = () => {
         {/* Placeholder for User Usage Graphs */}
         <motion.div
           variants={fadeInUp(0.7)}
-          className="position-relative mt-2 backdrop-blur-md bg-black/40 shadow-lg p-6 rounded-2xl shadow-md"
+          className="position-relative mt-2 backdrop-blur-md bg-black/40 p-6 rounded-2xl shadow-md"
         >
           <h2 className="text-xl font-bold text-[#7ec8e3] mb-4">Your Usage</h2>
           <p className="text-[#FFFFFF]">
@@ -225,7 +229,7 @@ const Dashboard = () => {
           {/* Quick Actions Links */}
           <motion.div
             variants={fadeInUp(0.8)}
-            className="position-relative mt-2 backdrop-blur-md bg-black/40 shadow-lg p-6 rounded-2xl shadow-md"
+            className="position-relative mt-2 backdrop-blur-md bg-black/40 p-6 rounded-2xl shadow-md"
           >
             <h3 className="text-lg font-bold text-[#7ec8e3] mb-4">
               Quick Actions
@@ -252,7 +256,7 @@ const Dashboard = () => {
           {/* Support Links */}
           <motion.div
             variants={fadeInUp(0.9)}
-            className="position-relative mt-2 backdrop-blur-md bg-black/40 shadow-lg p-6 rounded-2xl shadow-md"
+            className="position-relative mt-2 backdrop-blur-md bg-black/40p-6 rounded-2xl shadow-md p-7"
           >
             <h3 className="text-lg font-bold text-[#7ec8e3] mb-4">
               Need Help?
