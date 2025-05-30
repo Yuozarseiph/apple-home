@@ -47,13 +47,13 @@ export default function LandingPage() {
         className="flex flex-col items-center justify-center min-h-screen text-center px-4"
         
       >
-        <motion.h1 variants={fadeInUp} className="text-2xl sm:xl d:text-3xl lg:text-5xl xl:text-7xl font-bold mb-4">
+        <motion.h1 variants={fadeInUp} className="text-2xl md:text-3xl lg:text-5xl xl:text-7xl font-bold mb-4">
           Welcome to Apple Home.
         </motion.h1>
         <motion.p
           variants={fadeInUp}
           transition={{ delay: 0.3 }}
-          className="text-xl mb-6 max-w-2xl"
+          className="text-sm md:text-md lg:text-lg xl:text-xl mb-6 max-w-2xl"
         >
           A new way to build strength, together. Designed with care, built for
           connection.
