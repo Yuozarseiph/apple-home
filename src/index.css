@@ -1,6 +1,5 @@
 @import "tailwindcss";
 
-/* استایل دلخواه خودمون */
 .pt-30{
   padding-top: 15vh;
 }
@@ -13,16 +12,28 @@ body {
   left: 50%;
   transform: translate(-50%, -50%);
 }
+
+
 .bg-image-iPhone{
-  background-image: url('/src/assets/bg-image2.webp');
+  background-image: url('/src/assets/bg-all.webp');
   background-size: cover;
   background-position: center;
 }
 .shop-bg{
-  background-image: url('/src/assets/shop-bg.webp');
+  background-image: url('/src/assets/bg-all.webp');
   background-size: cover;
   background-position: center;
 }
+
+@media only screen and (max-width: 768px) {
+  .bg-image-iPhone {
+    background-image: url('/src/assets/bg-phone.webp');
+  }
+  .shop-bg {
+    background-image: url('/src/assets/bg-phone.webp');
+  }
+}
+
 .glow-button:hover {
   border: 1px solid rgb(2, 183, 255);
   color: rgb(0, 0, 0);
@@ -83,24 +94,10 @@ body {
 
 /*For Our Values*/
 .position-relative{
-  border: 1px solid rgba(2, 183, 255, 0.267);
+  box-shadow: inset 0 0 10px rgb(255, 255, 255);
   position: relative;
   z-index: 10;
 }
-.position-relative::after , .position-relative::before { 
-  content: "";
-  position: absolute;
-  border-radius: 50%;
-  background: radial-gradient(circle, rgba(2, 183, 255, 0.664) 0%, rgba(255, 255, 255, 0) 50%);
-  width: 25px;
-  height: 25px;
-  z-index: -1;
-}
-.position-relative::after{
-  left: 0;
-  top: 0;
-}
-.position-relative::before{
-  right: 0;
-  top: 0;
+.position-relative:hover{
+  box-shadow: inset 0 0 10px rgb(255, 255, 255), 0 0 10px rgb(255, 255, 255);
 }

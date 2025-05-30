@@ -1,6 +1,6 @@
 import React from "react";
 import { motion } from "framer-motion";
-import bgImage from "../assets/bg-image.webp";
+import bgImage from "../assets/bg-all.webp";
 
 const fadeInUp = {
   hidden: { opacity: 0, y: 30 },
@@ -37,7 +37,7 @@ export default function LandingPage() {
 
   return (
     <motion.div
-      className="select-none bg-black text-white min-h-screen font-sans"
+      className="bg-image-iPhone select-none bg-black text-white min-h-screen font-sans"
       initial="hidden"
       animate="visible"
       variants={{ visible: { transition: { staggerChildren: 0.5 } } }}
@@ -45,11 +45,7 @@ export default function LandingPage() {
       {/* Hero Section */}
       <section
         className="flex flex-col items-center justify-center min-h-screen text-center px-4"
-        style={{
-          backgroundImage: `url(${bgImage})`,
-          backgroundSize: "cover",
-          backgroundPosition: "center",
-        }}
+        
       >
         <motion.h1 variants={fadeInUp} className="text-2xl sm:xl d:text-3xl lg:text-5xl xl:text-7xl font-bold mb-4">
           Welcome to Apple Home.
@@ -80,7 +76,7 @@ export default function LandingPage() {
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true }}
-        className="bg-gradient-to-r from-[#050A30] via-[#090979] to-[#050A30] py-20 px-6 text-center"
+        className="py-20 px-6 text-center"
       >
         <motion.h2 variants={fadeInUp} className="text-4xl font-bold mb-10">
           Our Values
@@ -109,7 +105,7 @@ export default function LandingPage() {
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true }}
-        className="bg-gradient-to-r from-[#050A30] via-[#090979] to-[#050A30] py-16 text-center text-white"
+        className="py-16 text-center text-white"
       >
         <motion.h2 variants={fadeInUp} className="text-3xl font-bold mb-4">
           Stay in the Loop
