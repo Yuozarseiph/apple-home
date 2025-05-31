@@ -8,6 +8,7 @@
   padding-top: 15vh;
 }
 body {
+  font-family: cursive;
   background-color: #050A30;
   cursor: url('./assets/Icons/apple-cursor.svg');
 }
