@@ -18,10 +18,10 @@ const QuickInfo = () => {
 
   return (
     <>
-      <div className="fixed top-1 left-2 text-[20px] text-white opacity-70 z-50 font-mono bg-[#000000b6] backdrop:blur-2xl px-3 py-1 rounded-full shadow-lg">
+      <div className="fixed top-1 left-2 md:text-[20px] sm:text-[12px] text-white opacity-70 z-50 font-mono bg-[#000000b6] backdrop:blur-2xl px-3 py-1 rounded-full shadow-lg">
          {time}
       </div>
-      <div className="fixed top-1 right-2 text-[20px] text-white opacity-70 z-50 font-mono bg-[#000000b6] backdrop:blur-2xl px-3 py-1 rounded-full shadow-lg">
+      <div className="fixed top-1 right-2 md:text-[20px] sm:text-[12px] text-white opacity-70 z-50 font-mono bg-[#000000b6] backdrop:blur-2xl px-3 py-1 rounded-full shadow-lg">
          {date}
       </div>
     </>
