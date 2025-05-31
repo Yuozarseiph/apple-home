@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 function Blog() {
   return (
-    <div className="bg-image-iPhone text-white min-h-screen py-20 pt-30">
+    <div className="bg-image-iPhone text-white min-h-screen py-20 pb-[120px] pt-30">
       {/* Container for the blog content */}
       <section className="container mx-auto px-6">
         {/* Animated main heading */}

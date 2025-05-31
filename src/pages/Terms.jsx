@@ -21,7 +21,7 @@ function Terms() {
 
   return (
     <motion.div
-      className="bg-image-iPhone min-h-screen py-20"
+      className="bg-image-iPhone min-h-screen py-20 pb-[120px]"
       initial="hidden"
       animate="visible"
       variants={containerVariants}
@@ -35,7 +35,7 @@ function Terms() {
           Terms of Use
         </motion.h1>
 
-        <div className="position-relative backdrop-blur-md bg-black/10 shadow-lg p-8 rounded-xl shadow-lg text-left">
+        <div className="position-relative backdrop-blur-md bg-black/10 shadow-lg p-8 rounded-xl text-left">
           <motion.p
             variants={itemVariants}
             custom={0.5}

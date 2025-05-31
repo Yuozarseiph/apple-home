@@ -92,7 +92,7 @@ const Dashboard = () => {
   // Show loading text while user data is being fetched
   if (!userData) {
     return (
-      <div className="flex bg-image-iPhone items-center justify-center h-screen text-lg text-gray-600">
+      <div className="flex bg-image-iPhone items-center justify-center h-screen text-lg text-gray-600 pb-[120px]">
         Loading...
       </div>
     );
@@ -100,7 +100,7 @@ const Dashboard = () => {
 
   return (
     <motion.div
-      className="min-h-screen bg-image-iPhone p-6 pt-20"
+      className="min-h-screen bg-image-iPhone p-6 pt-20 pb-[120px]"
       initial="hidden"
       animate="visible"
       variants={{

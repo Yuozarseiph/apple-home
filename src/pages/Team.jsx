@@ -52,7 +52,7 @@ function SocialIcon({ type, url }) {
 
 function Team() {
   return (
-    <div className="bg-image-iPhone text-white min-h-screen py-20 flex justify-center items-center">
+    <div className="bg-image-iPhone text-white min-h-screen py-20 flex justify-center items-center pb-[120px]">
       <section className="container mx-auto px-6">
         <h1 className="text-4xl font-bold mb-6 text-center text-[#7EC8E3]">
           Meet the Minds Behind Apple Home

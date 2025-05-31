@@ -17,7 +17,7 @@ function BlogPost() {
   }
 
   return (
-    <div className="bg-image-iPhone text-white min-h-screen py-20 pt-30">
+    <div className="bg-image-iPhone text-white min-h-screen py-20 pb-[120px] pt-30">
       {/* Container with blurred background and shadow */}
       <div className="container backdrop-blur-md bg-black/10 shadow-lg mx-auto px-6 max-w-4xl position-relative rounded-xl p-5">
         {/* Animated post title */}

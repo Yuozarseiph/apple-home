@@ -3,7 +3,7 @@ import nfimg from "../assets/not-found.svg";
 import { Link } from "react-router-dom";
 export default function PageNotFound() {
   return (
-    <div className="bg-gradient-to-r from-[#050A30] via-[#090979] to-[#050A30] text-white min-h-screen pt-24 pb-16 px-6 flex flex-col items-center justify-center">
+    <div className="bg-gradient-to-r from-[#050A30] via-[#090979] to-[#050A30] text-white min-h-screen pt-24 pb-[120px] px-6 flex flex-col items-center justify-center">
       {/* Your SVG below. Replace the example with your actual SVG code */}
             <Link
         to="/"

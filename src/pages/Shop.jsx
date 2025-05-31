@@ -47,7 +47,7 @@ function Shop() {
   }, []);
 
   return (
-    <div className="shop-bg min-h-screen py-20 px-4 md:px-10">
+    <div className="shop-bg min-h-screen py-20 px-4 md:px-10 pb-[120px]">
       <section className="text-center">
         <motion.h1
           initial={{ opacity: 0, y: -20 }}
@@ -72,7 +72,7 @@ function Shop() {
                 key={product._id}
                 variants={itemVariants}
                 custom={index}
-                className="position-relative backdrop-blur-md bg-black/40 shadow-lg p-6 rounded-xl shadow-lg text-white flex flex-col"
+                className="position-relative backdrop-blur-md bg-black/40 shadow-lg p-6 rounded-xl text-white flex flex-col"
               >
                 <motion.img
                   src={product.image}

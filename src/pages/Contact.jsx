@@ -4,7 +4,7 @@ import { hoverTapVariant } from "../utils/motionVariants";
 
 export default function Contact() {
   return (
-    <div className="bg-image-iPhone text-white min-h-screen flex flex-col items-center justify-center p-6">
+    <div className="bg-image-iPhone text-white min-h-screen flex flex-col items-center justify-center p-6 pb-[120px]">
       {/* Page title */}
       <motion.h1
         className="text-4xl font-bold mb-6 text-[#7EC8E3]"

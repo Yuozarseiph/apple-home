@@ -56,7 +56,7 @@ export default function Faq() {
 
   return (
     <motion.div
-      className="bg-image-iPhone text-white min-h-screen pt-24 pb-16 px-6"
+      className="bg-image-iPhone text-white min-h-screen pt-24 pb-[120px] px-6 "
       initial="hidden"
       animate="visible"
       variants={{

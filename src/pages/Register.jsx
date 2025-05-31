@@ -61,7 +61,7 @@ const Register = () => {
 
   return (
     <motion.div
-      className="flex items-center justify-center min-h-screen bg-image-iPhone bg-cover bg-center px-4 w-full"
+      className="flex items-center justify-center min-h-screen bg-image-iPhone bg-cover bg-center px-4 w-full pb-[120px]"
       initial="hidden"
       animate="visible"
       variants={{

@@ -37,7 +37,7 @@ export default function LandingPage() {
 
   return (
     <motion.div
-      className="bg-image-iPhone select-none bg-black text-white min-h-screen font-sans"
+      className="bg-image-iPhone select-none bg-black text-white min-h-screen font-sans pb-[120px]" 
       initial="hidden"
       animate="visible"
       variants={{ visible: { transition: { staggerChildren: 0.5 } } }}

@@ -69,11 +69,11 @@ function Cart() {
   // Show loading text while data is being fetched
   if (loading)
     return (
-      <div className="text-white bg-image-iPhone text-center py-10">Loading your cart...</div>
+      <div className="text-white bg-image-iPhone text-center py-10 pb-[120px]">Loading your cart...</div>
     );
 
   return (
-    <div className="bg-image-iPhone text-white min-h-screen py-20 px-4">
+    <div className="bg-image-iPhone text-white min-h-screen py-20 pb-[120px] px-4">
       <div className="max-w-5xl mx-auto">
         <h1 className="text-4xl font-bold mb-8 text-center">Your Cart</h1>
 

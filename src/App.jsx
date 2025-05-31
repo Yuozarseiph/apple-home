@@ -5,8 +5,7 @@ import LandingPage from "./pages/LandingPage";
 import Contact from "./pages/Contact";
 import Terms from "./pages/Terms";
 import Shop from "./pages/Shop";
-import Header from "./components/Header";
-import Footer from "./components/Footer";
+import BottomNav from "./components/BottomNav";
 import About from "./pages/About";
 import FAQ from "./pages/Faq";
 import Login from "./pages/Login";
@@ -24,7 +23,6 @@ import PageNotFound from "./pages/PageNotFound";
 function App() {
   return (
     <Router>
-      <Header />
       <Routes>
         <Route path="/" element={<LandingPage />} />
         <Route path="/contact" element={<Contact />} />
@@ -74,7 +72,7 @@ function App() {
         {/* 404 Page Not Found route */}
         <Route path="*" element={<PageNotFound />} />
       </Routes>
-      <Footer />
+      <BottomNav />
     </Router>
   );
 }
