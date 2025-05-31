@@ -107,7 +107,7 @@ const Login = () => {
             whileTap={{ scale: 0.95 }}
             variants={fadeInUp(0.7)}
             type="submit"
-            className="w-full bg-[#ffffff2f] text-black px-5 py-4 rounded-full backdrop:blur-2xl hover:bg-[#ffffff9f] transition-colors"
+            className="w-full bg-[#ffffff2f] text-white px-5 py-4 rounded-full backdrop:blur-2xl hover:bg-[#ffffff9f] hover:text-black transition-colors"
           >
             Continue with Apple ID
           </motion.button>

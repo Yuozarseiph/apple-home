@@ -2,7 +2,7 @@ import React, { useEffect, useState, useRef } from "react";
 import { NavLink } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { icons } from "./IconImports";
-import upIcon from '../assets/Icons/Header/apple-up-menu.svg';
+import upIcon from "../assets/Icons/Header/apple-up-menu.svg";
 
 const BottomNav = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -26,7 +26,10 @@ const BottomNav = () => {
 
   useEffect(() => {
     const handleClickOutside = (event) => {
-      if (extraMenuRef.current && !extraMenuRef.current.contains(event.target)) {
+      if (
+        extraMenuRef.current &&
+        !extraMenuRef.current.contains(event.target)
+      ) {
         setShowExtra(false);
       }
     };
@@ -44,7 +47,11 @@ const BottomNav = () => {
 
   const navLinks = [
     { label: "Home", path: "/", icon: icons.homeIc },
-    { label: isLoggedIn ? "Dashboard" : "Login", path: isLoggedIn ? "/dashboard" : "/login", icon: icons.dashboardIc },
+    {
+      label: isLoggedIn ? "Dashboard" : "Login",
+      path: isLoggedIn ? "/dashboard" : "/login",
+      icon: icons.dashboardIc,
+    },
     { label: "Shop", path: "/shop", icon: icons.shopIc },
     { label: "Contact", path: "/contact", icon: icons.contactIc },
     { label: "Terms", path: "/terms", icon: icons.termsIc },
@@ -70,17 +77,17 @@ const BottomNav = () => {
             key={link.path}
             to={link.path}
             className={({ isActive }) =>
-              `flex flex-col items-center justify-center px-1 py-1 rounded-xl transition-all duration-300 hover:scale-110 ${
-                isActive ? "text-blue-600" : "text-white"
+              `flex flex-col items-center justify-center px-1 py-1 font-bold rounded-xl transition-all duration-300 hover:scale-110 ${
+                isActive ? "text-[#1c274c] text-shadow-white text-shadow-lg/100 scale-110" : "text-white"
               }`
             }
           >
             <img
               src={link.icon}
               alt={link.label}
-              className={`${isTablet ? "w-7 h-7" : "w-8 h-8"} sm:w-9 sm:h-9`}
+              className={`${isTablet ? "w-8 h-8" : "w-9 h-9"} sm:w-9 sm:h-9`}
             />
-            <span className="text-[10px] sm:text-sm font-semibold mt-1">
+            <span className="text-[1rem] sm:text-sm font-semibold mt-1">
               {link.label}
             </span>
           </NavLink>
@@ -92,7 +99,7 @@ const BottomNav = () => {
             className="flex flex-col items-center justify-center px-1 py-1 text-white hover:scale-110 transition-all text-xl"
           >
             <img src={upIcon} alt="Up Icon Menu" className="w-6 h-6" />
-            <span className="text-[10px] sm:text-sm mt-1">More</span>
+            <span className="text-[1rem] sm:text-sm mt-1">More</span>
           </button>
         )}
       </div>
@@ -104,7 +111,11 @@ const BottomNav = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: -10 }}
             exit={{ opacity: 0, y: 20 }}
-            className={`absolute ${isMobile ? 'right-3 bottom-20' : 'left-1/2 -translate-x-1/2 bottom-20'} bg-white/50 backdrop-blur-xl rounded-2xl shadow-xl p-3 flex flex-col gap-2 max-h-[60vh] overflow-hidden`}
+            className={`absolute ${
+              isMobile
+                ? "right-3 bottom-20"
+                : "left-1/2 -translate-x-1/2 bottom-20"
+            } bg-white/50 backdrop-blur-xl rounded-2xl shadow-xl p-3 flex flex-col gap-2 max-h-[60vh] overflow-hidden`}
           >
             {extraLinks.map((link) => (
               <NavLink
@@ -112,12 +123,12 @@ const BottomNav = () => {
                 to={link.path}
                 className={({ isActive }) =>
                   `flex items-center gap-2 px-2 py-1 rounded-xl transition-all duration-300 hover:scale-105 ${
-                    isActive ? "text-blue-600" : "text-white"
+                    isActive ? "text-[#1c274c] text-shadow-white text-shadow-lg/100" : "text-white"
                   }`
                 }
               >
-                <img src={link.icon} alt={link.label} className="w-6 h-6" />
-                <span className="text-sm font-medium">{link.label}</span>
+                <img src={link.icon} alt={link.label} className="w-9 h-9" />
+                <span className="text-lg font-medium">{link.label}</span>
               </NavLink>
             ))}
           </motion.div>

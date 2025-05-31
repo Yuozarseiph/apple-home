@@ -148,7 +148,7 @@ const Register = () => {
             whileTap={{ scale: 0.98 }}
             variants={fadeInUp(0.9)}
             type="submit"
-            className="w-full bg-[#ffffff2f] text-black px-5 py-4 rounded-full backdrop:blur-2xl hover:bg-[#ffffff9f] transition-colors"
+            className="w-full bg-[#ffffff2f] text-white px-5 py-4 rounded-full backdrop:blur-2xl hover:bg-[#ffffff9f] hover:text-black transition-colors"
           >
             Continue
           </motion.button>
