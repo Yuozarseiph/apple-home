@@ -69,7 +69,7 @@ const BottomNav = () => {
       initial={{ y: 100 }}
       animate={{ y: 0 }}
       transition={{ type: "spring", stiffness: 300 }}
-      className="fixed bottom-3 left-1/2 -translate-x-1/2 z-50 w-[98%] sm:w-[95%] md:w-[90%] max-w-5xl px-3 py-2 bg-white/50 backdrop-blur-xl border border-white/30 shadow-lg rounded-full"
+      className="fixed bottom-3 left-1/2 -translate-x-1/2 z-50 w-[98%] sm:w-[95%] md:w-[fit-content] max-w-5xl px-9 py-1 bg-white/50 backdrop-blur-xl border border-white/30 shadow-lg rounded-full"
     >
       <div className="flex items-center justify-center gap-2 sm:gap-4 overflow-hidden">
         {primaryLinks.map((link) => (
@@ -85,9 +85,9 @@ const BottomNav = () => {
             <img
               src={link.icon}
               alt={link.label}
-              className={`${isTablet ? "w-8 h-8" : "w-9 h-9"} sm:w-9 sm:h-9`}
+              className={`${isTablet ? "w-7 h-7" : "w-7 h-7"} sm:w-7 sm:h-7`}
             />
-            <span className="text-[1rem] sm:text-sm font-semibold mt-1">
+            <span className="text-[0.8rem] sm:text-sm font-semibold mt-1">
               {link.label}
             </span>
           </NavLink>
@@ -98,8 +98,8 @@ const BottomNav = () => {
             onClick={() => setShowExtra(!showExtra)}
             className="flex flex-col items-center justify-center px-1 py-1 text-white hover:scale-110 transition-all text-xl"
           >
-            <img src={upIcon} alt="Up Icon Menu" className="w-6 h-6" />
-            <span className="text-[1rem] sm:text-sm mt-1">More</span>
+            <img src={upIcon} alt="Up Icon Menu" className="w-7 h-7" />
+            <span className="text-[0.8rem] sm:text-sm mt-1">More</span>
           </button>
         )}
       </div>
@@ -127,8 +127,8 @@ const BottomNav = () => {
                   }`
                 }
               >
-                <img src={link.icon} alt={link.label} className="w-9 h-9" />
-                <span className="text-lg font-medium">{link.label}</span>
+                <img src={link.icon} alt={link.label} className="w-7 h-7" />
+                <span className="text-sm font-medium">{link.label}</span>
               </NavLink>
             ))}
           </motion.div>
