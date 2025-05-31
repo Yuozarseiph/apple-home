@@ -69,7 +69,7 @@ const BottomNav = () => {
       initial={{ y: 100 }}
       animate={{ y: 0 }}
       transition={{ type: "spring", stiffness: 300 }}
-      className="fixed bottom-3 left-1/2 -translate-x-1/2 z-50 w-[98%] sm:w-[95%] md:w-[fit-content] max-w-5xl px-9 py-1 bg-white/50 backdrop-blur-xl border border-white/30 shadow-lg rounded-full"
+      className="fixed bottom-3 left-1/2 -translate-x-1/2 z-50 w-[98%] sm:w-[95%] md:w-[fit-content] max-w-5xl px-9 py-1 bg-black/50 backdrop-blur-2xl border border-white/20 shadow-lg rounded-full"
     >
       <div className="flex items-center justify-center gap-2 sm:gap-4 overflow-hidden">
         {primaryLinks.map((link) => (
@@ -78,14 +78,14 @@ const BottomNav = () => {
             to={link.path}
             className={({ isActive }) =>
               `flex flex-col items-center justify-center px-1 py-1 font-bold rounded-xl transition-all duration-300 hover:scale-110 ${
-                isActive ? "text-[#1c274c] text-shadow-white text-shadow-lg/100 scale-110" : "text-white"
+                isActive ? "text-white text-shadow-[#1c274c] text-shadow-lg/100 scale-110" : "text-white"
               }`
             }
           >
             <img
               src={link.icon}
               alt={link.label}
-              className={`${isTablet ? "w-7 h-7" : "w-7 h-7"} sm:w-7 sm:h-7`}
+              className={`${isTablet ? "w-9 h-9" : "w-9 h-9"} bg-white/65 rounded-full p-1 sm:w-9 sm:h-9`}
             />
             <span className="text-[0.8rem] sm:text-sm font-semibold mt-1">
               {link.label}
@@ -96,9 +96,9 @@ const BottomNav = () => {
         {extraLinks.length > 0 && (
           <button
             onClick={() => setShowExtra(!showExtra)}
-            className="flex flex-col items-center justify-center px-1 py-1 text-white hover:scale-110 transition-all text-xl"
+            className="flex flex-col items-center justify-center px-1 py-1 text-white hover:scale-110 transition-all text-xl cursor-pointer"
           >
-            <img src={upIcon} alt="Up Icon Menu" className="w-7 h-7" />
+            <img src={upIcon} alt="Up Icon Menu" className="w-9 h-9 p-1 bg-white/65 rounded-full" />
             <span className="text-[0.8rem] sm:text-sm mt-1">More</span>
           </button>
         )}
@@ -115,7 +115,7 @@ const BottomNav = () => {
               isMobile
                 ? "right-3 bottom-20"
                 : "left-1/2 -translate-x-1/2 bottom-20"
-            } bg-white/50 backdrop-blur-xl rounded-2xl shadow-xl p-3 flex flex-col gap-2 max-h-[60vh] overflow-hidden`}
+            } bg-black/50 border-white/20 backdrop-blur-xl rounded-2xl shadow-xl p-3 flex flex-col gap-2 max-h-[60vh] overflow-hidden`}
           >
             {extraLinks.map((link) => (
               <NavLink
@@ -123,11 +123,11 @@ const BottomNav = () => {
                 to={link.path}
                 className={({ isActive }) =>
                   `flex items-center gap-2 px-2 py-1 rounded-xl transition-all duration-300 hover:scale-105 ${
-                    isActive ? "text-[#1c274c] text-shadow-white text-shadow-lg/100" : "text-white"
+                    isActive ? "text-white text-shadow-[#1c274c] text-shadow-lg/100" : "text-white"
                   }`
                 }
               >
-                <img src={link.icon} alt={link.label} className="w-7 h-7" />
+                <img src={link.icon} alt={link.label} className="w-9 h-9 p-1 bg-white/65 rounded-full" />
                 <span className="text-sm font-medium">{link.label}</span>
               </NavLink>
             ))}
