@@ -178,6 +178,40 @@ export default function DynamicIslandRouteNotifier() {
     // eslint-disable-next-line
   }, []);
 
+  // اجرای انیمیشن اولیه بعد از mount برای هماهنگی اندازه با محتوا
+  useEffect(() => {
+    // فقط یک بار اجرا شود
+    if (!islandRef.current || !messageRef.current) return;
+    const tlInit = gsap.timeline();
+    tlInit.set(messageRef.current, { opacity: 0, y: 20 });
+    tlInit.set(islandRef.current, {
+      width: 40,
+      height: 40,
+      borderRadius: "50%",
+      paddingLeft: 0,
+      paddingRight: 0,
+      scale: 1,
+      opacity: 1,
+    });
+    tlInit.to(islandRef.current, {
+      width: () => {
+        const msgWidth = messageRef.current.offsetWidth;
+        return msgWidth + 32;
+      },
+      height: 40,
+      borderRadius: "20px",
+      paddingLeft: 16,
+      paddingRight: 16,
+      duration: 0.5,
+      ease: "power2.out",
+    });
+    tlInit.to(
+      messageRef.current,
+      { opacity: 1, y: 0, duration: 0.5, ease: "power2.out" },
+      "<"
+    );
+  }, []);
+
   return (
     <div
       ref={islandRef}
@@ -194,9 +228,7 @@ export default function DynamicIslandRouteNotifier() {
           userSelect: "none",
         }}
       >
-        {showDateTime
-          ? dateTimeStr
-          : routeMessages[currentPath] || "Unknown"}
+        {showDateTime ? dateTimeStr : routeMessages[currentPath] || "Unknown"}
       </span>
     </div>
   );
