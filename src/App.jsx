@@ -19,12 +19,12 @@ import BlogPost from "./pages/BlogPost";
 import Cart from "./pages/Cart";
 import Checkout from "./pages/Checkout";
 import PageNotFound from "./pages/PageNotFound";
-import QuickInfo from "./components/QuickInfo";
+import DynamicIsland from "./components/DynamicIsland";
 
 function App() {
   return (
     <Router>
-      <QuickInfo />
+      <DynamicIsland />
       <Routes>
         <Route path="/" element={<LandingPage />} />
         <Route path="/contact" element={<Contact />} />
