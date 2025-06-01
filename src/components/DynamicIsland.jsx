@@ -19,13 +19,18 @@ export default function DynamicIslandRouteNotifier() {
   const messageRef = useRef();
   const tl = useRef();
 
-  const [currentPath, setCurrentPath] = useState(window.location.pathname);
-  const [showDateTime, setShowDateTime] = useState(false);
-  const [dateTimeStr, setDateTimeStr] = useState("");
-
   // پیام‌های در صف
   const queueRef = useRef([]);
   const isPlayingRef = useRef(false);
+
+  // پیام فعلی که باید نمایش داده شود
+  const [currentMessage, setCurrentMessage] = useState(() => ({
+    type: "route",
+    value: window.location.pathname,
+  }));
+
+  // ذخیره مسیر فعلی برای تشخیص تغییر واقعی مسیر
+  const lastPathRef = useRef(window.location.pathname);
 
   // Helper to update date/time string from user's device
   const updateDateTime = () => {
@@ -44,8 +49,20 @@ export default function DynamicIslandRouteNotifier() {
 
   // صف پیام‌ها
   const enqueueMessage = (msg) => {
-    queueRef.current.push(msg);
-    playNext();
+    // اگر پیام route است و مسیر جدید با مسیر قبلی فرق دارد، اجازه بده
+    if (msg.type === "route" && msg.value !== lastPathRef.current) {
+      lastPathRef.current = msg.value;
+      queueRef.current.push(msg);
+      playNext();
+      return;
+    }
+    // اگر پیام datetime است و پیام فعلی datetime نیست، اجازه بده
+    if (msg.type === "datetime" && currentMessage.type !== "datetime") {
+      queueRef.current.push(msg);
+      playNext();
+      return;
+    }
+    // پیام تکراری اضافه نشود
   };
 
   const playNext = () => {
@@ -53,13 +70,7 @@ export default function DynamicIslandRouteNotifier() {
     const next = queueRef.current.shift();
     if (!next) return;
     isPlayingRef.current = true;
-    if (next.type === "datetime") {
-      setDateTimeStr(next.value);
-      setShowDateTime(true);
-    } else if (next.type === "route") {
-      setShowDateTime(false);
-      setCurrentPath(next.value);
-    }
+    setCurrentMessage(next);
   };
 
   // Show date/time immediately and then every 60s
@@ -70,21 +81,9 @@ export default function DynamicIslandRouteNotifier() {
     // eslint-disable-next-line
   }, []);
 
-  // Hide date/time after animation
+  // اجرای انیمیشن برای پیام فعلی
   useEffect(() => {
-    if (showDateTime) {
-      const timeout = setTimeout(() => {
-        setShowDateTime(false);
-        isPlayingRef.current = false;
-        playNext();
-      }, 3300);
-      return () => clearTimeout(timeout);
-    }
-  }, [showDateTime]);
-
-  // اجرای انیمیشن برای route
-  useEffect(() => {
-    if (showDateTime) return; // اگر ساعت/تاریخ نمایش داده می‌شود، route اجرا نشود
+    if (!currentMessage) return;
     tl.current = gsap.timeline({ paused: true });
 
     tl.current.set(messageRef.current, { opacity: 0, y: 20 });
@@ -102,7 +101,7 @@ export default function DynamicIslandRouteNotifier() {
     tl.current.to(islandRef.current, {
       width: () => {
         const msgWidth = messageRef.current.offsetWidth;
-        return msgWidth + 32; // 16px padding left + right
+        return msgWidth + 32;
       },
       height: 40,
       borderRadius: "20px",
@@ -123,7 +122,7 @@ export default function DynamicIslandRouteNotifier() {
       y: -20,
       duration: 0.5,
       ease: "power2.in",
-      delay: 2,
+      delay: currentMessage.type === "route" ? 1.7 : 2, // زمان نمایش route را کمی بیشتر کن (مثلاً 1.7 ثانیه)
     });
 
     tl.current.to(islandRef.current, {
@@ -149,7 +148,7 @@ export default function DynamicIslandRouteNotifier() {
 
     tl.current.restart();
     // eslint-disable-next-line
-  }, [currentPath, showDateTime]);
+  }, [currentMessage]);
 
   // رویدادهای تغییر مسیر
   useEffect(() => {
@@ -180,7 +179,6 @@ export default function DynamicIslandRouteNotifier() {
 
   // اجرای انیمیشن اولیه بعد از mount برای هماهنگی اندازه با محتوا
   useEffect(() => {
-    // فقط یک بار اجرا شود
     if (!islandRef.current || !messageRef.current) return;
     const tlInit = gsap.timeline();
     tlInit.set(messageRef.current, { opacity: 0, y: 20 });
@@ -216,6 +214,7 @@ export default function DynamicIslandRouteNotifier() {
     <div
       ref={islandRef}
       onClick={() => {
+        // همیشه پیام route را به صف اضافه کن تا نمایش داده شود حتی اگر مسیر فعلی باشد
         enqueueMessage({ type: "route", value: window.location.pathname });
       }}
       className="fixed top-4 left-1/2 -translate-x-1/2 bg-black text-white text-sm rounded-full border border-white/20 shadow-lg z-50 flex items-center justify-center px-4 py-2 cursor-pointer overflow-hidden select-none"
@@ -228,7 +227,13 @@ export default function DynamicIslandRouteNotifier() {
           userSelect: "none",
         }}
       >
-        {showDateTime ? dateTimeStr : routeMessages[currentPath] || "Unknown"}
+        {currentMessage.type === "datetime"
+          ? currentMessage.value
+          : (() => {
+              let key = currentMessage.value || "";
+              if (key.length > 1 && key.endsWith("/")) key = key.slice(0, -1);
+              return routeMessages[key.toLowerCase()] || "";
+            })()}
       </span>
     </div>
   );
