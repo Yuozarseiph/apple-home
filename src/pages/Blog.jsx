@@ -1,29 +1,49 @@
-import { motion } from "framer-motion";
+import React, { useRef, useEffect } from "react";
 import { Link } from "react-router-dom";
+import gsap from "gsap";
 
 function Blog() {
+  const titleRef = useRef();
+  const cardRefs = useRef([]);
+
+  useEffect(() => {
+    if (titleRef.current) {
+      gsap.fromTo(
+        titleRef.current,
+        { opacity: 0, y: 40 },
+        { opacity: 1, y: 0, duration: 1, delay: 0.1, ease: "power2.out" }
+      );
+    }
+    cardRefs.current.forEach((el, i) => {
+      if (el) {
+        gsap.fromTo(
+          el,
+          { opacity: 0, y: 50 },
+          {
+            opacity: 1,
+            y: 0,
+            duration: 1,
+            delay: 0.3 + i * 0.18,
+            ease: "power2.out",
+          }
+        );
+      }
+    });
+  }, []);
+
   return (
     <div className="bg-image-iPhone text-white min-h-screen py-20 pb-[120px] pt-30">
-      {/* Container for the blog content */}
       <section className="container mx-auto px-6">
-        {/* Animated main heading */}
-        <motion.h1
-          className="text-4xl font-bold mb-12 text-center text-[#7EC8E3]"
-          initial={{ opacity: 0 }} // Start hidden
-          animate={{ opacity: 1 }} // Fade in
-          transition={{ duration: 1 }} // Duration 1 second
+        <h1
+          ref={titleRef}
+          className="text-4xl font-extrabold mb-12 text-center text-[#7EC8E3] drop-shadow-[0_2px_16px_rgba(126,200,227,0.6)]"
         >
           Discover the Experience
-        </motion.h1>
-
-        {/* Grid container for blog cards */}
+        </h1>
         <div className="grid md:grid-cols-3 gap-12">
-          {/* First Card */}
-          <motion.div
-            className="position-relative backdrop-blur-md bg-black/10 shadow-lg p-6 rounded-xl"
-            initial={{ opacity: 0, y: 50 }} // Start faded and shifted down
-            animate={{ opacity: 1, y: 0 }} // Animate to visible and in place
-            transition={{ duration: 1, delay: 0.2 }} // Slight delay for staggered effect
+          <div
+            ref={(el) => (cardRefs.current[0] = el)}
+            className="relative w-full rounded-2xl p-8 shadow-2xl border-2 border-white/20 bg-gradient-to-br from-white/10 via-[#7EC8E3]/10 to-black/30 backdrop-blur-2xl"
           >
             <h3 className="text-2xl font-semibold mb-4 text-[#7EC8E3]">
               Designing for Connection
@@ -32,21 +52,16 @@ function Blog() {
               How thoughtful design brings people closer — and makes every
               interaction feel more natural, more human.
             </p>
-            {/* Link to the detailed blog post */}
             <Link
               to="/blog/designing-for-connection"
               className="text-[#7EC8E3]"
             >
               Read more
             </Link>
-          </motion.div>
-
-          {/* Second Card */}
-          <motion.div
-            className="position-relative backdrop-blur-md bg-black/10 shadow-lg p-6 rounded-xl"
-            initial={{ opacity: 0, y: 50 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1, delay: 0.4 }}
+          </div>
+          <div
+            ref={(el) => (cardRefs.current[1] = el)}
+            className="relative w-full rounded-2xl p-8 shadow-2xl border-2 border-white/20 bg-gradient-to-br from-white/10 via-[#7EC8E3]/10 to-black/30 backdrop-blur-2xl"
           >
             <h3 className="text-2xl font-semibold mb-4 text-[#7EC8E3]">
               Strength Through Simplicity
@@ -61,14 +76,10 @@ function Blog() {
             >
               Read more
             </Link>
-          </motion.div>
-
-          {/* Third Card */}
-          <motion.div
-            className="position-relative backdrop-blur-md bg-black/10 shadow-lg p-6 rounded-xl"
-            initial={{ opacity: 0, y: 50 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1, delay: 0.6 }}
+          </div>
+          <div
+            ref={(el) => (cardRefs.current[2] = el)}
+            className="relative w-full rounded-2xl p-8 shadow-2xl border-2 border-white/20 bg-gradient-to-br from-white/10 via-[#7EC8E3]/10 to-black/30 backdrop-blur-2xl"
           >
             <h3 className="text-2xl font-semibold mb-4 text-[#7EC8E3]">
               The Future of Everyday Tech
@@ -79,11 +90,11 @@ function Blog() {
             </p>
             <Link
               to="/blog/the-future-of-everyday-tech"
-              className="text-[#7EC8E3] hover:underline-none"
+              className="text-[#7EC8E3]"
             >
               Read more
             </Link>
-          </motion.div>
+          </div>
         </div>
       </section>
     </div>

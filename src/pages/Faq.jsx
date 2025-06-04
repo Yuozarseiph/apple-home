@@ -100,7 +100,7 @@ export default function Faq() {
   ];
 
   return (
-    <div className="flex items-center justify-center min-h-screen bg-image-iPhone bg-cover bg-center px-4 pt-24 pb-[120px]">
+    <div className="flex items-center justify-center min-h-screen bg-image-iPhone bg-cover bg-center px-6 pt-24 pb-[120px] text-white">
       <section className="max-w-5xl mx-auto w-full">
         <h1
           ref={titleRef}
@@ -114,7 +114,7 @@ export default function Faq() {
             <div
               key={i}
               ref={(el) => (cardRefs.current[i] = el)}
-              className="relative backdrop-blur-md bg-black/10 shadow-lg p-6 rounded-xl cursor-pointer select-none transition hover:scale-105"
+              className="relative w-full rounded-2xl p-8 shadow-2xl border-2 border-white/20 bg-gradient-to-br from-white/10 via-[#7EC8E3]/10 to-black/30 backdrop-blur-2xl cursor-pointer select-none transition hover:scale-105"
             >
               <h2
                 role="button"
@@ -156,3 +156,4 @@ export default function Faq() {
     </div>
   );
 }
+// هیچ اثری از framer-motion نیست و انیمیشن‌ها با GSAP انجام می‌شود.

@@ -1,42 +1,56 @@
 // src/pages/BlogPost.js
 
-import { motion } from "framer-motion";
+import React, { useRef, useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
 import { blogPosts } from "../data/blogPosts";
+import gsap from "gsap";
 
 function BlogPost() {
-  // Get the 'slug' parameter from the URL
   const { slug } = useParams();
-
-  // Find the blog post that matches the slug
   const post = blogPosts.find((post) => post.slug === slug);
 
-  // If no post is found, display a not found message
+  const titleRef = useRef();
+  const containerRef = useRef();
+
+  useEffect(() => {
+    if (titleRef.current) {
+      gsap.fromTo(
+        titleRef.current,
+        { opacity: 0, y: 40 },
+        { opacity: 1, y: 0, duration: 1, delay: 0.1, ease: "power2.out" }
+      );
+    }
+    if (containerRef.current) {
+      gsap.fromTo(
+        containerRef.current,
+        { opacity: 0, y: 40 },
+        { opacity: 1, y: 0, duration: 1, delay: 0.2, ease: "power2.out" }
+      );
+    }
+  }, []);
+
   if (!post) {
-    return <div className="text-white text-center py-20">Blog not found !!!</div>;
+    return (
+      <div className="text-white text-center py-20">Blog not found !!!</div>
+    );
   }
 
   return (
     <div className="bg-image-iPhone text-white min-h-screen py-20 pb-[120px] pt-30">
-      {/* Container with blurred background and shadow */}
-      <div className="container backdrop-blur-md bg-black/10 shadow-lg mx-auto px-6 max-w-4xl position-relative rounded-xl p-5">
-        {/* Animated post title */}
-        <motion.h1
-          className="text-4xl font-bold mb-6 text-[#7EC8E3]"
-          initial={{ opacity: 0 }}           // Start hidden
-          animate={{ opacity: 1 }}           // Fade in animation
-          transition={{ duration: 0.6 }}     // Animation duration
+      <div
+        ref={containerRef}
+        className="container relative w-full max-w-4xl rounded-2xl p-10 shadow-2xl border-2 border-white/20 bg-gradient-to-br from-white/10 via-[#7EC8E3]/10 to-black/30 backdrop-blur-2xl mx-auto"
+      >
+        <h1
+          ref={titleRef}
+          className="text-4xl font-extrabold mb-6 text-[#7EC8E3] drop-shadow-[0_2px_16px_rgba(126,200,227,0.6)]"
         >
           {post.title}
-        </motion.h1>
-
-        {/* Blog content rendered as HTML */}
+        </h1>
         <article
           className="prose prose-invert prose-lg max-w-none"
           dangerouslySetInnerHTML={{ __html: post.content }}
         />
-
-        {/* Back link to the main blog page */}
         <div className="mt-10">
           <Link to="/blog" className="text-[#7EC8E3]">
             &larr; Back to Blog
