@@ -1,7 +1,7 @@
 // src/pages/BlogPost.js
 
 import { motion } from "framer-motion";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { blogPosts } from "../data/blogPosts";
 
 function BlogPost() {
@@ -38,9 +38,9 @@ function BlogPost() {
 
         {/* Back link to the main blog page */}
         <div className="mt-10">
-          <a href="/blog" className="text-[#7EC8E3] hover:underline">
+          <Link to="/blog" className="text-[#7EC8E3]">
             &larr; Back to Blog
-          </a>
+          </Link>
         </div>
       </div>
     </div>

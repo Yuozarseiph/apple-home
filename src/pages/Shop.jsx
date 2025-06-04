@@ -47,7 +47,7 @@ function Shop() {
   }, []);
 
   return (
-    <div className="shop-bg min-h-screen py-20 px-4 md:px-10 pb-[120px]">
+    <div className="bg-image-iPhone min-h-screen py-20 px-4 md:px-10 pb-[120px]">
       <section className="text-center">
         <motion.h1
           initial={{ opacity: 0, y: -20 }}

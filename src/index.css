@@ -12,20 +12,10 @@ body {
   background-color: #050A30;
   cursor: url('./assets/Icons/apple-cursor.svg');
 }
-.header{
-  top: 16px;
-  left: 50%;
-  transform: translate(-50%, -50%);
-}
-
 
 .bg-image-iPhone{
   background-image: url('/src/assets/bg-all.webp');
-  background-size: cover;
-  background-position: center;
-}
-.shop-bg{
-  background-image: url('/src/assets/bg-all.webp');
+  background-attachment: fixed;
   background-size: cover;
   background-position: center;
 }
@@ -39,70 +29,4 @@ body {
   }
 }
 
-.glow-button:hover {
-  border: 1px solid rgb(2, 183, 255);
-  color: rgb(0, 0, 0);
-  box-shadow: 0 0px 20px rgb(0, 217, 255);
-}
 
-.footer-drop-shadow{
-  position: relative;
-}
-.footer-drop-shadow:hover::after{
-  content: "";
-  position: absolute;
-  background: radial-gradient(circle, rgba(2, 183, 255, 0.664) 0%, rgba(255, 255, 255, 0) 50%);
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  filter: drop-shadow(0 0 10px #7ec8e3);
-}
-
-.drop-shadow{
-  position: relative;
-  color: #fff;
-  padding: 5px;
-  border-radius: 1200px;
-  overflow: hidden;
-
-}
-
-.drop-shadow:hover {
-  filter: drop-shadow(0 0 10px #7ec8e3);
-  box-shadow: 0 0 5px blue, 0 0 10px blue, 0 0 15px blue, 0 0 20px blue;
-  background-color: blue;
-}
-
-
-.input-shadow:focus{
-  outline: none;
-  box-shadow: 0 0 20px #ffffff;
-}
-
-
-
-.active-bg-glow{
-  position: relative;
-  background: #6ab5c7;
-  padding: 5px;
-  border-radius: 1200px;
-  box-shadow: 0 0 5px #6ab5c7, 0 0 10px #6ab5c7, 0 0 15px #6ab5c7, 0 0 20px #6ab5c7;
-}
-
-
-.bd-blur{
-  -webkit-backdrop-filter: blur(10px);
-  backdrop-filter: blur(10px);
-}
-
-
-/*For Our Values*/
-.position-relative{
-  box-shadow: inset 0 0 10px rgb(255, 255, 255);
-  position: relative;
-  z-index: 10;
-}
-.position-relative:hover{
-  box-shadow: inset 0 0 10px rgb(255, 255, 255), 0 0 10px rgb(255, 255, 255);
-}

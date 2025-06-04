@@ -32,21 +32,6 @@ export default function DynamicIslandRouteNotifier() {
   // ذخیره مسیر فعلی برای تشخیص تغییر واقعی مسیر
   const lastPathRef = useRef(window.location.pathname);
 
-  // Helper to update date/time string from user's device
-  const updateDateTime = () => {
-    const now = new Date();
-    const date = now.toLocaleDateString(undefined, {
-      year: "numeric",
-      month: "2-digit",
-      day: "2-digit",
-    });
-    const time = now.toLocaleTimeString(undefined, {
-      hour: "2-digit",
-      minute: "2-digit",
-    });
-    enqueueMessage({ type: "datetime", value: `${date} - ${time}` });
-  };
-
   // صف پیام‌ها
   const enqueueMessage = (msg) => {
     // اگر پیام route است و مسیر جدید با مسیر قبلی فرق دارد، اجازه بده
@@ -56,13 +41,12 @@ export default function DynamicIslandRouteNotifier() {
       playNext();
       return;
     }
-    // اگر پیام datetime است و پیام فعلی datetime نیست، اجازه بده
-    if (msg.type === "datetime" && currentMessage.type !== "datetime") {
+    // پیام تکراری اضافه نشود
+    if (msg.type === "custom") {
       queueRef.current.push(msg);
       playNext();
       return;
     }
-    // پیام تکراری اضافه نشود
   };
 
   const playNext = () => {
@@ -73,11 +57,20 @@ export default function DynamicIslandRouteNotifier() {
     setCurrentMessage(next);
   };
 
-  // Show date/time immediately and then every 60s
+  // پیام سفارشی (مثلاً ارور فرم) را به صف اضافه کن
   useEffect(() => {
-    updateDateTime(); // نمایش اولیه
-    const interval = setInterval(updateDateTime, 60000);
-    return () => clearInterval(interval);
+    window.showIslandMessage = (msg, opts = {}) => {
+      queueRef.current.push({
+        type: "custom",
+        value: msg,
+        color: opts.color || "#ff6b81", // پیش‌فرض قرمز
+        duration: opts.duration || 2.2,
+      });
+      playNext();
+    };
+    return () => {
+      delete window.showIslandMessage;
+    };
     // eslint-disable-next-line
   }, []);
 
@@ -122,7 +115,12 @@ export default function DynamicIslandRouteNotifier() {
       y: -20,
       duration: 0.5,
       ease: "power2.in",
-      delay: currentMessage.type === "route" ? 1.7 : 2, // زمان نمایش route را کمی بیشتر کن (مثلاً 1.7 ثانیه)
+      delay:
+        currentMessage.type === "route"
+          ? 1.7
+          : currentMessage.type === "custom"
+          ? currentMessage.duration
+          : 2,
     });
 
     tl.current.to(islandRef.current, {
@@ -214,7 +212,6 @@ export default function DynamicIslandRouteNotifier() {
     <div
       ref={islandRef}
       onClick={() => {
-        // همیشه پیام route را به صف اضافه کن تا نمایش داده شود حتی اگر مسیر فعلی باشد
         enqueueMessage({ type: "route", value: window.location.pathname });
       }}
       className="fixed top-4 left-1/2 -translate-x-1/2 bg-black text-white text-sm rounded-full border border-white/20 shadow-lg z-50 flex items-center justify-center px-4 py-2 cursor-pointer overflow-hidden select-none"
@@ -225,9 +222,13 @@ export default function DynamicIslandRouteNotifier() {
           position: "absolute",
           whiteSpace: "nowrap",
           userSelect: "none",
+          color:
+            currentMessage.type === "custom"
+              ? currentMessage.color || "#ff6b81"
+              : "#fff",
         }}
       >
-        {currentMessage.type === "datetime"
+        {currentMessage.type === "custom"
           ? currentMessage.value
           : (() => {
               let key = currentMessage.value || "";

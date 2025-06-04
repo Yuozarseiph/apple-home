@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import React, { useState, useRef, useEffect } from "react";
+import gsap from "gsap";
 
 export default function Faq() {
   const fadeInUp = {
@@ -49,42 +49,81 @@ export default function Faq() {
   ];
 
   const [openIndex, setOpenIndex] = useState(null);
+  const cardRefs = useRef([]);
+  const answerRefs = useRef([]);
+  const titleRef = useRef();
 
-  const toggleOpen = (index) => {
-    setOpenIndex(openIndex === index ? null : index);
-  };
+  useEffect(() => {
+    if (titleRef.current) {
+      gsap.fromTo(
+        titleRef.current,
+        { opacity: 0, y: 40 },
+        { opacity: 1, y: 0, duration: 1, delay: 0.1, ease: "power2.out" }
+      );
+    }
+    cardRefs.current.forEach((el, i) => {
+      if (el)
+        gsap.fromTo(
+          el,
+          { opacity: 0, y: 40, scale: 0.97 },
+          {
+            opacity: 1,
+            y: 0,
+            scale: 1,
+            duration: 1,
+            delay: 0.2 + i * 0.13,
+            ease: "power2.out",
+          }
+        );
+    });
+  }, []);
+
+  // Animate open/close of answers (smooth)
+  useEffect(() => {
+    answerRefs.current.forEach((ref, i) => {
+      if (!ref) return;
+      if (openIndex === i) {
+        gsap.fromTo(
+          ref,
+          { height: 0, opacity: 0, marginTop: 0 },
+          {
+            height: ref.scrollHeight,
+            opacity: 1,
+            marginTop: 12,
+            duration: 0.5,
+            ease: "power1.inOut",
+            display: "block",
+          }
+        );
+      } else {
+        gsap.to(ref, {
+          height: 0,
+          opacity: 0,
+          marginTop: 0,
+          duration: 0.4,
+          ease: "power1.inOut",
+          display: "none",
+        });
+      }
+    });
+  }, [openIndex]);
 
   return (
-    <motion.div
-      className="bg-image-iPhone text-white min-h-screen pt-24 pb-[120px] px-6 "
-      initial="hidden"
-      animate="visible"
-      variants={{
-        visible: {
-          transition: { delay: 0.2 },
-        },
-      }}
-    >
-      <section className="max-w-5xl mx-auto">
-        <motion.h1
-          variants={fadeInUp}
-          className="text-4xl font-bold mb-10 text-center text-[#7EC8E3]"
+    <div className="flex items-center justify-center min-h-screen bg-image-iPhone bg-cover bg-center px-4 pt-24 pb-[120px]">
+      <section className="max-w-5xl mx-auto w-full">
+        <h1
+          ref={titleRef}
+          className="text-4xl font-extrabold text-center text-[#7EC8E3] mb-10 drop-shadow-[0_2px_16px_rgba(126,200,227,0.6)]"
         >
           Got questions? We’ve got answers.
-        </motion.h1>
+        </h1>
 
-        <motion.div
-          variants={stagger}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
-          className="space-y-6"
-        >
+        <div className="space-y-6">
           {faqItems.map((item, i) => (
-            <motion.div
+            <div
               key={i}
-              variants={fadeInUp}
-              className="position-relative backdrop-blur-md bg-black/10 shadow-lg p-6 rounded-xl cursor-pointer select-none"
+              ref={(el) => (cardRefs.current[i] = el)}
+              className="relative backdrop-blur-md bg-black/10 shadow-lg p-6 rounded-xl cursor-pointer select-none transition hover:scale-105"
             >
               <h2
                 role="button"
@@ -93,11 +132,11 @@ export default function Faq() {
                 aria-controls={`faq-answer-${i}`}
                 id={`faq-question-${i}`}
                 className="text-2xl font-semibold mb-0 text-[#7EC8E3] flex justify-between items-center"
-                onClick={() => toggleOpen(i)}
+                onClick={() => setOpenIndex(openIndex === i ? null : i)}
                 onKeyDown={(e) => {
                   if (e.key === "Enter" || e.key === " ") {
                     e.preventDefault();
-                    toggleOpen(i);
+                    setOpenIndex(openIndex === i ? null : i);
                   }
                 }}
               >
@@ -106,27 +145,24 @@ export default function Faq() {
                   {openIndex === i ? "−" : "+"}
                 </span>
               </h2>
-
-              <AnimatePresence initial={false}>
-                {openIndex === i && (
-                  <motion.p
-                    key="content"
-                    id={`faq-answer-${i}`}
-                    aria-labelledby={`faq-question-${i}`}
-                    variants={answerVariants}
-                    initial="hidden"
-                    animate="visible"
-                    exit="hidden"
-                    className="text-white overflow-hidden"
-                  >
-                    {item.answer}
-                  </motion.p>
-                )}
-              </AnimatePresence>
-            </motion.div>
+              <div
+                ref={(el) => (answerRefs.current[i] = el)}
+                id={`faq-answer-${i}`}
+                aria-labelledby={`faq-question-${i}`}
+                className="overflow-hidden text-white transition-all duration-300"
+                style={{
+                  height: openIndex === i ? "auto" : 0,
+                  opacity: openIndex === i ? 1 : 0,
+                  marginTop: openIndex === i ? 12 : 0,
+                  display: openIndex === i ? "block" : "none",
+                }}
+              >
+                {item.answer}
+              </div>
+            </div>
           ))}
-        </motion.div>
+        </div>
       </section>
-    </motion.div>
+    </div>
   );
 }

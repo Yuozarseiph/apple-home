@@ -20,62 +20,72 @@ import Cart from "./pages/Cart";
 import Checkout from "./pages/Checkout";
 import PageNotFound from "./pages/PageNotFound";
 import DynamicIsland from "./components/DynamicIsland";
+import DynamicIslandRouteNotifier from "./components/DynamicIsland";
 
 function App() {
   return (
-    <Router>
-      <DynamicIsland />
-      <Routes>
-        <Route path="/" element={<LandingPage />} />
-        <Route path="/contact" element={<Contact />} />
-        <Route path="/terms" element={<Terms />} />
-        <Route path="/shop" element={<Shop />} />
-        <Route path="/about" element={<About />} />
-        <Route path="/faq" element={<FAQ />} />
-        <Route
-          path="/login"
-          element={
-            <PublicRoute>
-              <Login />
-            </PublicRoute>
-          }
-        />
-        <Route
-          path="/register"
-          element={
-            <PublicRoute>
-              <Register />
-            </PublicRoute>
-          }
-        />
-        <Route
-          path="/dashboard"
-          element={
-            <PrivateRoute>
-              <Dashboard />
-            </PrivateRoute>
-          }
-        />
-        <Route path="/cart" element={
-            <PrivateRoute>
-              <Cart />
-            </PrivateRoute>
-          } />
+    <>
+      <DynamicIslandRouteNotifier />
+      <Router>
+        <DynamicIsland />
+        <Routes>
+          <Route path="/" element={<LandingPage />} />
+          <Route path="/contact" element={<Contact />} />
+          <Route path="/terms" element={<Terms />} />
+          <Route path="/shop" element={<Shop />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/faq" element={<FAQ />} />
+          <Route
+            path="/login"
+            element={
+              <PublicRoute>
+                <Login />
+              </PublicRoute>
+            }
+          />
+          <Route
+            path="/register"
+            element={
+              <PublicRoute>
+                <Register />
+              </PublicRoute>
+            }
+          />
+          <Route
+            path="/dashboard"
+            element={
+              <PrivateRoute>
+                <Dashboard />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path="/cart"
+            element={
+              <PrivateRoute>
+                <Cart />
+              </PrivateRoute>
+            }
+          />
 
-        <Route path="/checkout" element={
-            <PrivateRoute>
-              <Checkout />
-            </PrivateRoute>
-          } />
-          
-        <Route path="/blog" element={<Blog />} />
-        <Route path="/blog/:slug" element={<BlogPost />} />
-        <Route path="/team" element={<Team />} />
-        {/* 404 Page Not Found route */}
-        <Route path="*" element={<PageNotFound />} />
-      </Routes>
-      <BottomNav />
-    </Router>
+          <Route
+            path="/checkout"
+            element={
+              <PrivateRoute>
+                <Checkout />
+              </PrivateRoute>
+            }
+          />
+
+          <Route path="/blog" element={<Blog />} />
+          <Route path="/blog/:slug" element={<BlogPost />} />
+          <Route path="/team" element={<Team />} />
+          {/* 404 Page Not Found route */}
+          <Route path="*" element={<PageNotFound />} />
+        </Routes>
+        <BottomNav />
+      </Router>
+    </>
   );
 }
 
