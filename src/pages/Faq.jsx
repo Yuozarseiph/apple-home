@@ -2,28 +2,79 @@ import React, { useState, useRef, useEffect } from "react";
 import gsap from "gsap";
 
 export default function Faq() {
-  const fadeInUp = {
-    hidden: { opacity: 0, y: 20 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.6 } },
-  };
+  const [openIndex, setOpenIndex] = useState(null);
+  const cardRefs = useRef([]);
+  const answerRefs = useRef([]);
+  const titleRef = useRef();
 
-  const stagger = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: { staggerChildren: 0.2 },
-    },
-  };
+  // Animate title and cards on mount
+  useEffect(() => {
+    if (titleRef.current) {
+      gsap.fromTo(
+        titleRef.current,
+        { opacity: 0, y: 40 },
+        { opacity: 1, y: 0, duration: 1, delay: 0.1, ease: "power2.out" }
+      );
+    }
 
-  const answerVariants = {
-    hidden: { opacity: 0, height: 0, marginTop: 0 },
-    visible: {
-      opacity: 1,
-      height: "auto",
-      marginTop: 12,
-      transition: { duration: 0.3 },
-    },
-  };
+    cardRefs.current.forEach((el, i) => {
+      if (el) {
+        gsap.fromTo(
+          el,
+          { opacity: 0, y: 40, scale: 0.97 },
+          {
+            opacity: 1,
+            y: 0,
+            scale: 1,
+            duration: 1,
+            delay: 0.2 + i * 0.13,
+            ease: "power2.out",
+          }
+        );
+      }
+    });
+  }, []);
+
+  // Animate open/close of answers smoothly with GSAP
+  useEffect(() => {
+    answerRefs.current.forEach((ref, i) => {
+      if (!ref) return;
+
+      // Hide all first
+      if (i !== openIndex) {
+        gsap.to(ref, {
+          height: 0,
+          opacity: 0,
+          marginTop: 0,
+          duration: 0.3,
+          ease: "power1.inOut",
+          onComplete: () => {
+            ref.style.display = "none"; // Hide after animation
+          },
+        });
+      }
+
+      // Show the selected one
+      if (i === openIndex) {
+        ref.style.display = "block"; // Make sure it's visible before measuring
+        gsap.fromTo(
+          ref,
+          {
+            height: 0,
+            opacity: 0,
+            marginTop: 0,
+          },
+          {
+            height: ref.scrollHeight,
+            opacity: 1,
+            marginTop: 12,
+            duration: 0.5,
+            ease: "power1.inOut",
+          }
+        );
+      }
+    });
+  }, [openIndex]);
 
   const faqItems = [
     {
@@ -47,66 +98,6 @@ export default function Faq() {
         "No problem. If you're not completely happy with your purchase, you can return it within 14 days — no questions asked. Full details are in our Terms of Use.",
     },
   ];
-
-  const [openIndex, setOpenIndex] = useState(null);
-  const cardRefs = useRef([]);
-  const answerRefs = useRef([]);
-  const titleRef = useRef();
-
-  useEffect(() => {
-    if (titleRef.current) {
-      gsap.fromTo(
-        titleRef.current,
-        { opacity: 0, y: 40 },
-        { opacity: 1, y: 0, duration: 1, delay: 0.1, ease: "power2.out" }
-      );
-    }
-    cardRefs.current.forEach((el, i) => {
-      if (el)
-        gsap.fromTo(
-          el,
-          { opacity: 0, y: 40, scale: 0.97 },
-          {
-            opacity: 1,
-            y: 0,
-            scale: 1,
-            duration: 1,
-            delay: 0.2 + i * 0.13,
-            ease: "power2.out",
-          }
-        );
-    });
-  }, []);
-
-  // Animate open/close of answers (smooth)
-  useEffect(() => {
-    answerRefs.current.forEach((ref, i) => {
-      if (!ref) return;
-      if (openIndex === i) {
-        gsap.fromTo(
-          ref,
-          { height: 0, opacity: 0, marginTop: 0 },
-          {
-            height: ref.scrollHeight,
-            opacity: 1,
-            marginTop: 12,
-            duration: 0.5,
-            ease: "power1.inOut",
-            display: "block",
-          }
-        );
-      } else {
-        gsap.to(ref, {
-          height: 0,
-          opacity: 0,
-          marginTop: 0,
-          duration: 0.4,
-          ease: "power1.inOut",
-          display: "none",
-        });
-      }
-    });
-  }, [openIndex]);
 
   return (
     <div className="flex items-center justify-center min-h-screen bg-image-iPhone bg-cover bg-center px-4 pt-24 pb-[120px]">
@@ -149,12 +140,11 @@ export default function Faq() {
                 ref={(el) => (answerRefs.current[i] = el)}
                 id={`faq-answer-${i}`}
                 aria-labelledby={`faq-question-${i}`}
-                className="overflow-hidden text-white transition-all duration-300"
+                className="overflow-hidden text-white"
                 style={{
-                  height: openIndex === i ? "auto" : 0,
-                  opacity: openIndex === i ? 1 : 0,
-                  marginTop: openIndex === i ? 12 : 0,
-                  display: openIndex === i ? "block" : "none",
+                  opacity: 0,
+                  height: 0,
+                  marginTop: 0,
                 }}
               >
                 {item.answer}
