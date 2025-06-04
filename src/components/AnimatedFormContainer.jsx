@@ -66,7 +66,7 @@ const AnimatedFormContainer = ({
           duration: 0.5,
           ease: "back.out(1.7)",
         },
-        ">+0.5"
+        "<+0.1"
       )
       .to(
         altRef.current,

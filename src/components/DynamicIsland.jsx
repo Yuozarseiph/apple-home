@@ -214,18 +214,18 @@ export default function DynamicIslandRouteNotifier() {
       onClick={() => {
         enqueueMessage({ type: "route", value: window.location.pathname });
       }}
-      className="fixed top-4 left-1/2 -translate-x-1/2 bg-black text-white text-sm rounded-full border border-white/20 shadow-lg z-50 flex items-center justify-center px-4 py-2 cursor-pointer overflow-hidden select-none"
+      className="fixed top-4 left-1/2 -translate-x-1/2 z-50 flex items-center justify-center cursor-pointer select-none rounded-full min-h-[44px] min-w-[44px] px-5 font-semibold text-[1.05rem] bg-black/80 backdrop-blur-md"
     >
       <span
         ref={messageRef}
+        className={`relative whitespace-nowrap select-none font-medium text-[1.08rem] px-1 tracking-tight
+          ${currentMessage.type === "custom" ? "" : "text-white"}
+        `}
         style={{
-          position: "absolute",
-          whiteSpace: "nowrap",
-          userSelect: "none",
           color:
             currentMessage.type === "custom"
               ? currentMessage.color || "#ff6b81"
-              : "#fff",
+              : undefined,
         }}
       >
         {currentMessage.type === "custom"
