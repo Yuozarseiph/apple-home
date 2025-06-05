@@ -88,7 +88,7 @@ const BottomNav = () => {
       initial={{ y: 100 }}
       animate={{ y: 0 }}
       transition={{ type: "spring", stiffness: 300 }}
-      className="fixed bottom-3 left-1/2 -translate-x-1/2 z-50 w-[98%] sm:w-[95%] md:w-[fit-content] max-w-5xl px-9 py-1 bg-black/50 backdrop-blur-2xl border border-white/20 shadow-lg rounded-full"
+      className="fixed bottom-3 left-1/2 -translate-x-1/2 z-50 w-[98%] sm:w-[95%]  xl:w-fit max-w-5xl px-9 py-5 bg-black/50 backdrop-blur-2xl border border-white/20 shadow-lg rounded-full"
     >
       <div className="flex items-center justify-center gap-2 sm:gap-4 overflow-visible">
         {primaryLinks.map((link) => (
@@ -103,8 +103,10 @@ const BottomNav = () => {
               }`
             }
           >
-            <span className="relative flex items-center justify-center w-10 h-10">
-              <span className="absolute inset-0 rounded-full bg-white/80 shadow-lg shadow-[#7EC8E3]/30 blur-sm opacity-80"></span>
+            <button
+              type="button"
+              className="group relative cursor-pointer flex justify-center p-2 rounded-md drop-shadow-xl bg-white/70 text-white font-semibold hover:translate-y-3 hover:rounded-[50%] transition-all duration-500 hover:bg-white/90"
+            >
               <img
                 src={link.icon}
                 alt={link.label}
@@ -116,20 +118,19 @@ const BottomNav = () => {
                   borderRadius: "9999px",
                 }}
               />
-            </span>
-            <span className="text-[0.8rem] sm:text-sm font-semibold mt-1">
-              {link.label}
-            </span>
+              <span className="absolute opacity-0 group-hover:opacity-100 group-hover:-translate-y-10 transition-all duration-700 bg-[#7EC8E3] px-2 py-1 rounded-md text-black text-sm shadow-md">
+                {link.label}
+              </span>
+            </button>
           </NavLink>
         ))}
 
         {extraLinks.length > 0 && (
           <button
-            onClick={() => setShowExtra(!showExtra)}
-            className="flex flex-col items-center justify-center px-1 py-1 text-white hover:scale-110 transition-all text-xl cursor-pointer"
-          >
-            <span className="relative flex items-center justify-center w-10 h-10">
-              <span className="absolute inset-0 rounded-full bg-white/80 shadow-lg shadow-[#7EC8E3]/30 blur-sm opacity-80"></span>
+              onClick={() => setShowExtra(!showExtra)}
+              type="button"
+              className="group relative cursor-pointer flex justify-center p-2 rounded-md drop-shadow-xl bg-white/70 text-white font-semibold hover:translate-y-3 hover:rounded-[50%] transition-all duration-500 hover:bg-white/90"
+            >
               <img
                 src={upIcon}
                 alt="Up Icon Menu"
@@ -141,9 +142,11 @@ const BottomNav = () => {
                   borderRadius: "9999px",
                 }}
               />
-            </span>
-            <span className="text-[0.8rem] sm:text-sm mt-1">More</span>
-          </button>
+              <span className="absolute opacity-0 group-hover:opacity-100 group-hover:-translate-y-10 transition-all duration-700 bg-[#7EC8E3] px-2 py-1 rounded-md text-black text-sm shadow-md">
+                More
+              </span>
+            </button>
+          
         )}
       </div>
 
@@ -165,15 +168,17 @@ const BottomNav = () => {
                 key={link.path}
                 to={link.path}
                 className={({ isActive }) =>
-                  `flex items-center gap-2 px-2 py-1 rounded-xl transition-all duration-300 hover:scale-105 ${
+                  `flex flex-col items-center justify-center px-1 py-1 font-bold rounded-xl transition-all duration-300 hover:scale-110 ${
                     isActive
-                      ? "text-white text-shadow-[#1c274c] text-shadow-lg/100"
+                      ? "text-white text-shadow-[#1c274c] text-shadow-lg/100 scale-110"
                       : "text-white"
                   }`
                 }
               >
-                <span className="relative flex items-center justify-center w-10 h-10">
-                  <span className="absolute inset-0 rounded-full bg-white/80 shadow-lg shadow-[#7EC8E3]/30 blur-sm opacity-80"></span>
+                <button
+                  type="button"
+                  className="group relative cursor-pointer flex justify-center p-2 rounded-md drop-shadow-xl bg-white/70 text-white font-semibold hover:translate-y-3 hover:rounded-[50%] transition-all duration-500 hover:bg-white/90"
+                >
                   <img
                     src={link.icon}
                     alt={link.label}
@@ -185,8 +190,10 @@ const BottomNav = () => {
                       borderRadius: "9999px",
                     }}
                   />
-                </span>
-                <span className="text-sm font-medium">{link.label}</span>
+                  <span className="absolute opacity-0 group-hover:opacity-100 group-hover:-translate-y-10 transition-all duration-700 bg-[#7EC8E3] px-2 py-1 rounded-md text-black text-sm shadow-md">
+                    {link.label}
+                  </span>
+                </button>
               </NavLink>
             ))}
           </motion.div>

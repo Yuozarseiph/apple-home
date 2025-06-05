@@ -1,10 +1,10 @@
 import React, { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { Link } from "react-router-dom";
-import {styles} from "../utils/Styles";
+import { styles } from "../utils/Styles";
+import CreativeButton from "../components/CreativeButton"; // Assuming you have a Button component
 
 const btnStyle = styles.btnStyle;
-
 
 const valuesData = [
   {
@@ -142,7 +142,7 @@ export default function LandingPage() {
   };
 
   return (
-    <div className="bg-image-iPhone select-none bg-black text-white min-h-screen font-sans pb-[120px]">
+    <div className="bg-image-iPhone select-none text-white min-h-screen font-sans pb-[120px]">
       {/* Hero Section */}
       <section
         ref={heroRef}
@@ -161,12 +161,8 @@ export default function LandingPage() {
           A new way to build strength, together. Designed with care, built for
           connection.
         </p>
-        <button
-          ref={heroBtnRef}
-          onClick={scrollToValues}
-          className={btnStyle}
-        >
-          Learn More
+        <button ref={heroBtnRef} onClick={scrollToValues}>
+          <CreativeButton text={"Read More"}></CreativeButton>
         </button>
       </section>
 
@@ -180,11 +176,8 @@ export default function LandingPage() {
             Ready to join the Apple Home experience? Create your account and
             start your journey today.
           </p>
-          <Link
-            to="/register"
-            className={btnStyle}
-          >
-            Create Account
+          <Link to="/register" className="inline-block">
+            <CreativeButton text={"Create Account"}></CreativeButton>
           </Link>
         </div>
       </section>
@@ -249,9 +242,9 @@ export default function LandingPage() {
           href="https://instagram.com"
           target="_blank"
           rel="noopener noreferrer"
-          className={btnStyle}
+          className="inline-block"
         >
-          Follow Me
+          <CreativeButton text={"Follow Me"}></CreativeButton>
         </a>
       </section>
     </div>
