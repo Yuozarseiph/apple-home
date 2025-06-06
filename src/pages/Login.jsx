@@ -5,6 +5,7 @@ import axios from "axios";
 import { styles } from "../utils/Styles";
 import AnimatedFormContainer from "../components/AnimatedFormContainer";
 import AnimatedFormItem from "../components/AnimatedFormItem";
+import CreativeButton from "../components/CreativeButton";
 
 // Icons
 import loginIcon from "../assets/Icons/apple-email.svg";
@@ -19,13 +20,13 @@ export default function Login() {
   const navigate = useNavigate();
 
   const handleFocus = (iconRef) => {
-    if (iconRef.current) {
+    if (iconIconRef.current) {
       gsap.fromTo(
         iconRef.current,
         { scale: 1, filter: "drop-shadow(0 0 12px #7EC8E3)" },
         {
           scale: 1.18,
-          filter: "drop-shadow(0 0 24px #7EC8E3)",
+          filter: "drop-shadow(0 0 24px rgba(0, 164, 196, 0.7))",
           duration: 0.25,
           yoyo: true,
           repeat: 1,
@@ -86,17 +87,14 @@ export default function Login() {
     <AnimatedFormContainer
       title="Welcome back"
       intro="Sign in to your Apple Home account to continue."
-      button={{
-        className: `${styles.btnStyle} w-full`,
-        text: "Continue with Apple ID",
-      }}
+      altText="Don't have an account? <a href='/register' class='underline hover:text-[#00a4c4] transition-colors'>Create one</a>"
       onSubmit={handleLogin}
     >
       {/* Email */}
       <AnimatedFormItem label="Apple ID or email" index={0}>
         <div className="relative">
           <span
-            className="absolute left-4 top-[40%] -translate-y-1/2 h-6 w-6 flex items-center justify-center pointer-events-none filter drop-shadow-[0_0_8px_#7EC8E3]"
+            className="absolute left-4 top-[40%] -translate-y-1/2 h-6 w-6 flex items-center justify-center pointer-events-none filter drop-shadow-[0_0_8px_rgba(0,164,196,0.4)]"
             onClick={() =>
               handleFocus({ current: document.querySelector(".login-icon") })
             }
@@ -124,7 +122,7 @@ export default function Login() {
       <AnimatedFormItem label="Password" index={1}>
         <div className="relative">
           <span
-            className="absolute left-4 top-[40%] -translate-y-1/2 h-6 w-6 flex items-center justify-center pointer-events-none filter drop-shadow-[0_0_8px_#7EC8E3]"
+            className="absolute left-4 top-[40%] -translate-y-1/2 h-6 w-6 flex items-center justify-center pointer-events-none filter drop-shadow-[0_0_8px_rgba(0,164,196,0.4)]"
             onClick={() =>
               handleFocus({ current: document.querySelector(".password-icon") })
             }
@@ -147,7 +145,22 @@ export default function Login() {
           />
         </div>
       </AnimatedFormItem>
-       <p className="text-white">Already have an Apple ID? <Link to='/register' className='text-blue-400'>Sign up</Link></p>
+
+      {/* Submit Button */}
+      <div className="mt-6">
+        <CreativeButton text="Continue" type="submit" />
+      </div>
+
+      {/* Alternate Text */}
+      <p className="text-gray-800 mt-6 text-sm text-center">
+        Already have an Apple ID?{" "}
+        <Link
+          to="/register"
+          className="text-[#00a4c4] hover:text-[#0077b6] transition-colors"
+        >
+          Sign up
+        </Link>
+      </p>
     </AnimatedFormContainer>
   );
 }

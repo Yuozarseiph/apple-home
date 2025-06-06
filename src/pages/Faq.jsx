@@ -1,5 +1,9 @@
 import React, { useState, useRef, useEffect } from "react";
 import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+// ثبت ScrollTrigger
+gsap.registerPlugin(ScrollTrigger);
 
 export default function Faq() {
   const [openIndex, setOpenIndex] = useState(null);
@@ -7,32 +11,50 @@ export default function Faq() {
   const answerRefs = useRef([]);
   const titleRef = useRef();
 
-  // Animate title and cards on mount
+  // Animate title and cards on mount with scroll detection
   useEffect(() => {
+    // Title animation
     if (titleRef.current) {
       gsap.fromTo(
         titleRef.current,
-        { opacity: 0, y: 40 },
-        { opacity: 1, y: 0, duration: 1, delay: 0.1, ease: "power2.out" }
+        { x: -100, opacity: 0 },
+        {
+          x: 0,
+          opacity: 1,
+          duration: 1.2,
+          ease: "power3.out",
+          scrollTrigger: {
+            trigger: titleRef.current,
+            start: "top 80%",
+          },
+        }
       );
     }
 
+    // FAQ cards animations
     cardRefs.current.forEach((el, i) => {
+      const direction = i % 2 === 0 ? -100 : 100;
+
       if (el) {
         gsap.fromTo(
           el,
-          { opacity: 0, y: 40, scale: 0.97 },
+          { x: direction, opacity: 0, scale: 0.95 },
           {
+            x: 0,
             opacity: 1,
-            y: 0,
             scale: 1,
-            duration: 1,
-            delay: 0.2 + i * 0.13,
-            ease: "power2.out",
+            duration: 1.2,
+            ease: "power3.out",
+            scrollTrigger: {
+              trigger: el,
+              start: "top 80%",
+            },
           }
         );
       }
     });
+
+    return () => {};
   }, []);
 
   // Animate open/close of answers smoothly with GSAP
@@ -40,7 +62,6 @@ export default function Faq() {
     answerRefs.current.forEach((ref, i) => {
       if (!ref) return;
 
-      // Hide all first
       if (i !== openIndex) {
         gsap.to(ref, {
           height: 0,
@@ -54,16 +75,11 @@ export default function Faq() {
         });
       }
 
-      // Show the selected one
       if (i === openIndex) {
         ref.style.display = "block"; // Make sure it's visible before measuring
         gsap.fromTo(
           ref,
-          {
-            height: 0,
-            opacity: 0,
-            marginTop: 0,
-          },
+          { height: 0, opacity: 0, marginTop: 0 },
           {
             height: ref.scrollHeight,
             opacity: 1,
@@ -100,11 +116,11 @@ export default function Faq() {
   ];
 
   return (
-    <div className="flex items-center justify-center min-h-screen bg-image-iPhone bg-cover bg-center px-6 pt-24 pb-[120px] text-white">
+    <div className="flex items-center justify-center min-h-screen bg-image-iPhone bg-cover bg-center px-6 pt-24 pb-[120px] text-gray-800">
       <section className="max-w-5xl mx-auto w-full">
         <h1
           ref={titleRef}
-          className="text-4xl font-extrabold text-center text-[#7EC8E3] mb-10 drop-shadow-[0_2px_16px_rgba(126,200,227,0.6)]"
+          className="text-4xl font-extrabold text-center text-[#00a4c4] mb-10 drop-shadow-[0_2px_16px_rgba(0,164,196,0.2)]"
         >
           Got questions? We’ve got answers.
         </h1>
@@ -114,7 +130,7 @@ export default function Faq() {
             <div
               key={i}
               ref={(el) => (cardRefs.current[i] = el)}
-              className="relative w-full rounded-2xl p-8 shadow-2xl border-2 border-white/20 bg-gradient-to-br from-white/10 via-[#7EC8E3]/10 to-black/30 backdrop-blur-2xl cursor-pointer select-none transition hover:scale-105"
+              className="relative w-full rounded-2xl p-8 shadow-xl border border-gray-200 bg-white/90 backdrop-blur-sm cursor-pointer select-none transition hover:shadow-2xl"
             >
               <h2
                 role="button"
@@ -122,7 +138,7 @@ export default function Faq() {
                 aria-expanded={openIndex === i}
                 aria-controls={`faq-answer-${i}`}
                 id={`faq-question-${i}`}
-                className="text-2xl font-semibold mb-0 text-[#7EC8E3] flex justify-between items-center"
+                className="text-2xl font-semibold mb-0 text-[#00a4c4] flex justify-between items-center"
                 onClick={() => setOpenIndex(openIndex === i ? null : i)}
                 onKeyDown={(e) => {
                   if (e.key === "Enter" || e.key === " ") {
@@ -132,22 +148,23 @@ export default function Faq() {
                 }}
               >
                 {item.question}
-                <span className="ml-4 text-white text-xl select-none">
-                  {openIndex === i ? "−" : "+"}
+                <span className="ml-4 text-[#00a4c4] text-xl select-none transition-transform duration-300 transform-gpu will-change-transform"
+                  style={{ transform: openIndex === i ? "rotate(0deg)" : "rotate(45deg)" }}>
+                  +
                 </span>
               </h2>
               <div
                 ref={(el) => (answerRefs.current[i] = el)}
                 id={`faq-answer-${i}`}
                 aria-labelledby={`faq-question-${i}`}
-                className="overflow-hidden text-white"
+                className="overflow-hidden text-gray-700"
                 style={{
                   opacity: 0,
                   height: 0,
                   marginTop: 0,
                 }}
               >
-                {item.answer}
+                <p className="mt-4">{item.answer}</p>
               </div>
             </div>
           ))}
@@ -156,4 +173,3 @@ export default function Faq() {
     </div>
   );
 }
-// هیچ اثری از framer-motion نیست و انیمیشن‌ها با GSAP انجام می‌شود.

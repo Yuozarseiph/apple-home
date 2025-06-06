@@ -39,7 +39,7 @@ const AnimatedFormItem = ({ label, children, index }) => {
       <label
         ref={labelRef}
         htmlFor={`input-${index}`}
-        className="block text-lg mb-2 text-[#7EC8E3]"
+        className="block text-lg mb-2 text-[#00a4c4] font-medium"
       >
         {label}
       </label>

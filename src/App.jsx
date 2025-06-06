@@ -21,6 +21,8 @@ import Checkout from "./pages/Checkout";
 import PageNotFound from "./pages/PageNotFound";
 import DynamicIsland from "./components/DynamicIsland";
 import DynamicIslandRouteNotifier from "./components/DynamicIsland";
+import Wwdc25 from "./pages/events/Wwdc25";
+import Iphone16Category from "./pages/productsCategories/iphone16";
 
 function App() {
   return (
@@ -35,6 +37,8 @@ function App() {
           <Route path="/shop" element={<Shop />} />
           <Route path="/about" element={<About />} />
           <Route path="/faq" element={<FAQ />} />
+          <Route path="/about/wwdc" element={<Wwdc25 />} />
+          <Route path="/shop/iphone16" element={<Iphone16Category />} />
           <Route
             path="/login"
             element={

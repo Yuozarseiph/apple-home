@@ -11,6 +11,7 @@ const BottomNav = () => {
   const [isTablet, setIsTablet] = useState(window.innerWidth < 768);
   const extraMenuRef = useRef();
 
+  // Check login status and screen size
   useEffect(() => {
     const token = localStorage.getItem("token");
     setIsLoggedIn(!!token);
@@ -22,7 +23,7 @@ const BottomNav = () => {
 
     window.addEventListener("resize", handleResize);
 
-    // Listen for login/logout changes in other tabs or after login
+    // Sync across tabs
     const handleStorage = (e) => {
       if (e.key === "token") {
         setIsLoggedIn(!!localStorage.getItem("token"));
@@ -30,7 +31,7 @@ const BottomNav = () => {
     };
     window.addEventListener("storage", handleStorage);
 
-    // Listen for login/logout in the same tab (custom event)
+    // Auth change in same tab
     const handleAuthChange = () => {
       setIsLoggedIn(!!localStorage.getItem("token"));
     };
@@ -43,6 +44,7 @@ const BottomNav = () => {
     };
   }, []);
 
+  // Close menu on click outside
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (
@@ -55,8 +57,6 @@ const BottomNav = () => {
 
     if (showExtra) {
       document.addEventListener("mousedown", handleClickOutside);
-    } else {
-      document.removeEventListener("mousedown", handleClickOutside);
     }
 
     return () => {
@@ -88,7 +88,7 @@ const BottomNav = () => {
       initial={{ y: 100 }}
       animate={{ y: 0 }}
       transition={{ type: "spring", stiffness: 300 }}
-      className="fixed bottom-3 left-1/2 -translate-x-1/2 z-50 w-[98%] sm:w-[95%]  xl:w-fit max-w-5xl px-9 py-5 bg-black/50 backdrop-blur-2xl border border-white/20 shadow-lg rounded-full"
+      className="fixed bottom-3 left-1/2 -translate-x-1/2 z-50 w-[98%] sm:w-[95%] xl:w-fit max-w-5xl px-9 py-5 bg-white/80 backdrop-blur-xl border border-gray-200 shadow-lg rounded-full"
     >
       <div className="flex items-center justify-center gap-2 sm:gap-4 overflow-visible">
         {primaryLinks.map((link) => (
@@ -98,14 +98,14 @@ const BottomNav = () => {
             className={({ isActive }) =>
               `flex flex-col items-center justify-center px-1 py-1 font-bold rounded-xl transition-all duration-300 hover:scale-110 ${
                 isActive
-                  ? "text-white text-shadow-[#1c274c] text-shadow-lg/100 scale-110"
-                  : "text-white"
+                  ? "text-[#00a4c4] text-shadow-[#7EC8E3]/50 scale-110"
+                  : "text-gray-700"
               }`
             }
           >
             <button
               type="button"
-              className="group relative cursor-pointer flex justify-center p-2 rounded-md drop-shadow-xl bg-white/70 text-white font-semibold hover:translate-y-3 hover:rounded-[50%] transition-all duration-500 hover:bg-white/90"
+              className="group relative cursor-pointer flex justify-center p-2 rounded-md drop-shadow-xl bg-white/100 text-white font-semibold hover:translate-y-3 hover:rounded-[50%] transition-all duration-500 hover:bg-white/90"
             >
               <img
                 src={link.icon}
@@ -127,26 +127,25 @@ const BottomNav = () => {
 
         {extraLinks.length > 0 && (
           <button
-              onClick={() => setShowExtra(!showExtra)}
-              type="button"
-              className="group relative cursor-pointer flex justify-center p-2 rounded-md drop-shadow-xl bg-white/70 text-white font-semibold hover:translate-y-3 hover:rounded-[50%] transition-all duration-500 hover:bg-white/90"
-            >
-              <img
-                src={upIcon}
-                alt="Up Icon Menu"
-                className="relative w-7 h-7 z-10"
-                style={{
-                  filter:
-                    "drop-shadow(0 2px 8px #7EC8E3) drop-shadow(0 0 2px #fff)",
-                  background: "transparent",
-                  borderRadius: "9999px",
-                }}
-              />
-              <span className="absolute opacity-0 group-hover:opacity-100 group-hover:-translate-y-10 transition-all duration-700 bg-[#7EC8E3] px-2 py-1 rounded-md text-black text-sm shadow-md">
-                More
-              </span>
-            </button>
-          
+            onClick={() => setShowExtra(!showExtra)}
+            type="button"
+            className="group relative cursor-pointer flex justify-center p-2 rounded-md drop-shadow-xl bg-white/70 text-white font-semibold hover:translate-y-3 hover:rounded-[50%] transition-all duration-500 hover:bg-white/90"
+          >
+            <img
+              src={upIcon}
+              alt="Up Icon Menu"
+              className="relative w-7 h-7 z-10"
+              style={{
+                filter:
+                  "drop-shadow(0 2px 8px #7EC8E3) drop-shadow(0 0 2px #fff)",
+                background: "transparent",
+                borderRadius: "9999px",
+              }}
+            />
+            <span className="absolute opacity-0 group-hover:opacity-100 group-hover:-translate-y-10 transition-all duration-700 bg-[#7EC8E3] px-2 py-1 rounded-md text-black text-sm shadow-md">
+              More
+            </span>
+          </button>
         )}
       </div>
 
@@ -161,7 +160,7 @@ const BottomNav = () => {
               isMobile
                 ? "right-3 bottom-20"
                 : "left-1/2 -translate-x-1/2 bottom-20"
-            } bg-black/50 border-white/20 backdrop-blur-xl rounded-2xl shadow-xl p-3 flex flex-col gap-2 max-h-[60vh] overflow-hidden`}
+            } bg-white/90 border border-gray-200 backdrop-blur-xl rounded-2xl shadow-xl p-3 flex flex-col gap-2 max-h-[60vh] overflow-hidden`}
           >
             {extraLinks.map((link) => (
               <NavLink
@@ -170,8 +169,8 @@ const BottomNav = () => {
                 className={({ isActive }) =>
                   `flex flex-col items-center justify-center px-1 py-1 font-bold rounded-xl transition-all duration-300 hover:scale-110 ${
                     isActive
-                      ? "text-white text-shadow-[#1c274c] text-shadow-lg/100 scale-110"
-                      : "text-white"
+                      ? "text-[#00a4c4] text-shadow-[#7EC8E3]/50 scale-110"
+                      : "text-gray-700"
                   }`
                 }
               >

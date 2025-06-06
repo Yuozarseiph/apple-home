@@ -5,9 +5,10 @@ import axios from "axios";
 import { styles } from "../utils/Styles";
 import AnimatedFormContainer from "../components/AnimatedFormContainer";
 import AnimatedFormItem from "../components/AnimatedFormItem";
+import CreativeButton from "../components/CreativeButton";
 
 // Icons
-import userIcon from "../assets/Icons/apple-email.svg";
+import userIcon from "../assets/Icons/apple-email.svg"; // اگر داری، نام فایل رو عوض کن
 import emailIcon from "../assets/Icons/apple-email.svg";
 import passwordIcon from "../assets/Icons/apple-password.svg";
 
@@ -28,7 +29,7 @@ export default function Register() {
         { scale: 1, filter: "drop-shadow(0 0 12px #7EC8E3)" },
         {
           scale: 1.18,
-          filter: "drop-shadow(0 0 24px #7EC8E3)",
+          filter: "drop-shadow(0 0 24px rgba(0,164,196,0.6))",
           duration: 0.25,
           yoyo: true,
           repeat: 1,
@@ -109,18 +110,14 @@ export default function Register() {
     <AnimatedFormContainer
       title="Create your Apple ID"
       intro="Enjoy seamless access to all Apple services with one account."
-      button={{
-        className: `${styles.btnStyle} w-full`,
-        text: "Continue",
-      }}
-      
+      altText="Already have an Apple ID? <a href='/login' class='underline hover:text-[#00a4c4] transition-colors'>Login</a>"
       onSubmit={handleRegister}
     >
       {/* Full Name */}
       <AnimatedFormItem label="Your Name" index={0}>
         <div className="relative">
           <span
-            className="absolute left-4 top-[40%] -translate-y-1/2 h-6 w-6 flex items-center justify-center pointer-events-none filter drop-shadow-[0_0_8px_#7EC8E3]"
+            className="absolute left-4 top-[40%] -translate-y-1/2 h-6 w-6 flex items-center justify-center pointer-events-none filter drop-shadow-[0_0_8px_rgba(0,164,196,0.4)]"
             onClick={() =>
               handleFocus({ current: document.querySelector(".name-icon") })
             }
@@ -141,7 +138,7 @@ export default function Register() {
       <AnimatedFormItem label="Your Email Address" index={1}>
         <div className="relative">
           <span
-            className="absolute left-4 top-[40%] -translate-y-1/2 h-6 w-6 flex items-center justify-center pointer-events-none filter drop-shadow-[0_0_8px_#7EC8E3]"
+            className="absolute left-4 top-[40%] -translate-y-1/2 h-6 w-6 flex items-center justify-center pointer-events-none filter drop-shadow-[0_0_8px_rgba(0,164,196,0.4)]"
             onClick={() =>
               handleFocus({ current: document.querySelector(".email-icon") })
             }
@@ -166,7 +163,7 @@ export default function Register() {
       <AnimatedFormItem label="Password" index={2}>
         <div className="relative">
           <span
-            className="absolute left-4 top-[40%] -translate-y-1/2 h-6 w-6 flex items-center justify-center pointer-events-none filter drop-shadow-[0_0_8px_#7EC8E3]"
+            className="absolute left-4 top-[40%] -translate-y-1/2 h-6 w-6 flex items-center justify-center pointer-events-none filter drop-shadow-[0_0_8px_rgba(0,164,196,0.4)]"
             onClick={() =>
               handleFocus({ current: document.querySelector(".password-icon") })
             }
@@ -191,7 +188,7 @@ export default function Register() {
       <AnimatedFormItem label="Confirm Password" index={3}>
         <div className="relative">
           <span
-            className="absolute left-4 top-[40%] -translate-y-1/2 h-6 w-6 flex items-center justify-center pointer-events-none filter drop-shadow-[0_0_8px_#7EC8E3]"
+            className="absolute left-4 top-[40%] -translate-y-1/2 h-6 w-6 flex items-center justify-center pointer-events-none filter drop-shadow-[0_0_8px_rgba(0,164,196,0.4)]"
             onClick={() =>
               handleFocus({ current: document.querySelector(".confirm-icon") })
             }
@@ -211,7 +208,22 @@ export default function Register() {
           />
         </div>
       </AnimatedFormItem>
-      <p className="text-white">Already have an Apple ID? <Link to='/login' className="text-blue-400">Login</Link></p>
+
+      {/* Submit Button */}
+      <div className="mt-6">
+        <CreativeButton text="Continue" type="submit" />
+      </div>
+
+      {/* Alternate Text */}
+      <p className="text-gray-800 mt-6 text-sm text-center">
+        Already have an Apple ID?{" "}
+        <Link
+          to="/login"
+          className="text-[#00a4c4] hover:text-[#0077b6] transition-colors"
+        >
+          Login
+        </Link>
+      </p>
     </AnimatedFormContainer>
   );
 }

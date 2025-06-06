@@ -1,11 +1,16 @@
-import React, { useEffect, useRef } from "react";
+import React, { useRef, useEffect } from "react";
 import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { Link } from "react-router-dom";
-import { styles } from "../utils/Styles";
-import CreativeButton from "../components/CreativeButton"; // Assuming you have a Button component
 
-const btnStyle = styles.btnStyle;
+// Components
+import CreativeButton from "../components/CreativeButton";
+import BannerSlider from "../components/BannerSlider";
 
+// GSAP Plugin
+gsap.registerPlugin(ScrollTrigger);
+
+// Sample Data
 const valuesData = [
   {
     title: "Designed for You",
@@ -23,32 +28,26 @@ const valuesData = [
 
 const featuresData = [
   {
-    // icon: <FaApple className="text-3xl text-[#7EC8E3]" />,
     title: "Apple Ecosystem",
     desc: "Seamless integration with all your Apple devices.",
   },
   {
-    // icon: <FaUsers className="text-3xl text-[#7EC8E3]" />,
     title: "Community",
     desc: "Connect and grow with a supportive community.",
   },
   {
-    // icon: <FaLock className="text-3xl text-[#7EC8E3]" />,
     title: "Privacy First",
     desc: "Your data is safe and secure with us.",
   },
   {
-    // icon: <FaRocket className="text-3xl text-[#7EC8E3]" />,
     title: "Fast & Reliable",
     desc: "Experience lightning-fast performance.",
   },
 ];
 
 export default function LandingPage() {
+  // Refs
   const heroRef = useRef();
-  const heroTitleRef = useRef();
-  const heroDescRef = useRef();
-  const heroBtnRef = useRef();
   const valuesTitleRef = useRef();
   const valueCardsRef = useRef([]);
   const featuresTitleRef = useRef();
@@ -57,196 +56,188 @@ export default function LandingPage() {
   const followDescRef = useRef();
   const followBtnRef = useRef();
 
+  // Animate Element - ساده و بدون تکرار
+  const animateElement = (el, direction = -100) => {
+    if (!el) return;
+
+    gsap.fromTo(
+      el,
+      { x: direction, opacity: 0 },
+      {
+        x: 0,
+        opacity: 1,
+        duration: 1.2,
+        ease: "power3.out",
+        scrollTrigger: {
+          trigger: el,
+          start: "top 80%",
+        },
+      }
+    );
+  };
+
+  // Setup Animations
   useEffect(() => {
-    // Hero section animation
-    gsap.fromTo(
-      heroTitleRef.current,
-      { opacity: 0, y: 40 },
-      { opacity: 1, y: 0, duration: 1, ease: "power3.out", delay: 0.1 }
-    );
-    gsap.fromTo(
-      heroDescRef.current,
-      { opacity: 0, y: 40 },
-      { opacity: 1, y: 0, duration: 1, ease: "power3.out", delay: 0.3 }
-    );
-    gsap.fromTo(
-      heroBtnRef.current,
-      { opacity: 0, scale: 0.9 },
-      { opacity: 1, scale: 1, duration: 0.7, ease: "back.out(1.7)", delay: 0.6 }
-    );
-    // Values section animation
-    gsap.fromTo(
-      valuesTitleRef.current,
-      { opacity: 0, y: 40 },
-      { opacity: 1, y: 0, duration: 1, ease: "power3.out", delay: 0.2 }
-    );
-    valueCardsRef.current.forEach((el, i) => {
-      if (el)
-        gsap.fromTo(
-          el,
-          { opacity: 0, y: 40, scale: 0.95 },
-          {
-            opacity: 1,
-            y: 0,
-            scale: 1,
-            duration: 0.8,
-            delay: 0.4 + i * 0.15,
-            ease: "power3.out",
-          }
-        );
+    animateElement(heroRef.current, -100);
+    animateElement(valuesTitleRef.current, -100);
+    animateElement(featuresTitleRef.current, -100);
+    animateElement(followTitleRef.current, -100);
+    animateElement(followDescRef.current, -100);
+    animateElement(followBtnRef.current, -100);
+
+    valueCardsRef.current.forEach((card, i) => {
+      animateElement(card, i % 2 === 0 ? -100 : 100);
     });
-    // Features section animation
-    gsap.fromTo(
-      featuresTitleRef.current,
-      { opacity: 0, y: 40 },
-      { opacity: 1, y: 0, duration: 1, ease: "power3.out", delay: 0.2 }
-    );
-    featureCardsRef.current.forEach((el, i) => {
-      if (el)
-        gsap.fromTo(
-          el,
-          { opacity: 0, y: 40, scale: 0.95 },
-          {
-            opacity: 1,
-            y: 0,
-            scale: 1,
-            duration: 0.8,
-            delay: 0.4 + i * 0.12,
-            ease: "power3.out",
-          }
-        );
+
+    featureCardsRef.current.forEach((card, i) => {
+      animateElement(card, i % 2 === 0 ? -100 : 100);
     });
-    // Follow section animation
-    gsap.fromTo(
-      followTitleRef.current,
-      { opacity: 0, y: 40 },
-      { opacity: 1, y: 0, duration: 1, ease: "power3.out", delay: 0.2 }
-    );
-    gsap.fromTo(
-      followDescRef.current,
-      { opacity: 0, y: 40 },
-      { opacity: 1, y: 0, duration: 1, ease: "power3.out", delay: 0.4 }
-    );
-    gsap.fromTo(
-      followBtnRef.current,
-      { opacity: 0, scale: 0.9 },
-      { opacity: 1, scale: 1, duration: 0.7, ease: "back.out(1.7)", delay: 0.7 }
-    );
+
+    return () => {};
   }, []);
+
+  // Utility to assign ref array
+  const setValueCardRef = (i) => (el) => {
+    valueCardsRef.current[i] = el;
+  };
+
+  const setFeatureCardRef = (i) => (el) => {
+    featureCardsRef.current[i] = el;
+  };
 
   const scrollToValues = () => {
     const el = document.getElementById("values");
-    if (el) {
-      window.scrollTo({ top: el.offsetTop, behavior: "smooth" });
-    }
+    if (el) window.scrollTo({ top: el.offsetTop, behavior: "smooth" });
   };
 
   return (
-    <div className="bg-image-iPhone select-none text-white min-h-screen font-sans pb-[120px]">
-      {/* Hero Section */}
-      <section
-        ref={heroRef}
-        className="flex flex-col items-center justify-center min-h-screen text-center px-4"
-      >
-        <h1
-          ref={heroTitleRef}
-          className="text-2xl md:text-3xl lg:text-5xl xl:text-7xl font-bold mb-4"
-        >
-          Welcome to Apple Home.
-        </h1>
-        <p
-          ref={heroDescRef}
-          className="text-sm md:text-md lg:text-lg xl:text-xl mb-6 max-w-2xl"
-        >
-          A new way to build strength, together. Designed with care, built for
-          connection.
-        </p>
-        <button ref={heroBtnRef} onClick={scrollToValues}>
-          <CreativeButton text={"Read More"}></CreativeButton>
-        </button>
-      </section>
+    <div className="bg-image-iPhone select-none text-white min-h-screen font-sans flex align-center justify-center pb-[120px] px-1">
+      {/* Banner Slider */}
+      <div className="xl:w-[80%] w-full max-w-[1400px] h-fit">
+        <section className="flex items-center justify-center h-full mb-10">
+          <div className="relative w-full h-full mt-10 rounded-4xl overflow-hidden">
+            <BannerSlider />
+          </div>
+        </section>
 
-      {/* Get Started Section */}
-      <section className="py-10 px-6 text-center">
-        <div className="max-w-2xl mx-auto bg-white/10 rounded-2xl shadow-lg p-8 backdrop-blur-xl border border-white/20">
-          <h2 className="text-3xl font-bold text-[#7EC8E3] mb-4">
-            Get Started
-          </h2>
-          <p className="mb-6 text-blue-100">
-            Ready to join the Apple Home experience? Create your account and
-            start your journey today.
+        {/* Hero Section */}
+        <section
+          ref={heroRef}
+          className="flex flex-col items-center justify-center p-12 rounded-4xl w-full text-center px-4 bg-white/90 backdrop-blur-sm"
+        >
+          <h1 className="text-2xl md:text-3xl lg:text-5xl xl:text-6xl font-bold mb-4 text-[#00a4c4] leading-tight">
+            Welcome to Apple Home.
+          </h1>
+          <p className="text-sm md:text-md lg:text-lg xl:text-xl mb-6 max-w-2xl mx-auto text-gray-700">
+            A new way to build strength, together. Designed with care, built for
+            connection.
           </p>
-          <Link to="/register" className="inline-block">
-            <CreativeButton text={"Create Account"}></CreativeButton>
-          </Link>
-        </div>
-      </section>
+          <button onClick={scrollToValues}>
+            <CreativeButton text={"Read More"} />
+          </button>
+        </section>
 
-      {/* Features Section */}
-      <section className="py-16 px-6 text-center">
-        <h2
-          ref={featuresTitleRef}
-          className="text-4xl font-bold mb-10 text-[#7EC8E3]"
+        <div className="h-12" />
+
+        {/* Get Started Section */}
+        <section className="flex flex-col items-center justify-center p-12 rounded-4xl w-full text-center bg-white/90 backdrop-blur-sm">
+          <div className="max-w-2xl mx-auto">
+            <h2 className="text-3xl font-bold text-[#00a4c4] mb-4">
+              Get Started
+            </h2>
+            <p className="mb-6 text-blue-900">
+              Ready to join the Apple Home experience? Create your account and
+              start your journey today.
+            </p>
+            <Link to="/register" className="inline-block">
+              <CreativeButton text={"Create Account"} />
+            </Link>
+          </div>
+        </section>
+
+        <div className="h-12" />
+
+        {/* Features Section */}
+        <section className="flex flex-col items-center justify-center p-12 rounded-4xl w-full text-center bg-white/90 backdrop-blur-sm">
+          <h2
+            ref={featuresTitleRef}
+            className="text-4xl font-bold mb-10 text-[#00a4c4]"
+          >
+            Features
+          </h2>
+          <div className="grid md:grid-cols-4 gap-8 max-w-6xl mx-auto">
+            {featuresData.map(({ title, desc }, i) => (
+              <div
+                key={i}
+                ref={setFeatureCardRef(i)}
+                className="bg-white rounded-xl p-6 shadow-lg flex flex-col items-center justify-center border border-[#00a4c4]/20 hover:border-[#00a4c4] transition-all hover:shadow-xl"
+              >
+                <h3 className="text-xl font-semibold text-[#00a4c4] mb-2">
+                  {title}
+                </h3>
+                <p className="text-gray-700 text-sm text-center">{desc}</p>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        <div className="h-12" />
+
+        {/* Our Values */}
+        <section
+          id="values"
+          className="flex flex-col items-center justify-center p-12 rounded-4xl w-full text-center bg-white/90 backdrop-blur-sm"
         >
-          Features
-        </h2>
-        <div className="grid md:grid-cols-4 gap-8 max-w-6xl mx-auto">
-          {featuresData.map((f, i) => (
-            <div
-              key={f.title}
-              ref={(el) => (featureCardsRef.current[i] = el)}
-              className="bg-black/20 rounded-xl p-6 shadow-lg flex flex-col items-center justify-center transition hover:scale-105"
-            >
-              {/* <div className="mb-3">{f.icon}</div> */}
-              <h3 className="text-xl font-semibold text-[#7EC8E3] mb-2">
-                {f.title}
-              </h3>
-              <p className="text-white text-sm">{f.desc}</p>
-            </div>
-          ))}
-        </div>
-      </section>
+          <h2
+            ref={valuesTitleRef}
+            className="text-4xl font-bold mb-10 text-[#00a4c4]"
+          >
+            Our Values
+          </h2>
+          <div className="grid md:grid-cols-3 gap-10 max-w-6xl mx-auto">
+            {valuesData.map(({ title, desc }, i) => (
+              <div
+                key={i}
+                ref={setValueCardRef(i)}
+                className="bg-white rounded-xl p-6 shadow-lg border border-[#00a4c4]/20 hover:border-[#00a4c4] hover:shadow-xl transition-all"
+              >
+                <h3 className="text-2xl font-semibold text-[#00a4c4] mb-2">
+                  {title}
+                </h3>
+                <p className="text-gray-700">{desc}</p>
+              </div>
+            ))}
+          </div>
+        </section>
 
-      {/* Our Values */}
-      <section id="values" className="py-20 px-6 text-center">
-        <h2 ref={valuesTitleRef} className="text-4xl font-bold mb-10">
-          Our Values
-        </h2>
-        <div className="grid md:grid-cols-3 gap-10 max-w-6xl mx-auto">
-          {valuesData.map(({ title, desc }, i) => (
-            <div
-              key={i}
-              ref={(el) => (valueCardsRef.current[i] = el)}
-              className="backdrop-blur-md bg-black/10 shadow-lg p-6 rounded-xl transition hover:scale-105"
-            >
-              <h3 className="text-2xl font-semibold text-[#7EC8E3] mb-2">
-                {title}
-              </h3>
-              <p className="text-white">{desc}</p>
-            </div>
-          ))}
-        </div>
-      </section>
+        <div className="h-12" />
 
-      {/* Follow Us */}
-      <section className="py-16 text-center text-white">
-        <h2 ref={followTitleRef} className="text-3xl font-bold mb-4">
-          Stay in the Loop
-        </h2>
-        <p ref={followDescRef} className="mb-6">
-          Be the first to know about new features, updates, and how others are
-          using Apple Home.
-        </p>
-        <a
-          ref={followBtnRef}
-          href="https://instagram.com"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="inline-block"
-        >
-          <CreativeButton text={"Follow Me"}></CreativeButton>
-        </a>
-      </section>
+        {/* Follow Us */}
+        <section className="flex flex-col items-center justify-center p-12 rounded-4xl w-full text-center bg-white/90 backdrop-blur-sm">
+          <h2
+            ref={followTitleRef}
+            className="text-3xl font-bold mb-4 text-[#00a4c4]"
+          >
+            Stay in the Loop
+          </h2>
+          <p
+            ref={followDescRef}
+            className="mb-6 text-gray-700 max-w-lg mx-auto"
+          >
+            Be the first to know about new features, updates, and how others are
+            using Apple Home.
+          </p>
+          <a
+            ref={followBtnRef}
+            href="https://instagram.com"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-block"
+          >
+            <CreativeButton text={"Follow Me"} />
+          </a>
+        </section>
+      </div>
     </div>
   );
 }

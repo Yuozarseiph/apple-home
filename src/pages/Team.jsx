@@ -1,6 +1,9 @@
 // src/pages/Team.jsx
 import React, { useRef, useEffect } from "react";
 import gsap from "gsap";
+import { Link } from "react-router-dom";
+
+// Assets
 import man from "../assets/man.svg";
 
 const teamMembers = [
@@ -12,10 +15,9 @@ const teamMembers = [
       "Yousof leads with vision and purpose — building experiences that bring people together through thoughtful design and intuitive technology.",
     imgSrc: man,
     alt: "Yousof Shaker Ardakani",
-    rotate: 3,
     socials: {
-      linkedin: "https://linkedin.com/in/yousofshaker",
-      twitter: "https://twitter.com/yousofshaker",
+      linkedin: "https://linkedin.com/in/yousofshaker",   
+      twitter: "https://twitter.com/yousofshaker",   
     },
   },
 ];
@@ -25,7 +27,7 @@ function SocialIcon({ type, url }) {
     linkedin: (
       <svg
         xmlns="http://www.w3.org/2000/svg"
-        className="w-6 h-6 text-[#7EC8E3] hover:text-white transition-colors"
+        className="w-6 h-6 text-[#00a4c4] hover:text-[#0077b6] transition-colors"
         fill="currentColor"
         viewBox="0 0 24 24"
       >
@@ -35,7 +37,7 @@ function SocialIcon({ type, url }) {
     twitter: (
       <svg
         xmlns="http://www.w3.org/2000/svg"
-        className="w-6 h-6 text-[#7EC8E3] hover:text-white transition-colors"
+        className="w-6 h-6 text-[#00a4c4] hover:text-[#0077b6] transition-colors"
         fill="currentColor"
         viewBox="0 0 24 24"
       >
@@ -56,89 +58,86 @@ function SocialIcon({ type, url }) {
   );
 }
 
-function Team() {
-  const titleRef = useRef();
-  const sectionRef = useRef();
+export default function Team() {
+  const titleRef = useRef(null);
+  const sectionRef = useRef(null);
   const cardRefs = useRef([]);
 
-  useEffect(() => {
-    if (titleRef.current) {
-      gsap.fromTo(
-        titleRef.current,
-        { opacity: 0, y: 40 },
-        { opacity: 1, y: 0, duration: 1, delay: 0.1, ease: "power2.out" }
-      );
-    }
-    if (sectionRef.current) {
-      gsap.fromTo(
-        sectionRef.current,
-        { opacity: 0, y: 40 },
-        { opacity: 1, y: 0, duration: 1, delay: 0.2, ease: "power2.out" }
-      );
-    }
-    cardRefs.current.forEach((el, i) => {
-      if (el) {
-        gsap.fromTo(
-          el,
-          { opacity: 0, y: 40 },
-          {
-            opacity: 1,
-            y: 0,
-            duration: 1,
-            delay: 0.4 + i * 0.18,
-            ease: "power2.out",
-          }
-        );
+  // Animate on scroll - utility function
+  const animateElement = (el, direction = -100) => {
+    if (!el) return;
+
+    gsap.fromTo(
+      el,
+      { x: direction, opacity: 0 },
+      {
+        x: 0,
+        opacity: 1,
+        duration: 1.2,
+        ease: "power3.out",
+        scrollTrigger: {
+          trigger: el,
+          start: "top 80%",
+        },
       }
+    );
+  };
+
+  // Setup animations
+  useEffect(() => {
+    if (titleRef.current) animateElement(titleRef.current, -100);
+    if (sectionRef.current) animateElement(sectionRef.current, -100);
+
+    cardRefs.current.forEach((card, i) => {
+      animateElement(card, i % 2 === 0 ? -100 : 100);
     });
+
+    return () => {};
   }, []);
 
   return (
-    <div className="bg-image-iPhone text-white min-h-screen pt-24 pb-[120px] px-6">
+    <div className="bg-image-iPhone text-gray-800 min-h-screen pt-24 pb-[120px] px-6">
+      {/* Hero Section */}
       <section
-        className="relative w-full max-w-5xl rounded-2xl p-10 shadow-2xl border-2 border-white/20 bg-gradient-to-br from-white/10 via-[#7EC8E3]/10 to-black/30 backdrop-blur-2xl mx-auto text-center mb-6"
         ref={sectionRef}
+        className="relative w-full max-w-5xl rounded-2xl p-10 shadow-2xl border border-gray-200 bg-white/90 backdrop-blur-sm mx-auto text-center mb-6"
       >
         <h1
           ref={titleRef}
-          className="text-4xl font-extrabold text-[#7EC8E3] mb-8 drop-shadow-[0_2px_16px_rgba(126,200,227,0.6)]"
+          className="text-4xl font-extrabold text-[#00a4c4] mb-8 drop-shadow-[0_2px_16px_rgba(0,164,196,0.2)]"
         >
           Meet the Minds Behind Apple Home
         </h1>
-        <p className="text-lg max-w-2xl mx-auto text-center text-blue-100 font-medium drop-shadow-[0_1px_8px_rgba(126,200,227,0.2)] mb-10">
-          We’re a team of designers, engineers, and thinkers who believe great
-          technology starts with empathy.
+        <p className="text-lg max-w-2xl mx-auto text-center text-gray-700 font-medium mb-10">
+          We’re a team of designers, engineers, and thinkers who believe great technology starts with empathy.
         </p>
       </section>
+
+      {/* Team Members Grid */}
       <section className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto mt-8">
-        {teamMembers.map(
-          ({ id, name, role, description, imgSrc, alt, socials }, index) => (
-            <div
-              key={id}
-              ref={(el) => (cardRefs.current[index] = el)}
-              className="relative w-full rounded-2xl p-8 shadow-2xl border-2 border-white/20 bg-gradient-to-br from-white/10 via-[#7EC8E3]/10 to-black/30 backdrop-blur-2xl flex flex-col items-center"
-            >
-              <img
-                src={imgSrc}
-                alt={alt}
-                className="rounded-full mb-4 w-32 h-32 object-cover border-4 border-[#7EC8E3]/40 shadow-lg"
-              />
-              <h3 className="text-2xl font-semibold mb-2 text-[#7EC8E3]">
-                {name}
-              </h3>
-              <p className="mb-4 text-white">{role}</p>
-              <p className="text-center text-white mb-4">{description}</p>
-              <div className="flex">
-                {Object.entries(socials).map(([type, url]) => (
-                  <SocialIcon key={type} type={type} url={url} />
-                ))}
-              </div>
+        {teamMembers.map(({ id, name, role, description, imgSrc, alt, rotate, socials }, index) => (
+          <div
+            key={id}
+            ref={(el) => (cardRefs.current[index] = el)}
+            className="relative w-full rounded-2xl p-8 shadow-xl border border-gray-200 bg-white/90 backdrop-blur-sm flex flex-col items-center text-center hover:shadow-2xl transition-all"
+          >
+            <img
+              src={imgSrc}
+              alt={alt}
+              style={{ transform: `rotate(${rotate}deg)` }}
+              className="rounded-full mb-4 w-32 h-32 object-cover border-4 border-[#00a4c4]/40 shadow-md"
+            />
+            <h3 className="text-2xl font-semibold mb-2 text-[#00a4c4]">{name}</h3>
+            <p className="mb-4 text-gray-700">{role}</p>
+            <p className="text-gray-700 mb-4">{description}</p>
+            <div className="flex justify-center space-x-4">
+              {Object.entries(socials).map(([type, url]) => (
+                <SocialIcon key={type} type={type} url={url} />
+              ))}
             </div>
-          )
-        )}
+          </div>
+        ))}
       </section>
     </div>
   );
 }
-
-export default Team;
