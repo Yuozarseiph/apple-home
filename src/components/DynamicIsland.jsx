@@ -190,7 +190,7 @@ export default function DynamicIslandRouteNotifier() {
     <div
       ref={islandRef}
       className="fixed top-4 left-0 right-0 mx-auto z-50 flex items-center justify-center cursor-pointer select-none rounded-full min-h-[44px] min-w-[44px] px-5 font-semibold text-[1.05rem]
-      bg-gray-900/20 backdrop-blur-md border border-gray-700/30 shadow-lg
+      bg-gray-900/60 backdrop-blur-md border border-gray-700/30 shadow-lg
       hover:bg-gray-800/30 transition-colors duration-300"
       onClick={() =>
         enqueueMessage({ type: "route", value: window.location.pathname })
