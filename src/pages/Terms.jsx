@@ -47,7 +47,7 @@ function Terms() {
   }, []);
 
   return (
-    <div className="bg-image-iPhone min-h-screen pt-24 pb-[120px] px-6 text-gray-800">
+    <div className="overflow-x-hidden min-h-screen pt-24 pb-[120px] px-6 text-gray-800">
       {/* Hero Section */}
       <section
         className="relative w-full max-w-4xl rounded-2xl p-10 shadow-2xl border border-gray-200 bg-white/90 backdrop-blur-sm mx-auto text-center mb-6"

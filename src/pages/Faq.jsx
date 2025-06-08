@@ -116,7 +116,7 @@ export default function Faq() {
   ];
 
   return (
-    <div className="flex items-center justify-center min-h-screen bg-image-iPhone bg-cover bg-center px-6 pt-24 pb-[120px] text-gray-800">
+    <div className="flex items-center justify-center min-h-screen overflow-x-hidden bg-cover bg-center px-6 pt-24 pb-[120px] text-gray-800">
       <section className="max-w-5xl mx-auto w-full">
         <h1
           ref={titleRef}

@@ -137,7 +137,7 @@ function Checkout() {
   };
 
   return (
-    <div className="bg-image-iPhone text-white min-h-screen py-20 pb-[120px] px-4">
+    <div className="overflow-x-hidden text-white min-h-screen py-20 pb-[120px] px-4">
       <div className="max-w-5xl mx-auto">
         <h1 className="text-4xl font-bold mb-8 text-center">Checkout</h1>
 

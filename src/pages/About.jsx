@@ -40,7 +40,7 @@ export default function About() {
   };
 
   return (
-    <div className="bg-image-iPhone text-gray-800 min-h-screen pt-24 pb-[120px] px-6">
+    <div className="bg-image-iPhone text-gray-800 min-h-screen pt-24 pb-[120px] px-6 overflow-x-hidden">
       {/* Hero Section */}
       <section
         ref={setRef(0)}

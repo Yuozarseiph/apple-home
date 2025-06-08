@@ -144,14 +144,14 @@ const Dashboard = () => {
   // Show loading text while user data is being fetched
   if (!userData) {
     return (
-      <div className="flex bg-image-iPhone items-center justify-center h-screen text-lg text-gray-600 pb-[120px]">
+      <div className="flex bg-overflow-x-hidden items-center justify-center h-screen text-lg text-gray-600 pb-[120px]">
         Loading...
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-image-iPhone p-6 pt-20 pb-[120px]">
+    <div className="min-h-screen overflow-x-hidden p-6 pt-20 pb-[120px]">
       <div className="max-w-5xl mx-auto">
         {/* Header Section */}
         <div

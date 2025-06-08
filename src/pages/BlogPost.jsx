@@ -60,7 +60,7 @@ function BlogPost() {
   }
 
   return (
-    <div className="bg-image-iPhone text-gray-800 min-h-screen py-20 pb-[120px] pt-30">
+    <div className="bg-image-iPhone text-gray-800 min-h-screen py-20 pb-[120px] pt-30 overflow-x-hidden">
       <div
         ref={containerRef}
         className="container relative w-full max-w-4xl rounded-2xl p-10 shadow-2xl border border-gray-200 bg-white/90 backdrop-blur-sm mx-auto"

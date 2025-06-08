@@ -5,7 +5,7 @@ import CreativeButton from "../components/CreativeButton";
 export default function PageNotFound() {
   return (
 
-      <div className="bg-white text-white min-h-screen pt-24 pb-[120px] px-6 flex flex-col items-center justify-center">
+      <div className="bg-white overflow-x-hidden text-white min-h-screen pt-24 pb-[120px] px-6 flex flex-col items-center justify-center">
         {/* Your SVG below. Replace the example with your actual SVG code */}
         
           <Link

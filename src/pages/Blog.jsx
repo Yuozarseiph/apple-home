@@ -57,7 +57,7 @@ export default function Blog() {
   };
 
   return (
-    <div className="bg-image-iPhone text-gray-800 min-h-screen py-20 pb-[120px] pt-30">
+    <div className="bg-image-iPhone text-gray-800 min-h-screen py-20 pb-[120px] pt-30 overflow-x-hidden">
       <section className="container mx-auto px-6">
         {/* Title */}
         <h1

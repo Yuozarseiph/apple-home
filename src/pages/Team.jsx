@@ -96,7 +96,7 @@ export default function Team() {
   }, []);
 
   return (
-    <div className="bg-image-iPhone text-gray-800 min-h-screen pt-24 pb-[120px] px-6">
+    <div className="overflow-x-hidden text-gray-800 min-h-screen pt-24 pb-[120px] px-6">
       {/* Hero Section */}
       <section
         ref={sectionRef}

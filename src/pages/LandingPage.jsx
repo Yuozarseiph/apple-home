@@ -111,7 +111,7 @@ export default function LandingPage() {
   };
 
   return (
-    <div className="bg-image-iPhone select-none text-white min-h-screen font-sans flex align-center justify-center pb-[120px] px-1 overflow-hidden">
+    <div className="overflow-x-hidden select-none text-white min-h-screen font-sans flex align-center justify-center pb-[120px] px-1 overflow-hidden">
       {/* Banner Slider */}
       <div className="xl:w-[80%] w-full max-w-[1400px] h-fit">
         <section className="flex items-center justify-center h-full mb-10">
