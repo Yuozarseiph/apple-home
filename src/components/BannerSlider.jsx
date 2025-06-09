@@ -147,7 +147,7 @@ function BannerSlider() {
 
   return (
     <div
-      className="relative w-full h-[50vh] overflow-hidden select-none"
+      className="relative w-full max-h-[250px] md:max-h-[50vh] h-[50vh] overflow-hidden select-none"
       onMouseEnter={() => setPaused(true)}
       onMouseLeave={() => setPaused(false)}
       style={{ perspective: 1200 }}

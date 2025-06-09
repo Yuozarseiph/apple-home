@@ -35,6 +35,7 @@ body {
       var(--c3) 0 180deg
     );
   background-size: var(--s) calc(var(--s) * 0.577);
+  background-attachment: fixed;
 }
 
 /* 
