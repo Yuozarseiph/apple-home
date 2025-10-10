@@ -1,130 +1,142 @@
-import React, { useEffect, useState } from "react";
-import axios from "axios";
+import React, { useState } from "react";
 import { motion } from "framer-motion";
 import AddToCartButton from "../components/AddToCartButton";
+import { Eye } from "lucide-react";
+import { Link } from "react-router-dom";
+import ip16 from "../assets/iPhone16/ip16.png";
+import ip16e from "../assets/iPhone16/ip16e.png";
+import ip16pro from "../assets/iPhone16/ip16pro.png";
 
-function Shop() {
-  const [products, setProducts] = useState([]);
-  const [loading, setLoading] = useState(true);
+const GREEN_COLOR = "#00d5be";
 
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: { staggerChildren: 0.2, delayChildren: 0.5 },
-    },
-  };
+const staggerContainer = {
+  hidden: {},
+  visible: { transition: { staggerChildren: 0.1 } },
+};
+const fadeInUp = {
+  hidden: { opacity: 0, y: 30 },
+  visible: { opacity: 1, y: 0 },
+};
 
-  const itemVariants = {
-    hidden: { y: 50, opacity: 0 },
-    visible: {
-      y: 0,
-      opacity: 1,
-      transition: { type: "spring", stiffness: 100 },
-    },
-  };
+const productsMock = [
+  {
+    _id: "1",
+    name: "iPhone 16",
+    description: "The ultimate iPhone.",
+    price: "999",
+    image: ip16,
+  },
+  {
+    _id: "2",
+    name: "iPhone 16e",
+    description: "Supercharged by M3.",
+    price: "749",
+    image: ip16e,
+  },
+  {
+    _id: "3",
+    name: "iPhone 16 Pro",
+    description: "Smarter. Brighter. Mightier.",
+    price: "1199",
+    image: ip16pro,
+  },
+  {
+    _id: "4",
+    name: "iPhone 16 Pro Max",
+    description: "Adaptive Audio. Now playing.",
+    price: "1399",
+    image: ip16pro,
+  },
+];
 
-  const imageVariants = {
-    hidden: { scale: 0.8, opacity: 0 },
-    visible: {
-      scale: 1,
-      opacity: 1,
-      transition: { duration: 0.6 },
-    },
-  };
-
-  useEffect(() => {
-    axios
-      .get("http://localhost:5000/api/products") // آدرس رو بسته به بک‌اند خودت تنظیم کن
-      .then((res) => {
-        setProducts(res.data);
-        setLoading(false);
-      })
-      .catch((err) => {
-        console.error("Error fetching products:", err);
-        setLoading(false);
-      });
-  }, []);
+const Shop = () => {
+  const [products] = useState(productsMock);
 
   return (
-    <div className="overflow-x-hidden min-h-screen py-20 px-4 md:px-10 pb-[120px]">
-      <section className="text-center">
-        <motion.h1
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          className="text-4xl font-bold text-white mb-10"
+    <div className="bg-black text-white min-h-screen pt-24 pb-28 px-4 md:px-6">
+      <div className="container mx-auto">
+        <motion.div
+          initial="hidden"
+          animate="visible"
+          variants={staggerContainer}
+          className="text-center mb-16"
         >
-          Our Products
-        </motion.h1>
-
-        {loading ? (
-          <p className="text-white text-lg">Loading products...</p>
-        ) : (
-          <motion.div
-            variants={containerVariants}
-            initial="hidden"
-            animate="visible"
-            className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-10"
+          <motion.h1
+            variants={fadeInUp}
+            className="text-4xl md:text-5xl font-bold tracking-tighter"
           >
-            {products.map((product, index) => (
+            The Store
+          </motion.h1>
+          <motion.p
+            variants={fadeInUp}
+            className="text-gray-400 mt-4 text-lg max-w-2xl mx-auto"
+          >
+            The best way to buy the products you love.
+          </motion.p>
+        </motion.div>
+
+        <motion.div
+          variants={staggerContainer}
+          initial="hidden"
+          animate="visible"
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8"
+        >
+          {products.map((product) => (
+            <motion.div
+              key={product._id}
+              variants={fadeInUp}
+              className="relative group bg-gray-900 rounded-2xl p-6 flex flex-col text-center border border-white/10 overflow-hidden hover:shadow-lg transition-shadow"
+            >
               <motion.div
-                key={product._id}
-                variants={itemVariants}
-                custom={index}
-                className="position-relative backdrop-blur-md bg-black/40 shadow-lg p-6 rounded-xl text-white flex flex-col"
-              >
-                <motion.img
-                  src={product.image}
-                  alt={product.name}
-                  variants={imageVariants}
-                  className="w-full h-48 object-contain rounded-lg mb-4"
-                />
-                <motion.h3
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.3 }}
-                  className="text-xl font-semibold text-[#7EC8E3] mb-2"
+                className="absolute inset-0 z-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                style={{
+                  background: `radial-gradient(circle at center, ${GREEN_COLOR}11, transparent 80%)`,
+                }}
+              />
+
+              <div className="relative z-10 flex flex-col h-full">
+                <Link
+                  to={`/product/${product._id}`}
+                  className="block relative mb-6"
                 >
-                  {product.name}
-                </motion.h3>
-                <motion.p
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.4 }}
-                >
-                  {product.description}
-                </motion.p>
-                <motion.p
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.5 }}
-                  className="text-[#7EC8E3] font-bold mb-4"
-                >
-                  {product.price}
-                </motion.p>
-                <motion.div
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.6 }}
-                  className="mt-auto flex gap-4 justify-center"
-                >
-                  <AddToCartButton productId={product._id} />
-                  <motion.button
-                    whileHover={{ backgroundColor: "#0000FF", color: "white" }}
-                    whileTap={{ scale: 0.95 }}
-                    className="border border-[#7EC8E3] text-[#7EC8E3] px-4 py-2 rounded-xl hover:bg-[#0000FF] hover:text-white transition-all duration-300"
+                  <img
+                    src={product.image}
+                    alt={product.name}
+                    className="w-full h-52 object-contain transition-transform duration-300 group-hover:scale-105 rounded-lg"
+                  />
+                  <motion.div
+                    className="absolute inset-0 bg-black/50 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-lg"
+                    initial={{ backdropFilter: "blur(0px)" }}
+                    whileHover={{ backdropFilter: "blur(8px)" }}
                   >
-                    View Details
-                  </motion.button>
-                </motion.div>
-              </motion.div>
-            ))}
-          </motion.div>
-        )}
-      </section>
+                    <div className="flex items-center gap-2 font-semibold border-2 border-white rounded-full px-4 py-2">
+                      <Eye size={18} />
+                      View Product
+                    </div>
+                  </motion.div>
+                </Link>
+                <h3 className="text-xl font-semibold text-white mb-2">
+                  {product.name}
+                </h3>
+                <p className="text-gray-400 flex-grow text-sm">
+                  {product.description}
+                </p>
+                <p
+                  className="font-bold my-4 text-2xl"
+                  style={{ color: GREEN_COLOR }}
+                >
+                  ${product.price}
+                </p>
+                <div className="mt-auto pt-4">
+                  <AddToCartButton productId={product._id} />
+                </div>
+              </div>
+            </motion.div>
+          ))}
+        </motion.div>
+      </div>
     </div>
   );
-}
+};
 
 export default Shop;

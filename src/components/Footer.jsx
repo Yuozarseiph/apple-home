@@ -1,103 +1,70 @@
 import React from "react";
 import { motion } from "framer-motion";
-import instagram from "../assets/instagram.svg";
-import github from "../assets/github.svg";
-import telegram from "../assets/telegram.svg";
+import { Instagram, Github, Send } from "lucide-react";
 
-// Import animation variants
-import {
-  containerVariant,
-  itemVariant,
-  hoverTapVariant,
-  socialIconVariant,
-  linkVariant
-} from "../utils/motionVariants";
+// Framer Motion variants can be defined here or imported
+const containerVariant = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: { staggerChildren: 0.1, delayChildren: 0.2 },
+  },
+};
+
+const itemVariant = {
+  hidden: { y: 20, opacity: 0 },
+  visible: { y: 0, opacity: 1, transition: { type: "spring", stiffness: 100 } },
+};
 
 const Footer = () => {
-  // Array of navigation links
   const quickLinks = [
     { label: "Home", href: "/" },
     { label: "Shop", href: "/shop" },
     { label: "Contact", href: "/contact" },
-    { label: "Terms", href: "/terms" },
-    { label: "About Us", href: "/about" },
-    { label: "FAQ", href: "/faq" },
     { label: "Blog", href: "/blog" },
-    { label: "Team", href: "/team" },
+    { label: "About Us", href: "/about" },
   ];
+
+  const SocialLink = ({ href, children }) => (
+    <motion.a
+        href={href}
+        target="_blank"
+        rel="noopener noreferrer"
+        whileHover={{ scale: 1.2, rotate: 10 }}
+        whileTap={{ scale: 0.9 }}
+        className="text-gray-400 hover:text-teal-400 transition-colors"
+    >
+        {children}
+    </motion.a>
+  );
 
   return (
     <motion.footer
-      className="select-none bg-[#050A30] text-white py-12 px-6"
-      variants={containerVariant}       // Animate child items with stagger
+      className="select-none bg-gray-900 text-gray-300 py-12 px-6"
+      variants={containerVariant}
       initial="hidden"
       whileInView="visible"
-      viewport={{ once: true }}         // Trigger animation once on scroll
+      viewport={{ once: true, amount: 0.3 }}
     >
-      <div className="max-w-6xl mx-auto flex flex-wrap justify-between gap-8">
-        
-        {/* Branding and social icons */}
-        <motion.div variants={itemVariant} className="flex-1 min-w-[250px]">
-          <h3 className="text-2xl font-bold mb-4">Apple Home</h3>
-          <p className="mb-5 text-sm leading-relaxed text-gray-300">
-            Our mission is to bring couples closer together through meaningful and empowering gymnastics lessons.
+      <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8">
+        <motion.div variants={itemVariant} className="flex flex-col">
+          <h3 className="text-2xl font-bold mb-4 text-white">Apple Home</h3>
+          <p className="mb-5 text-sm leading-relaxed text-gray-400">
+            Our mission is to bring you the best products with the best design and quality.
           </p>
-
-          {/* Social Media Icons with rotation animation */}
-          <div className="flex space-x-5">
-            <motion.a
-              href="https://instagram.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              variants={socialIconVariant}
-              custom={10}                 // Custom rotation direction
-              whileHover="hover"
-              whileTap="tap"
-            >
-              <img src={instagram} alt="Instagram" className="w-7 h-7" />
-            </motion.a>
-
-            <motion.a
-              href="https://github.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              variants={socialIconVariant}
-              custom={-10}
-              whileHover="hover"
-              whileTap="tap"
-            >
-              <img src={github} alt="GitHub" className="w-7 h-7" />
-            </motion.a>
-
-            <motion.a
-              href="https://t.me"
-              target="_blank"
-              rel="noopener noreferrer"
-              variants={socialIconVariant}
-              custom={15}
-              whileHover="hover"
-              whileTap="tap"
-            >
-              <img src={telegram} alt="Telegram" className="w-7 h-7" />
-            </motion.a>
+          <div className="flex space-x-5 mt-auto">
+            <SocialLink href="https://instagram.com"><Instagram /></SocialLink>
+            <SocialLink href="https://github.com"><Github /></SocialLink>
+            <SocialLink href="https://t.me"><Send /></SocialLink>
           </div>
         </motion.div>
 
-        {/* Quick Navigation Links */}
-        <motion.div variants={itemVariant} className="flex-1 min-w-[200px]">
-          <h4 className="text-lg font-semibold">Quick Links</h4>
-          <ul className="space-y-3 mt-1">
-            {quickLinks.map((link, idx) => (
-              <motion.li
-                key={idx}
-                variants={linkVariant}
-                whileHover="hover"
-                whileTap="tap"
-              >
-                <a
-                  href={link.href}
-                  className="text-sm hover:text-[#7EC8E3] p-3 footer-drop-shadow transition-colors duration-300"
-                >
+        <motion.div variants={itemVariant}>
+          <h4 className="text-lg font-semibold text-white">Quick Links</h4>
+          <ul className="space-y-3 mt-4">
+            {quickLinks.map((link) => (
+              <motion.li key={link.label} whileHover={{ x: 5 }} whileTap={{ scale: 0.95 }}>
+                <a href={link.href} className="text-sm hover:text-teal-400 transition-colors">
                   {link.label}
                 </a>
               </motion.li>
@@ -105,25 +72,21 @@ const Footer = () => {
           </ul>
         </motion.div>
 
-        {/* Newsletter Subscription Box */}
-        <motion.div variants={itemVariant} className="flex-1 min-w-[250px]">
-          <h4 className="text-lg font-semibold mb-5">Newsletter</h4>
-          <p className="text-sm mb-5 text-gray-300">
-            Subscribe to our newsletter to get the latest updates and offers.
+        <motion.div variants={itemVariant}>
+          <h4 className="text-lg font-semibold mb-4 text-white">Newsletter</h4>
+          <p className="text-sm mb-5 text-gray-400">
+            Subscribe to our newsletter for the latest updates.
           </p>
-
-          {/* Input and Button with animations */}
           <div className="flex space-x-2">
             <input
               type="email"
               placeholder="Enter your email"
-              className="w-full px-4 py-1 rounded-full border-none shadow-lg shadow-[#ffffff38] bg-[#7474741e] backdrop:blur-2xl text-white input-shadow"
+              className="w-full px-4 py-2 rounded-lg border border-gray-700 bg-gray-800 text-white focus:ring-2 focus:ring-teal-500 focus:outline-none transition"
             />
             <motion.button
-              className="bg-[#ffffff81] text-black px-5 py-2 rounded-full hover:bg-[#6ab5c7] transition-colors"
-              variants={hoverTapVariant}
-              whileHover="hover"
-              whileTap="tap"
+              className="bg-teal-500 text-white px-5 py-2 rounded-lg hover:bg-teal-600 transition-colors font-semibold"
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
             >
               Subscribe
             </motion.button>
@@ -131,27 +94,8 @@ const Footer = () => {
         </motion.div>
       </div>
 
-      {/* Footer Copyright */}
-      <motion.div
-        variants={itemVariant}
-        className="mt-10 text-center text-sm text-[#7EC8E3]"
-      >
+      <motion.div variants={itemVariant} className="mt-12 pt-8 border-t border-gray-800 text-center text-sm text-gray-500">
         &copy; {new Date().getFullYear()} Apple Home. All rights reserved.
-      </motion.div>
-
-      {/* Developer Credit */}
-      <motion.div
-        variants={itemVariant}
-        className="mt-4 text-center text-sm text-[#7EC8E3]"
-      >
-        Created by{" "}
-        <a
-          href="https://yuozarseiph.top"
-          className="hover:text-[#7EC8E3] transition-colors"
-        >
-          Yousef Shaker Ardakani
-        </a>
-        . All rights reserved.
       </motion.div>
     </motion.footer>
   );

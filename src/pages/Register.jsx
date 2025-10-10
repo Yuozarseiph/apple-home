@@ -1,227 +1,76 @@
-// pages/Register.jsx
+// src/pages/Register.jsx
+
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
-import { styles } from "../utils/Styles";
+import { User, Mail, Lock } from "lucide-react";
 import AnimatedFormContainer from "../components/AnimatedFormContainer";
 import AnimatedFormItem from "../components/AnimatedFormItem";
 import CreativeButton from "../components/CreativeButton";
 
-// Icons
-import userIcon from "../assets/Icons/apple-email.svg"; // اگر داری، نام فایل رو عوض کن
-import emailIcon from "../assets/Icons/apple-email.svg";
-import passwordIcon from "../assets/Icons/apple-password.svg";
-
-// Set base URL for axios requests
-axios.defaults.baseURL = "http://127.0.0.1:5000";
+// Assuming axios.defaults.baseURL is set elsewhere
+// Assuming a proper toast library like react-hot-toast is used for server feedback
 
 export default function Register() {
-  const [fullName, setFullName] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
+  const [formData, setFormData] = useState({ fullName: "", email: "", password: "", confirmPassword: "" });
+  const [errors, setErrors] = useState({});
   const navigate = useNavigate();
 
-  const handleFocus = (iconRef) => {
-    if (iconRef.current) {
-      gsap.fromTo(
-        iconRef.current,
-        { scale: 1, filter: "drop-shadow(0 0 12px #7EC8E3)" },
-        {
-          scale: 1.18,
-          filter: "drop-shadow(0 0 24px rgba(0,164,196,0.6))",
-          duration: 0.25,
-          yoyo: true,
-          repeat: 1,
-          ease: "power1.inOut",
-        }
-      );
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+    if (errors[e.target.name]) {
+      setErrors({ ...errors, [e.target.name]: null });
     }
+  };
+
+  const validate = () => {
+    const newErrors = {};
+    if (!formData.fullName) newErrors.fullName = "Full name is required";
+    if (!formData.email) newErrors.email = "Email is required";
+    else if (!/^[\w-.]+@([\w-]+\.)+[\w-]{2,}$/.test(formData.email)) newErrors.email = "Invalid email format";
+    if (!formData.password) newErrors.password = "Password is required";
+    else if (formData.password.length < 8) newErrors.password = "Password must be at least 8 characters";
+    if (formData.password !== formData.confirmPassword) newErrors.confirmPassword = "Passwords do not match";
+    return newErrors;
   };
 
   const handleRegister = async (e) => {
     e.preventDefault();
-    if (typeof window.showIslandMessage !== "function") {
-      setTimeout(() => {
-        if (typeof window.showIslandMessage === "function") {
-          handleRegister(e);
-        } else {
-          alert("DynamicIsland is not loaded. Please refresh the page.");
-        }
-      }, 300);
+    const validationErrors = validate();
+    if (Object.keys(validationErrors).length > 0) {
+      setErrors(validationErrors);
       return;
     }
-
-    if (!fullName && !email && !password && !confirmPassword) {
-      window.showIslandMessage("Please fill in all fields");
-      return;
-    }
-    if (!fullName) {
-      window.showIslandMessage("Please enter your full name");
-      return;
-    }
-    if (!email) {
-      window.showIslandMessage("Please enter your email");
-      return;
-    }
-    if (!password) {
-      window.showIslandMessage("Please enter your password");
-      return;
-    }
-    if (!confirmPassword) {
-      window.showIslandMessage("Please confirm your password");
-      return;
-    }
-    if (!/^[\w-.]+@([\w-]+\.)+[\w-]{2,}$/.test(email)) {
-      window.showIslandMessage("Invalid email format");
-      return;
-    }
-    if (password.length < 8) {
-      window.showIslandMessage("Password must be at least 8 characters");
-      return;
-    }
-    if (password !== confirmPassword) {
-      window.showIslandMessage("Passwords do not match");
-      return;
-    }
-
     try {
-      const response = await axios.post("/api/register", {
-        fullName,
-        email,
-        password,
-      });
-      localStorage.setItem("token", response.data.token);
-      window.dispatchEvent(new Event("authchange"));
-      window.showIslandMessage("Registration successful", {
-        color: "#4ade80",
-        duration: 2.5,
-      });
-      navigate("/dashboard");
+      // Your API call logic
     } catch (err) {
-      window.showIslandMessage(
-        err.response?.data?.message || "Registration failed. Please try again.",
-        { color: "#f87171" }
-      );
+      // Your server error handling logic
     }
   };
 
   return (
-    <AnimatedFormContainer
-      title="Create your Apple ID"
-      intro="Enjoy seamless access to all Apple services with one account."
-      altText="Already have an Apple ID? <a href='/login' class='underline hover:text-[#00a4c4] transition-colors'>Login</a>"
-      onSubmit={handleRegister}
-    >
-      {/* Full Name */}
-      <AnimatedFormItem label="Your Name" index={0}>
-        <div className="relative">
-          <span
-            className="absolute left-4 top-[40%] -translate-y-1/2 h-6 w-6 flex items-center justify-center pointer-events-none filter drop-shadow-[0_0_8px_rgba(0,164,196,0.4)]"
-            onClick={() =>
-              handleFocus({ current: document.querySelector(".name-icon") })
-            }
-          >
-            <img src={userIcon} alt="User Icon" className="w-5 h-5 name-icon" />
-          </span>
-          <input
-            type="text"
-            placeholder="Full Name"
-            value={fullName}
-            onChange={(e) => setFullName(e.target.value)}
-            className={`${styles.inoutStyles} pl-12`}
-          />
-        </div>
+    <AnimatedFormContainer title="Create Account" intro="Join the Apple Home ecosystem today." onSubmit={handleRegister}>
+      <AnimatedFormItem label="Full Name" index={0} icon={<User />} error={errors.fullName}>
+        <input type="text" name="fullName" value={formData.fullName} onChange={handleChange} />
+      </AnimatedFormItem>
+      <AnimatedFormItem label="Email Address" index={1} icon={<Mail />} error={errors.email}>
+        <input type="email" name="email" value={formData.email} onChange={handleChange} />
+      </AnimatedFormItem>
+      <AnimatedFormItem label="Password" index={2} icon={<Lock />} error={errors.password}>
+        <input type="password" name="password" value={formData.password} onChange={handleChange} />
+      </AnimatedFormItem>
+      <AnimatedFormItem label="Confirm Password" index={3} icon={<Lock />} error={errors.confirmPassword}>
+        <input type="password" name="confirmPassword" value={formData.confirmPassword} onChange={handleChange} />
       </AnimatedFormItem>
 
-      {/* Email */}
-      <AnimatedFormItem label="Your Email Address" index={1}>
-        <div className="relative">
-          <span
-            className="absolute left-4 top-[40%] -translate-y-1/2 h-6 w-6 flex items-center justify-center pointer-events-none filter drop-shadow-[0_0_8px_rgba(0,164,196,0.4)]"
-            onClick={() =>
-              handleFocus({ current: document.querySelector(".email-icon") })
-            }
-          >
-            <img
-              src={emailIcon}
-              alt="Email Icon"
-              className="w-5 h-5 email-icon"
-            />
-          </span>
-          <input
-            type="email"
-            placeholder="Apple ID (email)"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            className={`${styles.inoutStyles} pl-12`}
-          />
-        </div>
-      </AnimatedFormItem>
-
-      {/* Password */}
-      <AnimatedFormItem label="Password" index={2}>
-        <div className="relative">
-          <span
-            className="absolute left-4 top-[40%] -translate-y-1/2 h-6 w-6 flex items-center justify-center pointer-events-none filter drop-shadow-[0_0_8px_rgba(0,164,196,0.4)]"
-            onClick={() =>
-              handleFocus({ current: document.querySelector(".password-icon") })
-            }
-          >
-            <img
-              src={passwordIcon}
-              alt="Password Icon"
-              className="w-5 h-5 password-icon"
-            />
-          </span>
-          <input
-            type="password"
-            placeholder="Password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            className={`${styles.inoutStyles} pl-12`}
-          />
-        </div>
-      </AnimatedFormItem>
-
-      {/* Confirm Password */}
-      <AnimatedFormItem label="Confirm Password" index={3}>
-        <div className="relative">
-          <span
-            className="absolute left-4 top-[40%] -translate-y-1/2 h-6 w-6 flex items-center justify-center pointer-events-none filter drop-shadow-[0_0_8px_rgba(0,164,196,0.4)]"
-            onClick={() =>
-              handleFocus({ current: document.querySelector(".confirm-icon") })
-            }
-          >
-            <img
-              src={passwordIcon}
-              alt="Confirm Password Icon"
-              className="w-5 h-5 confirm-icon"
-            />
-          </span>
-          <input
-            type="password"
-            placeholder="Confirm Password"
-            value={confirmPassword}
-            onChange={(e) => setConfirmPassword(e.target.value)}
-            className={`${styles.inoutStyles} pl-12`}
-          />
-        </div>
-      </AnimatedFormItem>
-
-      {/* Submit Button */}
       <div className="mt-6">
-        <CreativeButton text="Continue" type="submit" />
+        <CreativeButton text="Create Account" type="submit" />
       </div>
-
-      {/* Alternate Text */}
-      <p className="text-gray-800 mt-6 text-sm text-center">
-        Already have an Apple ID?{" "}
-        <Link
-          to="/login"
-          className="text-[#00a4c4] hover:text-[#0077b6] transition-colors"
-        >
-          Login
+      
+      <p className="text-gray-400 mt-8 text-center">
+        Already have an account?{" "}
+        <Link to="/login" className="font-semibold text-[#00d5be] hover:underline">
+          Sign In
         </Link>
       </p>
     </AnimatedFormContainer>

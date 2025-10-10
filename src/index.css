@@ -7,13 +7,36 @@
 .pt-30{
   padding-top: 15vh;
 }
+/* پس زمینه اصلی */
+/* در فایل index.css یا فایل CSS اصلی */
+body {
+  background: linear-gradient(135deg, #0d0d0d, #1a1a1a, #333333);
+  color: #ffffff;
+  min-height: 100vh;
+  margin: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+
+/* المان‌های شیشه‌ای */
+.glass-card {
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);  
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+}
+
+
 /* body {
   font-family: 'Poppins', sans-serif;
   background-color: #050A30;
   cursor: url('./assets/Icons/apple-cursor.svg');
 } */
 /* From Uiverse.io by csemszepp */ 
-body {
+/* body {
   overflow-x: hidden;
   width: 100%;
   height: 100vh;
@@ -36,7 +59,7 @@ body {
     );
   background-size: var(--s) calc(var(--s) * 0.577);
   background-attachment: fixed;
-}
+} */
 
 /* 
 .bg-image-iPhone{

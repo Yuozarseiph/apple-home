@@ -4,13 +4,16 @@ import { motion } from "framer-motion";
 const FadeInComponent = () => {
   return (
     <motion.div
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      exit={{ opacity: 0 }}
-      transition={{ duration: 1 }}
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      exit={{ opacity: 0, y: -20 }}
+      transition={{ duration: 0.7, ease: "easeInOut" }}
+      className="p-8 bg-gray-800 rounded-lg text-gray-200 shadow-xl"
     >
-      <h2>Welcome to Smart Rendezvous</h2>
-      <p>This content fades in when it enters the DOM.</p>
+      <h2 className="text-2xl font-bold text-teal-400 mb-2">
+        Welcome to Dark Mode
+      </h2>
+      <p>This content fades in with a dark theme applied.</p>
     </motion.div>
   );
 };

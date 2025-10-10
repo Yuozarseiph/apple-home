@@ -1,210 +1,137 @@
-import React, { useRef, useEffect } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-import bg from "../assets/bg-all.webp"
+import { motion } from "framer-motion";
+import { ArrowRight } from "lucide-react";
 
-// GSAP plugin registration
-gsap.registerPlugin(ScrollTrigger);
+const blogPosts = [
+    { slug: 'designing-for-connection', title: 'Designing for Connection', excerpt: 'How thoughtful design brings people closer and makes every interaction feel more human.', image: 'https://placehold.co/1200x600/00d5be/000000?text=Featured+Post' },
+    { slug: 'the-future-of-everyday-tech', title: 'The Future of Everyday Tech', excerpt: 'We explore how smart, sustainable design is shaping the home of tomorrow.', image: 'https://placehold.co/600x400/1a1a1a/ffffff?text=Blog+Post+2' },
+    { slug: 'strength-through-simplicity', title: 'Strength Through Simplicity', excerpt: 'The most powerful experiences are often the simplest. Here’s how we empower without overwhelming.', image: 'https://placehold.co/600x400/2a2a2a/ffffff?text=Blog+Post+3' },
+    { slug: 'beyond-the-screen', title: 'Beyond the Screen', excerpt: 'Exploring the boundaries of digital interaction and physical space.', image: 'https://placehold.co/600x400/3a3a3a/ffffff?text=Blog+Post+4' },
+];
 
-export default function Blog() {
-  const sectionRef = useRef(null);
-  const cardRefs = useRef([]);
+const staggerContainer = {
+  hidden: {},
+  visible: {
+    transition: {
+      staggerChildren: 0.15,
+    },
+  },
+};
 
-  // Set up GSAP animations for blog cards
-  useEffect(() => {
-    if (sectionRef.current) {
-      gsap.fromTo(
-        sectionRef.current,
-        { opacity: 0, y: 40 },
-        {
-          opacity: 1,
-          y: 0,
-          duration: 1.2,
-          ease: "power3.out",
-        }
-      );
-    }
+const fadeInUp = {
+  hidden: { opacity: 0, y: 30 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { type: "spring", stiffness: 120, damping: 20, duration: 0.8 },
+  },
+};
 
-    cardRefs.current.forEach((card, index) => {
-      const direction = index % 2 === 0 ? -100 : 100;
-
-      gsap.fromTo(
-        card,
-        { x: direction, opacity: 0 },
-        {
-          x: 0,
-          opacity: 1,
-          duration: 1.2,
-          scrollTrigger: {
-            trigger: card,
-            start: "top 80%",
-            toggleActions: "play none none reverse",
-          },
-          ease: "power3.out",
-        }
-      );
-    });
-
-    return () => {
-      // Optional cleanup
-    };
-  }, []);
-
-  // Utility to assign ref with array support
-  const setCardRef = (index) => (el) => {
-    cardRefs.current[index] = el;
-  };
+const BlogPostCard = ({ post, isFeatured = false }) => {
+  const GREEN_COLOR = "#00d5be";
+  
+  if (isFeatured) {
+    return (
+      <motion.div 
+        className="col-span-1 md:col-span-3"
+        variants={fadeInUp}
+      >
+        <Link to={`/blog/${post.slug}`} className="block group relative overflow-hidden rounded-2xl shadow-2xl">
+          <motion.div 
+              whileHover={{ scale: 1.03 }}
+              transition={{ type: 'spring', stiffness: 200, damping: 20 }}
+              className="md:flex items-center bg-gray-900"
+          >
+            <div className="md:w-1/2">
+              <img className="w-full h-64 md:h-full object-cover" src={post.image} alt={post.title} />
+            </div>
+            <div className="md:w-1/2 p-8 md:p-12">
+              <p className="text-sm font-semibold mb-2" style={{color: GREEN_COLOR}}>Featured Article</p>
+              <h2 className="text-3xl lg:text-4xl font-bold text-white mb-4 leading-tight">{post.title}</h2>
+              <p className="text-gray-400 mb-6">{post.excerpt}</p>
+              <div className="inline-flex items-center font-semibold text-white">
+                Read more <ArrowRight className="w-4 h-4 ml-2 transition-transform duration-300 group-hover:translate-x-1" />
+              </div>
+            </div>
+          </motion.div>
+        </Link>
+      </motion.div>
+    );
+  }
 
   return (
-    <div className="bg-image-iPhone text-gray-800 min-h-screen py-20 pb-[120px] pt-30 overflow-x-hidden">
-      <section className="container mx-auto px-6">
-        {/* Title */}
-        <h1
-          ref={sectionRef}
-          className="text-4xl font-extrabold mb-12 text-center text-[#00a4c4] drop-shadow-[0_2px_16px_rgba(0,164,196,0.4)]"
+    <motion.div
+      variants={fadeInUp}
+      whileHover={{ y: -8, boxShadow: "0 25px 50px -12px rgba(0, 213, 190, 0.2)" }}
+      className="bg-gray-900 rounded-2xl shadow-lg overflow-hidden flex flex-col group"
+    >
+      <Link to={`/blog/${post.slug}`} className="block overflow-hidden">
+        <img
+          className="w-full h-48 object-cover transition-transform duration-300 group-hover:scale-105"
+          src={post.image}
+          alt={post.title}
+        />
+      </Link>
+      <div className="p-6 flex flex-col flex-grow">
+        <Link to={`/blog/${post.slug}`}>
+          <h5 className="mb-3 text-xl font-bold tracking-tight text-white group-hover:text-[#00d5be] transition-colors">
+            {post.title}
+          </h5>
+        </Link>
+        <p className="text-gray-400 text-sm flex-grow mb-4">{post.excerpt}</p>
+        <Link
+          to={`/blog/${post.slug}`}
+          className="inline-flex items-center mt-auto font-semibold text-[#00d5be] text-sm"
         >
-          Discover the Experience
-        </h1>
+          Read more <ArrowRight className="w-4 h-4 ml-2 transition-transform duration-300 group-hover:translate-x-1" />
+        </Link>
+      </div>
+    </motion.div>
+  );
+};
 
-        {/* Cards Grid */}
-        <div className="grid md:grid-cols-3 gap-12">
-          {/* Card 1 */}
-          <div
-            ref={setCardRef(0)}
-            className="max-w-sm bg-white/80 border border-gray-200 rounded-xl shadow-lg"
-          >
-            <Link to="/blog/designing-for-connection">
-              <img
-                className="rounded-t-lg w-full h-48 object-cover"
-                src={bg}
-                alt="bg-all.webp"
-              />
-            </Link>
-            <div className="p-6">
-              <Link to="/blog/designing-for-connection">
-                <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-800">
-                  Designing for Connection
-                </h5>
-              </Link>
-              <p className="mb-4 text-gray-700">
-                How thoughtful design brings people closer — and makes every interaction feel more natural, more human.
-              </p>
-              <Link
-                to="/blog/designing-for-connection"
-                className="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-gradient-to-r from-blue-500 to-cyan-400 rounded-full hover:from-blue-600 hover:to-cyan-500 focus:ring-4 focus:outline-none focus:ring-blue-300 transition-all"
-              >
-                Read more
-                <svg
-                  className="w-3.5 h-3.5 ms-2 rtl:rotate-180"
-                  aria-hidden="true"
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 14 10"
-                >
-                  <path
-                    stroke="currentColor"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="2"
-                    d="M1 5h12m0 0L9 1m4 4L9 9"
-                  />
-                </svg>
-              </Link>
-            </div>
-          </div>
+export default function Blog() {
+  const featuredPost = blogPosts[0];
+  const otherPosts = blogPosts.slice(1);
 
-          {/* Card 2 */}
-          <div
-            ref={setCardRef(1)}
-            className="max-w-sm bg-white/80 border border-gray-200 rounded-xl shadow-lg"
+  return (
+    <div className="bg-black text-white min-h-screen py-24 pb-28 px-4 md:px-6">
+      <div className="container mx-auto">
+        <motion.div 
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.2 }}
+            variants={staggerContainer}
+            className="text-center mb-16"
+        >
+          <motion.h1
+            variants={fadeInUp}
+            className="text-4xl md:text-5xl font-bold tracking-tighter text-white"
           >
-            <Link to="/blog/the-future-of-everyday-tech">
-              <img
-                className="rounded-t-lg w-full h-48 object-cover"
-                src={bg}
-                alt=""
-              />
-            </Link>
-            <div className="p-6">
-              <Link to="/blog/the-future-of-everyday-tech">
-                <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-800">
-                  The Future of Everyday Tech
-                </h5>
-              </Link>
-              <p className="mb-4 text-gray-700">
-                Technology should evolve with you. We explore how smart, sustainable design is shaping the home of tomorrow — today.
-              </p>
-              <Link
-                to="/blog/the-future-of-everyday-tech"
-                className="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-gradient-to-r from-blue-500 to-cyan-400 rounded-full hover:from-blue-600 hover:to-cyan-500 focus:ring-4 focus:outline-none focus:ring-blue-300 transition-all"
-              >
-                Read more
-                <svg
-                  className="w-3.5 h-3.5 ms-2 rtl:rotate-180"
-                  aria-hidden="true"
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 14 10"
-                >
-                  <path
-                    stroke="currentColor"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="2"
-                    d="M1 5h12m0 0L9 1m4 4L9 9"
-                  />
-                </svg>
-              </Link>
-            </div>
-          </div>
+            From Our Team
+          </motion.h1>
+          <motion.p 
+            variants={fadeInUp}
+            className="text-gray-400 mt-4 text-lg max-w-2xl mx-auto"
+          >
+            Insights, ideas, and stories from the intersection of design and technology.
+          </motion.p>
+        </motion.div>
 
-          {/* Card 3 */}
-          <div
-            ref={setCardRef(2)}
-            className="max-w-sm bg-white/80 border border-gray-200 rounded-xl shadow-lg"
-          >
-            <Link to="/blog/strength-through-simplicity">
-              <img
-                className="rounded-t-lg w-full h-48 object-cover"
-                src={bg}
-                alt=""
-              />
-            </Link>
-            <div className="p-6">
-              <Link to="/blog/strength-through-simplicity">
-                <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-800">
-                  Strength Through Simplicity
-                </h5>
-              </Link>
-              <p className="mb-4 text-gray-700">
-                The most powerful experiences are often the simplest. Here’s how we build products that empower without overwhelming.
-              </p>
-              <Link
-                to="/blog/strength-through-simplicity"
-                className="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-gradient-to-r from-blue-500 to-cyan-400 rounded-full hover:from-blue-600 hover:to-cyan-500 focus:ring-4 focus:outline-none focus:ring-blue-300 transition-all"
-              >
-                Read more
-                <svg
-                  className="w-3.5 h-3.5 ms-2 rtl:rotate-180"
-                  aria-hidden="true"
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 14 10"
-                >
-                  <path
-                    stroke="currentColor"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="2"
-                    d="M1 5h12m0 0L9 1m4 4L9 9"
-                  />
-                </svg>
-              </Link>
-            </div>
-          </div>
-        </div>
-      </section>
+        <motion.div 
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.1 }}
+            variants={staggerContainer}
+            className="grid md:grid-cols-3 gap-8"
+        >
+          {featuredPost && <BlogPostCard post={featuredPost} isFeatured />}
+          {otherPosts.map((post) => (
+            <BlogPostCard key={post.slug} post={post} />
+          ))}
+        </motion.div>
+      </div>
     </div>
   );
 }

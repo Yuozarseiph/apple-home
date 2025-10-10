@@ -1,153 +1,162 @@
-import React, { useRef, useEffect } from "react";
-import gsap from "gsap";
-import instagram from "../assets/instagram.svg";
-import github from "../assets/github.svg";
-import telegram from "../assets/telegram.svg";
+import React from "react";
+import { motion } from "framer-motion";
+import { Instagram, Github, Send, Users, Target, Rocket } from "lucide-react";
+
+// Animation Variants
+const fadeIn = (direction = "up", delay = 0) => ({
+  hidden: {
+    opacity: 0,
+    y: direction === "up" ? 40 : direction === "down" ? -40 : 0,
+    x: direction === "left" ? 40 : direction === "right" ? -40 : 0,
+  },
+  visible: {
+    opacity: 1,
+    y: 0,
+    x: 0,
+    transition: {
+      type: "spring",
+      stiffness: 120,
+      damping: 20,
+      duration: 0.8,
+      delay,
+    },
+  },
+});
+
+const staggerContainer = {
+  hidden: {},
+  visible: {
+    transition: {
+      staggerChildren: 0.2,
+    },
+  },
+};
+
+const SocialLink = ({ href, Icon }) => (
+    <motion.a 
+        href={href} 
+        target="_blank" 
+        rel="noopener noreferrer" 
+        className="text-gray-500 hover:text-[#00d5be] transition-colors"
+        whileHover={{ scale: 1.2, y: -3}}
+        whileTap={{ scale: 0.9 }}
+    >
+      <Icon size={28} />
+    </motion.a>
+);
 
 export default function About() {
-  // Refs for animation targets
-  const sections = useRef([]);
-
-  // Set up GSAP animations
-  useEffect(() => {
-    sections.current.forEach((section, index) => {
-      const direction = index % 2 === 0 ? -200 : 200; // left/right
-      gsap.fromTo(
-        section,
-        { x: direction, opacity: 0 },
-        {
-          x: 0,
-          opacity: 1,
-          duration: 2.5,
-          scrollTrigger: {
-            trigger: section,
-            start: "top 80%",
-            toggleActions: "play none none reverse",
-          },
-          ease: "power3.out",
-        }
-      );
-    });
-
-    return () => {
-      // Optional cleanup
-    };
-  }, []);
-
-  // Utility to assign ref with array support
-  const setRef = (index) => (el) => {
-    sections.current[index] = el;
-  };
+  const GREEN_COLOR = "#00d5be";
 
   return (
-    <div className="bg-image-iPhone text-gray-800 min-h-screen pt-24 pb-[120px] px-6 overflow-x-hidden">
-      {/* Hero Section */}
-      <section
-        ref={setRef(0)}
-        className="max-w-5xl mx-auto text-center mb-12 bg-white/90 shadow-xl rounded-2xl p-10 border border-gray-200"
-      >
-        <h1 className="text-4xl md:text-5xl font-extrabold text-[#00a4c4] mb-6 tracking-tight">
-          About Apple Home
-        </h1>
-        <p className="text-lg md:text-xl text-gray-700 max-w-3xl mx-auto leading-relaxed">
-          A new kind of experience. Designed for connection. Built with care.
-          Apple Home is where technology meets life — and every detail has a purpose.
-        </p>
-      </section>
-
-      {/* Purpose Section */}
-      <section
-        ref={setRef(1)}
-        className="bg-white/90 shadow-lg rounded-2xl p-8 border border-gray-200 mx-auto max-w-4xl mb-12"
-      >
-        <h2 className="text-2xl font-semibold mb-4 text-[#00a4c4]">Our Purpose</h2>
-        <p className="text-gray-700">
-          Technology should help you live better — not get in the way. At Apple Home,
-          we design products that simplify your daily routine, inspire creativity,
-          and keep you connected to what matters most.
-        </p>
-      </section>
-
-      {/* Two-column grid - ورود از چپ و راست جداگانه */}
-      <section className="grid md:grid-cols-2 gap-8 max-w-6xl mx-auto mt-12">
-        {Object.entries({
-          WhoWeAre: [
-            "Who We Are",
-            "We’re a team of designers, engineers, and thinkers who believe great technology starts with empathy. Every product we create begins with one question: How can this make life better?",
-          ],
-          WhatDrivesUs: [
-            "What Drives Us",
-            "We believe innovation isn’t just about speed or specs — it’s about how a product feels in your hands, how it fits into your life, and how it helps you do more of what you love.",
-          ],
-        }).map(([key, [title, text]], idx) => (
-          <div
-            key={key}
-            ref={setRef(idx + 2)}
-            className="bg-white/90 shadow-lg rounded-2xl p-6 border border-gray-200"
+    <div className="bg-gray-950 text-gray-200 min-h-screen overflow-x-hidden">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-24 md:py-32">
+        
+        {/* --- Hero Section --- */}
+        <motion.section 
+          className="text-center mb-24 md:mb-32"
+          initial="hidden"
+          animate="visible"
+          variants={staggerContainer}
+        >
+          <motion.h1 
+            variants={fadeIn("up")}
+            className="text-5xl md:text-7xl font-bold text-white tracking-tighter mb-6"
           >
-            <h3 className="text-xl font-semibold mb-3 text-[#00a4c4]">{title}</h3>
-            <p className="text-gray-700">{text}</p>
-          </div>
-        ))}
-      </section>
-
-      {/* Branding & Social Icons */}
-      <section
-        ref={setRef(4)}
-        className="bg-white/90 shadow-lg rounded-2xl p-10 text-center border border-gray-200 mx-auto max-w-5xl mt-12 mb-12"
-      >
-        <h3 className="text-2xl font-bold mb-4 text-[#00a4c4]">Apple Home</h3>
-        <p className="mb-6 text-sm text-gray-600">
-          Our mission is to bring couples closer together through meaningful and empowering gymnastics lessons.
-        </p>
-        <div className="flex justify-center space-x-6">
-          <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" className="hover:text-[#00a4c4] transition-colors">
-            <img src={instagram} alt="Instagram" className="w-6 h-6" />
-          </a>
-          <a href="https://github.com" target="_blank" rel="noopener noreferrer" className="hover:text-[#00a4c4] transition-colors">
-            <img src={github} alt="GitHub" className="w-6 h-6" />
-          </a>
-          <a href="https://t.me" target="_blank" rel="noopener noreferrer" className="hover:text-[#00a4c4] transition-colors">
-            <img src={telegram} alt="Telegram" className="w-6 h-6" />
-          </a>
-        </div>
-      </section>
-
-      {/* Newsletter Section */}
-      <section
-        ref={setRef(5)}
-        className="bg-white/90 shadow-lg rounded-2xl p-10 text-center border border-gray-200 mx-auto max-w-5xl mt-12 mb-12"
-      >
-        <h4 className="text-lg font-semibold mb-3 text-[#00a4c4]">Newsletter</h4>
-        <p className="mb-6 text-sm text-gray-600">Subscribe to our newsletter to get the latest updates and offers.</p>
-        <div className="flex flex-wrap sm:flex-nowrap justify-center gap-3 max-w-md mx-auto items-center">
-          <input
-            type="email"
-            placeholder="Enter your email"
-            className="w-full py-3 pl-5 pr-3 rounded-full border border-gray-300 focus:border-blue-400 focus:ring focus:ring-blue-200 outline-none transition-shadow shadow-sm"
-          />
-          <button className="bg-gradient-to-r from-blue-500 to-cyan-400 hover:from-blue-600 hover:to-cyan-500 text-white px-6 py-3 rounded-full font-medium shadow-md hover:shadow-lg transition-all">
-            Subscribe
-          </button>
-        </div>
-      </section>
-
-      {/* Copyright */}
-      <section className="mt-10 text-center text-sm text-gray-600">
-        <div>&copy; {new Date().getFullYear()} Apple Home. All rights reserved.</div>
-        <div className="mt-4">
-          Created by{" "}
-          <a
-            href="https://yuozarseiph.top"
-            className="hover:text-[#00a4c4] transition-colors"
-            target="_blank"
-            rel="noopener noreferrer"
+            A new standard in <span style={{color: GREEN_COLOR}}>connection</span>.
+          </motion.h1>
+          <motion.p 
+            variants={fadeIn("up", 0.2)}
+            className="text-lg md:text-xl text-gray-400 max-w-3xl mx-auto leading-relaxed"
           >
-            Yousef Shaker Ardakani
-          </a>
-          . All rights reserved.
-        </div>
-      </section>
+            We believe technology should feel like an extension of you. Intuitive, inspiring, and seamlessly integrated into your life.
+          </motion.p>
+        </motion.section>
+
+        {/* --- Feature Section 1 --- */}
+        <motion.section 
+            className="grid md:grid-cols-2 gap-12 md:gap-16 items-center mb-24 md:mb-32"
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.3 }}
+            variants={staggerContainer}
+        >
+          <motion.div variants={fadeIn("right")}>
+            <div className="w-full h-80 bg-gray-900 rounded-2xl flex items-center justify-center border border-white/10">
+              {/* Placeholder for a compelling image */}
+                            <Target className="w-16 h-16 text-gray-700" />
+            </div>
+          </motion.div>
+          <motion.div variants={fadeIn("left")}>
+            <Target className="w-10 h-10 mb-4" style={{color: GREEN_COLOR}}/>
+            <h2 className="text-3xl font-bold mb-4 text-white">Our Purpose</h2>
+            <p className="text-gray-400 text-lg leading-relaxed">
+              Technology should help you live better. We design products that simplify your daily routine and inspire creativity, not complicate it.
+            </p>
+          </motion.div>
+        </motion.section>
+
+        {/* --- Quote Section --- */}
+        <motion.section 
+            className="text-center my-24 md:my-32"
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.5 }}
+            variants={fadeIn("up")}
+        >
+          <Rocket className="w-12 h-12 mx-auto mb-6" style={{color: GREEN_COLOR}} />
+          <h2 className="text-3xl md:text-4xl font-medium text-white italic max-w-4xl mx-auto leading-snug">
+            "Innovation isn’t just about specs — it’s about how a product feels, how it fits into your life, and how it helps you do more of what you love."
+          </h2>
+        </motion.section>
+
+        {/* --- Team Section (Suggested Addition) --- */}
+        <motion.section
+          className="mb-24 md:mb-32"
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.3 }}
+          variants={staggerContainer}
+        >
+            <motion.div variants={fadeIn("up")} className="text-center">
+                <Users className="w-10 h-10 mb-4 mx-auto" style={{color: GREEN_COLOR}} />
+                <h2 className="text-3xl font-bold mb-4 text-white">Who We Are</h2>
+                <p className="text-gray-400 text-lg max-w-2xl mx-auto mb-12">
+                 A team of designers and engineers who believe great technology starts with empathy.
+                </p>
+            </motion.div>
+            {/* You can map over team members here */}
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+              {/* Example Team Member */}
+              <motion.div variants={fadeIn("up")} className="text-center">
+                 <div className="w-24 h-24 bg-gray-800 rounded-full mx-auto mb-4 border-2" style={{borderColor: GREEN_COLOR}}></div>
+                 <h4 className="font-semibold text-white">Alex Doe</h4>
+                 <p className="text-sm text-gray-500">Lead Designer</p>
+              </motion.div>
+              {/* ... other team members */}
+            </div>
+        </motion.section>
+        
+        {/* --- Connect Section --- */}
+        <motion.section 
+            className="text-center bg-gray-900 py-16 rounded-2xl"
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.5 }}
+            variants={staggerContainer}
+        >
+          <motion.h3 variants={fadeIn("up")} className="text-3xl font-bold mb-4 text-white">Stay Connected</motion.h3>
+          <motion.p variants={fadeIn("up")} className="mb-8 text-gray-400">
+            Follow our journey and be the first to know about updates.
+          </motion.p>
+          <motion.div variants={fadeIn("up")} className="flex justify-center space-x-10">
+            <SocialLink href="https://instagram.com" Icon={Instagram} />
+            <SocialLink href="https://github.com" Icon={Github} />
+            <SocialLink href="https://t.me" Icon={Send} />
+          </motion.div>
+        </motion.section>
+
+      </div>
     </div>
   );
 }

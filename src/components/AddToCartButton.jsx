@@ -1,45 +1,111 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
+import { motion, AnimatePresence } from "framer-motion";
+import { ShoppingCart, Loader2, Check } from "lucide-react";
+
+const toast = (message, isError = false) => {
+  const toastElement = document.createElement("div");
+  toastElement.className = `fixed top-5 right-5 text-white py-2 px-4 rounded-lg shadow-lg ${
+    isError ? "bg-red-600" : "bg-green-600"
+  }`;
+  toastElement.innerText = message;
+  document.body.appendChild(toastElement);
+  setTimeout(() => {
+    toastElement.remove();
+  }, 3000);
+};
 
 function AddToCartButton({ productId }) {
+  const [status, setStatus] = useState("idle");
+  const GREEN_COLOR = "#00d5be";
+
   const addToCart = async () => {
+    if (status !== "idle") return;
     const token = localStorage.getItem("token");
     if (!token) {
-      alert("You must be logged in to add items to the cart.");
+      toast("You must be logged in...", true);
       return;
     }
-
+    setStatus("loading");
     try {
-      // First, get the product details by productId
-      const productResponse = await axios.get(`/api/products/${productId}`);
-      const product = productResponse.data;
-
-      // Then, add the product to the user's cart
-      const response = await axios.post(
+      await axios.post(
         "/api/cart/add",
-        { productId: productId }, // Only send productId
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
+        { productId },
+        { headers: { Authorization: `Bearer ${token}` } }
       );
-
-      alert("Added to cart!");
+      setStatus("success");
     } catch (err) {
-      // Print detailed error response
-      console.error("Error adding to cart:", err.response ? err.response : err);
-      alert("Could not add to cart.");
+      console.error("Error:", err.response ? err.response.data : err);
+      setStatus("error");
     }
   };
 
+  useEffect(() => {
+    if (status === "success" || status === "error") {
+      if (status === "success") toast("Added to cart!");
+      if (status === "error") toast("Could not add to cart.", true);
+      const timer = setTimeout(() => setStatus("idle"), 2500);
+      return () => clearTimeout(timer);
+    }
+  }, [status]);
+
   return (
-    <button
+    <motion.button
       onClick={addToCart}
-      className="bg-[#7EC8E3] text-black px-4 py-2 rounded-xl hover:bg-blue-400 transition"
+      disabled={status !== "idle"}
+      type="button"
+      className="
+        relative w-full h-12 rounded-lg font-semibold overflow-hidden
+        bg-[#15202b] border border-[#00d5be]
+        text-[#00d5be]
+        flex items-center justify-center
+        shadow-sm
+        hover:bg-gradient-to-r hover:from-[#10b981] hover:to-[#3b82f6]
+        active:scale-95
+        transition duration-300
+        disabled:opacity-60 disabled:cursor-not-allowed
+      "
+      whileTap={{ scale: 0.95 }}
     >
-      Add to Cart
-    </button>
+      <AnimatePresence initial={false} mode="popLayout">
+        {status === "idle" && (
+          <motion.div
+            key="idle"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="flex items-center gap-2"
+          >
+            <ShoppingCart size={20} />
+            <span>Add to Cart</span>
+          </motion.div>
+        )}
+        {status === "loading" && (
+          <motion.div
+            key="loading"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="flex items-center gap-2"
+          >
+            <Loader2 size={20} className="animate-spin" />
+            <span>Adding...</span>
+          </motion.div>
+        )}
+        {status === "success" && (
+          <motion.div
+            key="success"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="flex items-center gap-2 text-black bg-[#00d5be] px-4 py-2 rounded-lg font-bold"
+          >
+            <Check size={20} />
+            <span>Added!</span>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </motion.button>
   );
 }
 
