@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { ShieldCheck, Users, Zap, ArrowDown, CheckCircle } from "lucide-react";
 import CreativeButton from "../components/CreativeButton";
-
+import bgimg from "../assets/bg-all.webp";
 const GREEN_COLOR = "#00d5be";
 
 const staggerContainer = {
@@ -137,10 +137,10 @@ const ValuesSection = () => {
           whileInView="visible"
           viewport={{ once: true, amount: 0.5 }}
           variants={fadeInLeft}
-          className="w-full h-96 bg-gray-900 rounded-2xl flex items-center justify-center border border-white/10"
+          className="w-full h-full bg-gray-900 rounded-2xl flex items-center justify-center border border-white/10"
         >
           {/* Placeholder for a compelling product/lifestyle image */}
-          <span className="text-gray-500">[Placeholder for a compelling product/lifestyle image]</span>
+          <img src={bgimg} alt="" />
         </motion.div>
         <motion.div
           variants={staggerContainer}
