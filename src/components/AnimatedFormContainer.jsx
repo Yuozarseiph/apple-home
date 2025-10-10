@@ -30,7 +30,7 @@ const AnimatedFormContainer = ({ title, intro, children, onSubmit }) => {
   };
 
   return (
-    <div className="flex items-center justify-center min-h-screen bg-gray-950 p-30">
+    <div className="flex items-center justify-center min-h-screen bg-gray-950 p-5">
       <motion.div
         variants={containerVariants}
         initial="hidden"

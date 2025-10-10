@@ -10,6 +10,7 @@
 /* پس زمینه اصلی */
 /* در فایل index.css یا فایل CSS اصلی */
 body {
+  overflow-x: hidden;
   background: linear-gradient(135deg, #0d0d0d, #1a1a1a, #333333);
   color: #ffffff;
   min-height: 100vh;
