@@ -1,5 +1,3 @@
-// src/data/blogPosts.js
-
 export const blogPosts = [
   {
     slug: "designing-for-connection",
