@@ -1,5 +1,3 @@
-// src/components/AnimatedFormItem.jsx
-
 import React, { useState, cloneElement, Children } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
