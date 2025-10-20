@@ -2,8 +2,6 @@ import React, {useState} from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ChevronDown, MessageSquare } from "lucide-react";
 import { Link } from "react-router-dom";
-
-// Added more questions as requested
 const faqItems = [
     { question: "What is Apple Home?", answer: "Apple Home is where our technology meets your everyday life, designed to simplify routines and inspire creativity." },
     { question: "Is Apple Home right for me?", answer: "Absolutely. Whether you're just getting started or deep into the ecosystem, Apple Home adapts to your needs." },
@@ -18,8 +16,8 @@ const FaqItem = ({ item, isOpen, onClick }) => {
   const GREEN_COLOR = "#00d5be";
   
   const itemVariants = {
-    closed: { backgroundColor: "rgba(17, 24, 39, 0)" }, // bg-gray-900 (transparent to show page bg)
-    open: { backgroundColor: "rgba(31, 41, 55, 1)" },   // bg-gray-800
+    closed: { backgroundColor: "rgba(17, 24, 39, 0)" },
+    open: { backgroundColor: "rgba(31, 41, 55, 1)" },
   };
 
   return (
@@ -30,7 +28,6 @@ const FaqItem = ({ item, isOpen, onClick }) => {
       animate={isOpen ? "open" : "closed"}
       transition={{ duration: 0.3 }}
     >
-      {/* Coloured indicator bar */}
       <motion.div 
         layout 
         className="absolute left-0 top-0 bottom-0 w-1"
@@ -109,7 +106,6 @@ export default function Faq() {
           ))}
         </motion.div>
 
-        {/* --- Contact Us CTA --- */}
         <motion.div 
             className="text-center mt-16 p-8 bg-gray-900 rounded-2xl border border-white/10"
             initial={{ opacity: 0, y: 30 }}
