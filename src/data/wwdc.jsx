@@ -1,4 +1,3 @@
-// src/data/wwdc.jsx
 export const wwdcEvent = {
   title: "WWDC25",
   subtitle: "Apple Worldwide Developers Conference.",
@@ -50,17 +49,13 @@ export const wwdcEvent = {
           <stop offset="100%" stopColor="#b554d5" />
         </linearGradient>
       </defs>
-
-      {/* Background with soft glow */}
+      
       <rect width="600" height="200" rx="32" fill="#f8f9fa" />
 
-      {/* Gradient Overlay */}
       <rect width="600" height="200" rx="32" fill="url(#wwdc-gradient)" opacity="0.85" />
 
-      {/* Glow effect on top */}
       <rect width="600" height="200" rx="32" fill="url(#banner-glow)" />
 
-      {/* Texts */}
       <text
         x="50%"
         y="45%"
@@ -114,12 +109,12 @@ export const wwdcEvent = {
   ),
 
   wwdcColors: [
-    "#00a4c4", // آبی تم روشن
-    "#34C759", // سبز پویا
-    "#FFD60A", // زرد هوشمندانه
-    "#FF9500", // نارنجی تم روشن
-    "#FF2D55", // قرمز زیبا
-    "#AF52DE", // بنفش تم روشن
+    "#00a4c4",
+    "#34C759",
+    "#FFD60A",
+    "#FF9500",
+    "#FF2D55",
+    "#AF52DE",
   ],
 
   highlights: [
