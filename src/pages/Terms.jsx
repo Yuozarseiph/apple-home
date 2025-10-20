@@ -1,7 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
 import { motion, useScroll, useSpring } from "framer-motion";
-
-// --- محتوای جدید و گسترش یافته ---
 const termsSections = [
     { 
         id: "agreement", 
