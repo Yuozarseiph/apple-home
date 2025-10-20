@@ -2,8 +2,6 @@ import React from "react";
 import { Link, useParams } from "react-router-dom";
 import { motion, useScroll, useSpring } from "framer-motion";
 import { ArrowLeft, Calendar, User, Clock } from "lucide-react";
-
-// مقاله چهارم به این آبجکت اضافه شد
 const blogPosts = {
   'designing-for-connection': {
     title: 'Designing for Connection',
