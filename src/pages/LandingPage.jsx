@@ -35,7 +35,6 @@ const HeroSection = () => {
 
   return (
     <section className="relative flex items-center justify-center min-h-screen text-center px-4 overflow-hidden bg-black">
-      {/* Animated background */}
       <motion.div
         className="absolute top-1/4 left-1/4 w-96 h-96 rounded-full"
         style={{ background: `radial-gradient(circle, ${GREEN_COLOR}11, transparent 70%)` }}
@@ -139,7 +138,6 @@ const ValuesSection = () => {
           variants={fadeInLeft}
           className="w-full h-full bg-gray-900 rounded-2xl flex items-center justify-center border border-white/10"
         >
-          {/* Placeholder for a compelling product/lifestyle image */}
           <img src={bgimg} alt="" />
         </motion.div>
         <motion.div
