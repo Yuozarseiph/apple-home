@@ -13,7 +13,6 @@ function Checkout() {
   const expiryRefs = useRef({ month: null, year: null });
   const cvvRef = useRef(null);
 
-  // Form handling logic remains largely the same...
   const handleChange = (e) => setFormData({ ...formData, [e.target.name]: e.target.value });
   const handleCardNumberChange = (index, value) => {
     if (/^\d{0,4}$/.test(value)) {
@@ -35,7 +34,6 @@ function Checkout() {
   
   const handleSubmit = async (e) => {
     e.preventDefault();
-    // Simplified validation for demonstration
     if (cardNumber.join("").length !== 16 || !formData.name || !formData.email) {
         return setError("Please fill all required fields correctly.");
     }
