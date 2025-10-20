@@ -10,7 +10,6 @@ function Cart() {
   const [loading, setLoading] = useState(true);
   const GREEN_COLOR = "#00d5be";
 
-  // --- LOGIC IS UNTOUCHED ---
   useEffect(() => {
     const fetchCart = async () => {
       try {
@@ -27,7 +26,6 @@ function Cart() {
     fetchCart();
   }, []);
 
-  // --- LOGIC IS UNTOUCHED ---
   const removeFromCart = async (productId) => {
     try {
       await axios.post("/api/cart/remove", { productId }, {
@@ -39,33 +37,28 @@ function Cart() {
     }
   };
 
-  // --- NEW LOGIC FOR QUANTITY ---
   const updateQuantity = async (productId, newQuantity) => {
     if (newQuantity < 1) {
       removeFromCart(productId);
       return;
     }
-    // Optimistic update
     setCartItems((prev) =>
       prev.map((item) =>
         item.product._id === productId ? { ...item, quantity: newQuantity } : item
       )
     );
     try {
-      // API call to update server
       await axios.post("/api/cart/update", { productId, quantity: newQuantity }, {
         headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
       });
     } catch (err) {
       console.error("Update error:", err.response?.data);
-      // Revert on error if needed
     }
   };
 
   const total = cartItems.reduce((sum, item) => sum + (item.product?.price || 0) * item.quantity, 0).toFixed(2);
 
   if (loading) {
-    // ... no changes to loading state ...
   }
   
   const staggerContainer = { hidden: {}, visible: { transition: { staggerChildren: 0.1 }}};
@@ -79,13 +72,11 @@ function Cart() {
         </motion.div>
 
         {cartItems.length === 0 ? (
-          <motion.div /* ... improved empty state ... */>
-            {/* ... Your improved empty state component can go here ... */}
+          <motion.div>
           </motion.div>
         ) : (
           <div className="grid grid-cols-1 lg:grid-cols-3 lg:gap-12">
-            
-            {/* Cart Items List */}
+          
             <motion.ul layout className="space-y-6 lg:col-span-2" variants={staggerContainer} initial="hidden" animate="visible">
               <AnimatePresence>
                 {cartItems.map((item) => (
@@ -101,7 +92,6 @@ function Cart() {
                       <h3 className="text-xl font-semibold text-white">{item.product.name}</h3>
                       <p className="text-lg font-medium" style={{ color: GREEN_COLOR }}>${parseFloat(item.product.price).toFixed(2)}</p>
                       <div className="flex items-center mt-auto pt-4 gap-4">
-                        {/* Quantity Selector */}
                         <div className="flex items-center border border-gray-700 rounded-md">
                           <button onClick={() => updateQuantity(item.product._id, item.quantity - 1)} className="p-2 hover:bg-gray-800 transition-colors"><Minus size={16} /></button>
                           <span className="px-3 text-lg font-medium">{item.quantity}</span>
@@ -117,7 +107,6 @@ function Cart() {
               </AnimatePresence>
             </motion.ul>
 
-            {/* Order Summary */}
             <motion.div layout className="lg:col-span-1 lg:sticky lg:top-24 h-fit mt-12 lg:mt-0 p-6 bg-gray-900 rounded-xl border border-gray-800">
               <h2 className="text-2xl font-semibold border-b border-gray-800 pb-4 mb-4">Order Summary</h2>
               <div className="space-y-3 text-gray-400">
