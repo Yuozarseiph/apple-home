@@ -1,8 +1,6 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
-
-// انیمیشن‌ها رو برای خوانایی بیشتر بیرون تعریف می‌کنیم
 const buttonVariants = {
   hover: {
     scale: 1.05,
