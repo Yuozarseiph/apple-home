@@ -1,9 +1,7 @@
-// src/pages/Team.jsx
-
 import React from "react";
 import { motion } from "framer-motion";
 import { Linkedin, Twitter } from "lucide-react";
-import man from "../assets/man.svg"; // Assuming you have this asset
+import man from "../assets/man.svg";
 
 const teamMembers = [
     {
@@ -17,7 +15,6 @@ const teamMembers = [
             twitter: "https://twitter.com/yousofshaker",   
         },
     },
-    // Add more team members here
 ];
 
 const staggerContainer = { hidden: {}, visible: { transition: { staggerChildren: 0.2 }}};
@@ -65,7 +62,7 @@ export default function Team() {
                     <motion.div 
                       className="absolute inset-0 rounded-full border-2 border-transparent group-hover:border-[#00d5be]"
                       initial={{ scale: 1.1, opacity: 0 }}
-                      animate={{ scale: 1.1, opacity: 0 }} // Start slightly larger
+                      animate={{ scale: 1.1, opacity: 0 }}
                       whileHover={{ scale: 1, opacity: 1 }}
                       transition={{ type: 'spring', stiffness: 300, damping: 20 }}
                     />
