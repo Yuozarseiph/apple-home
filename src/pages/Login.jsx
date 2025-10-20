@@ -1,5 +1,3 @@
-// src/pages/Login.jsx
-
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
@@ -25,7 +23,6 @@ export default function Login() {
         return;
     }
     try {
-       // Your API call logic for login
     } catch (err) {
       setError(err.response?.data?.message || "Incorrect email or password");
     }
@@ -40,7 +37,6 @@ export default function Login() {
         <input type="password" name="password" value={formData.password} onChange={handleChange} />
       </AnimatedFormItem>
       
-      {/* Display general login error */}
       {error && <p className="text-red-500 text-xs text-center -mb-2">{error}</p>}
       
       <div className="mt-8">
