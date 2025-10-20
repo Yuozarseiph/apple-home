@@ -4,7 +4,7 @@ import { ArrowRight } from "lucide-react";
 
 export default function CreativeButton({ text, type = "button", onSubmitBtn }) {
   const GREEN_COLOR = "#00d5be";
-  const DARK_GREEN_TEXT = "#004d40"; // A very dark shade for contrast
+  const DARK_GREEN_TEXT = "#004d40";
 
   const backgroundVariants = {
     rest: { scale: 0 },
@@ -39,14 +39,12 @@ export default function CreativeButton({ text, type = "button", onSubmitBtn }) {
       "
       style={{ borderColor: GREEN_COLOR }}
     >
-      {/* Animated Background */}
       <motion.div
         className="absolute inset-0 z-0 bg-gradient-to-br from-green-400 via-teal-400 to-blue-500"
         style={{ borderRadius: "1rem" }}
         variants={backgroundVariants}
         transition={{ type: "tween", ease: [0.22, 1, 0.36, 1], duration: 0.4 }}
       >
-        {/* Shimmer/gloss effect */}
         <motion.div
           className="w-full h-full"
           style={{
@@ -62,8 +60,6 @@ export default function CreativeButton({ text, type = "button", onSubmitBtn }) {
           }}
         />
       </motion.div>
-
-      {/* Content */}
       <motion.div
         className="relative z-10 flex items-center justify-center gap-2"
       >
