@@ -1,5 +1,3 @@
-// src/pages/Register.jsx
-
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
@@ -7,9 +5,6 @@ import { User, Mail, Lock } from "lucide-react";
 import AnimatedFormContainer from "../components/AnimatedFormContainer";
 import AnimatedFormItem from "../components/AnimatedFormItem";
 import CreativeButton from "../components/CreativeButton";
-
-// Assuming axios.defaults.baseURL is set elsewhere
-// Assuming a proper toast library like react-hot-toast is used for server feedback
 
 export default function Register() {
   const [formData, setFormData] = useState({ fullName: "", email: "", password: "", confirmPassword: "" });
@@ -42,9 +37,7 @@ export default function Register() {
       return;
     }
     try {
-      // Your API call logic
     } catch (err) {
-      // Your server error handling logic
     }
   };
 
