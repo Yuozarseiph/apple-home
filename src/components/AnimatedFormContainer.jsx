@@ -3,8 +3,6 @@ import { motion } from "framer-motion";
 
 const AnimatedFormContainer = ({ title, intro, children, onSubmit }) => {
   const GREEN_COLOR = "#00d5be";
-
-  // Variants for the main container's entrance and staggering children
   const containerVariants = {
     hidden: { opacity: 0, scale: 0.98 },
     visible: {
@@ -13,13 +11,11 @@ const AnimatedFormContainer = ({ title, intro, children, onSubmit }) => {
       transition: {
         duration: 0.5,
         ease: "easeOut",
-        when: "beforeChildren", // Ensure container animates in before children
-        staggerChildren: 0.15, // Stagger delay for each child
+        when: "beforeChildren",
+        staggerChildren: 0.15,
       },
     },
   };
-
-  // Variants for each child element (title, intro, form)
   const childVariants = {
     hidden: { opacity: 0, y: 20 },
     visible: {
