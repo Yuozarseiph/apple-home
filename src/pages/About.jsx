@@ -2,7 +2,6 @@ import React from "react";
 import { motion } from "framer-motion";
 import { Instagram, Github, Send, Users, Target, Rocket } from "lucide-react";
 
-// Animation Variants
 const fadeIn = (direction = "up", delay = 0) => ({
   hidden: {
     opacity: 0,
@@ -52,7 +51,6 @@ export default function About() {
     <div className="bg-gray-950 text-gray-200 min-h-screen overflow-x-hidden">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-24 md:py-32">
         
-        {/* --- Hero Section --- */}
         <motion.section 
           className="text-center mb-24 md:mb-32"
           initial="hidden"
@@ -73,7 +71,6 @@ export default function About() {
           </motion.p>
         </motion.section>
 
-        {/* --- Feature Section 1 --- */}
         <motion.section 
             className="grid md:grid-cols-2 gap-12 md:gap-16 items-center mb-24 md:mb-32"
             initial="hidden"
@@ -83,7 +80,6 @@ export default function About() {
         >
           <motion.div variants={fadeIn("right")}>
             <div className="w-full h-80 bg-gray-900 rounded-2xl flex items-center justify-center border border-white/10">
-              {/* Placeholder for a compelling image */}
                             <Target className="w-16 h-16 text-gray-700" />
             </div>
           </motion.div>
@@ -96,7 +92,6 @@ export default function About() {
           </motion.div>
         </motion.section>
 
-        {/* --- Quote Section --- */}
         <motion.section 
             className="text-center my-24 md:my-32"
             initial="hidden"
@@ -110,7 +105,6 @@ export default function About() {
           </h2>
         </motion.section>
 
-        {/* --- Team Section (Suggested Addition) --- */}
         <motion.section
           className="mb-24 md:mb-32"
           initial="hidden"
@@ -125,19 +119,15 @@ export default function About() {
                  A team of designers and engineers who believe great technology starts with empathy.
                 </p>
             </motion.div>
-            {/* You can map over team members here */}
             <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
-              {/* Example Team Member */}
               <motion.div variants={fadeIn("up")} className="text-center">
                  <div className="w-24 h-24 bg-gray-800 rounded-full mx-auto mb-4 border-2" style={{borderColor: GREEN_COLOR}}></div>
                  <h4 className="font-semibold text-white">Alex Doe</h4>
                  <p className="text-sm text-gray-500">Lead Designer</p>
               </motion.div>
-              {/* ... other team members */}
             </div>
         </motion.section>
-        
-        {/* --- Connect Section --- */}
+
         <motion.section 
             className="text-center bg-gray-900 py-16 rounded-2xl"
             initial="hidden"
