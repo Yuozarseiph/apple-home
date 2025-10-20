@@ -30,9 +30,6 @@ const Dashboard = () => {
     
     const fetchUserData = async () => {
       try {
-        // Mocking user data as the endpoint might not be available
-        // const response = await axios.get("/api/user", { headers: { Authorization: `Bearer ${token}` } });
-        // setUserData(response.data);
         setTimeout(() => setUserData({ name: "Yousef", email: "hi@yuozarseiph.top" }), 500);
       } catch (error) {
         console.error("Error fetching user data:", error);
