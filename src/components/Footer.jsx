@@ -2,7 +2,6 @@ import React from "react";
 import { motion } from "framer-motion";
 import { Instagram, Github, Send } from "lucide-react";
 
-// Framer Motion variants can be defined here or imported
 const containerVariant = {
   hidden: { opacity: 0 },
   visible: {
